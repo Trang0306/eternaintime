@@ -1,1050 +1,1362 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ari's Music Room ♡</title>
-
-<style>
-:root {
-  --bg: #080e22;
-  --card: rgba(23, 35, 70, .65);
-  --border: rgba(180, 199, 255, .18);
-  --text: #edf0ff;
-  --muted: #aab8dc;
-  --accent: #b9caff;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(
-      ellipse at 30% 10%,
-      #233763 0%,
-      transparent 45%
-    ),
-    linear-gradient(
-      160deg,
-      #101b3b,
-      #080e22 75%
-    );
-  overflow-x: hidden;
-}
-
-button {
-  font: inherit;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline: 2px solid #dce5ff;
-  outline-offset: 4px;
-}
-
-/* STARS */
-
-.stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle 4s infinite alternate;
-}
-
-@keyframes twinkle {
-  from { opacity: .15; }
-  to { opacity: .9; }
-}
-
-/* HEADER */
-
-header {
-  padding: 25px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  border-bottom: 1px solid var(--border);
-  background: rgba(8, 14, 34, .35);
-  backdrop-filter: blur(15px);
-}
-
-.logo {
-  letter-spacing: 4px;
-  font-size: 17px;
-  color: #e4eaff;
-}
-
-nav {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-nav a {
-  text-decoration: none;
-  color: var(--muted);
-  font-size: 13px;
-  transition: .3s;
-}
-
-nav a:hover,
-nav a.active {
-  color: white;
-}
-
-#langBtn {
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.06);
-  color: white;
-  cursor: pointer;
-}
-
-/* INTRO */
-
-.intro {
-  text-align: center;
-  padding: 65px 20px 50px;
-}
-
-.eyebrow {
-  color: #b9caff;
-  font-size: 11px;
-  letter-spacing: 4px;
-  margin-bottom: 18px;
-}
-
-.intro h1 {
-  font-weight: 400;
-  font-size: clamp(32px, 5vw, 52px);
-  margin-bottom: 17px;
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-/* MAIN LAYOUT */
-
-.music-layout {
-  width: min(1250px, 92%);
-  margin: 0 auto 80px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 25px;
-  align-items: stretch;
-}
-
-.glass {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 25px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 15px 50px rgba(0,0,0,.18);
-}
-
-/* LEFT PLAYER */
-
-.player {
-  padding: 28px 22px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.player-label {
-  color: #b9caff;
-  letter-spacing: 2px;
-  font-size: 10px;
-  margin-bottom: 35px;
-}
-
-/* VINYL */
-
-.vinyl-wrapper {
-  position: relative;
-  width: min(100%, 320px);
-  aspect-ratio: 1;
-  margin: 0 auto 30px;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,.5));
-}
-
-.vinyl {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  position: relative;
-  display: grid;
-  place-items: center;
-
-  background:
-    repeating-radial-gradient(
-      circle,
-      #171923 0px,
-      #171923 3px,
-      #252938 4px,
-      #0a0c14 6px
-    );
-
-  border: 8px solid #090b13;
-
-  box-shadow:
-    inset 0 0 0 2px rgba(255,255,255,.12),
-    inset 0 0 30px rgba(0,0,0,.9),
-    0 0 40px rgba(143,166,255,.12);
-
-  animation: spin 9s linear infinite;
-  animation-play-state: paused;
-}
-
-.vinyl.playing {
-  animation-play-state: running;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.vinyl-cover {
-  width: 43%;
-  height: 43%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid #11131e;
-  box-shadow: 0 0 0 2px rgba(255,255,255,.2);
-}
-
-.vinyl-hole {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #dbe4ff;
-  border: 3px solid #555d78;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* SONG INFO */
-
-.song-title {
-  font-size: 25px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.song-artist {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.playing-status {
-  color: #b9caff;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin: 22px 0;
-}
-
-/* PROGRESS */
-
-.progress {
-  width: 100%;
-  margin-top: auto;
-}
-
-input[type="range"] {
-  width: 100%;
-  accent-color: #b9caff;
-  cursor: pointer;
-}
-
-.time-row {
-  display: flex;
-  justify-content: space-between;
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 7px;
-}
-
-/* CONTROLS */
-
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin: 25px 0;
-}
-
-.control-btn {
-  border: none;
-  background: transparent;
-  color: #e5eaff;
-  font-size: 22px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.control-btn:hover {
-  color: white;
-  transform: scale(1.15);
-}
-
-.play-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: rgba(180,199,255,.18);
-  border: 1px solid rgba(180,199,255,.35);
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.play-btn:hover {
-  background: rgba(180,199,255,.35);
-  box-shadow: 0 0 25px rgba(180,199,255,.25);
-}
-
-.volume {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  width: 80%;
-  color: var(--muted);
-}
-
-.volume input {
-  width: 65%;
-}
-
-/* RIGHT PLAYLIST */
-
-.playlist {
-  padding: 30px;
-}
-
-.playlist-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 12px;
-}
-
-.playlist-heading h2 {
-  font-size: 25px;
-  font-weight: 400;
-}
-
-.song-count {
-  color: #b9caff;
-  font-size: 12px;
-}
-
-.playlist-description {
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 28px;
-  line-height: 1.7;
-}
-
-/* 6 SONG CARDS */
-
-.song-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 17px;
-}
-
-.song-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  min-width: 0;
-  padding: 15px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: rgba(255,255,255,.035);
-  color: var(--text);
-  text-align: left;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.song-card:hover {
-  transform: translateY(-4px);
-  background: rgba(150,175,255,.12);
-  border-color: rgba(185,205,255,.4);
-}
-
-.song-card.active {
-  border-color: #b9caff;
-  background: rgba(145,170,255,.16);
-  box-shadow: 0 0 20px rgba(145,170,255,.1);
-}
-
-.cover-box {
-  position: relative;
-  width: 85px;
-  height: 85px;
-  flex-shrink: 0;
-}
-
-.cover-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.cover-overlay {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: rgba(0,0,0,.45);
-  border-radius: 12px;
-  opacity: 0;
-  transition: .3s;
-  font-size: 25px;
-}
-
-.song-card:hover .cover-overlay,
-.song-card.active .cover-overlay {
-  opacity: 1;
-}
-
-.song-info {
-  min-width: 0;
-}
-
-.song-number {
-  font-size: 10px;
-  color: #9baddb;
-  letter-spacing: 2px;
-  margin-bottom: 7px;
-}
-
-.song-name {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.artist-name {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
-  line-height: 1.5;
-}
-
-/* FOOTER */
-
-.back-home {
-  text-align: center;
-  margin: 60px 0 45px;
-}
-
-.back-home a {
-  display: inline-block;
-  padding: 13px 26px;
-  border-radius: 30px;
-  border: 1px solid var(--border);
-  color: #d0dcff;
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 2px;
-  transition: .3s;
-}
-
-.back-home a:hover {
-  background: rgba(180,199,255,.13);
-  transform: translateY(-3px);
-}
-
-footer {
-  text-align: center;
-  border-top: 1px solid var(--border);
-  padding: 28px;
-  color: #8798c3;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-  .music-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .vinyl-wrapper {
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 550px) {
-  header {
-    padding: 20px 5%;
-  }
-
-  nav {
-    gap: 12px;
-  }
-
-  .playlist {
-    padding: 22px 15px;
-  }
-
-  .song-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cover-box {
-    width: 75px;
-    height: 75px;
-  }
-
-  .intro {
-    padding-top: 45px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .star {
-    animation: none;
-  }
-
-  .vinyl {
-    animation: none;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#080d21">
+  <meta name="description" content="Ari's Discord profile and social connections.">
+
+  <title>Discord & Contact | Moonlit</title>
+
+  <style>
+    :root {
+      --bg: #080d21;
+      --bg2: #101936;
+      --card: rgba(20, 30, 65, 0.66);
+      --border: rgba(181, 198, 255, 0.18);
+      --text: #e9edff;
+      --muted: #aeb9da;
+      --accent: #b9c8ff;
+      --accent2: #d5c5ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          ellipse at 50% 0%,
+          rgba(84, 103, 182, 0.25),
+          transparent 55%
+        ),
+        linear-gradient(
+          160deg,
+          #080d21,
+          #101936 55%,
+          #080d21
+        );
+
+      overflow-x: hidden;
+    }
+
+    /* STARS */
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.65;
+      animation: twinkle 4s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: 0.15;
+        transform: scale(0.7);
+      }
+
+      to {
+        opacity: 0.95;
+        transform: scale(1.4);
+      }
+    }
+
+    /* NAVIGATION */
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 24px 15px;
+    }
+
+    .navigation a {
+      color: #dce5ff;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 10px 17px;
+      border-radius: 30px;
+
+      border: 1px solid var(--border);
+      background: rgba(19, 29, 64, 0.65);
+
+      transition: 0.3s;
+    }
+
+    .navigation a:hover,
+    .navigation a.active {
+      background: rgba(137, 159, 236, 0.22);
+      border-color: rgba(193, 207, 255, 0.5);
+      box-shadow: 0 0 20px rgba(130, 155, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* LANGUAGE */
+
+    .language-switch {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin: 5px 0 25px;
+    }
+
+    .language-switch button {
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: 9px 20px;
+      color: var(--text);
+      background: rgba(25, 36, 78, 0.75);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .language-switch button:hover {
+      background: rgba(120, 145, 220, 0.25);
+    }
+
+    /* HEADER */
+
+    .page-header {
+      text-align: center;
+      padding: 35px 20px 45px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      letter-spacing: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .page-header h1 {
+      margin: 18px 0;
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 6vw, 58px);
+      font-weight: normal;
+      color: #e6eaff;
+      text-shadow: 0 0 30px rgba(160, 180, 255, 0.25);
+    }
+
+    .page-header p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* LAYOUT */
+
+    .container {
+      width: min(1050px, 92%);
+      margin: auto;
+    }
+
+    .glass-card {
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      border: 1px solid var(--border);
+      border-radius: 24px;
+
+      box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.22),
+        inset 0 1px rgba(255, 255, 255, 0.04);
+
+      overflow: hidden;
+    }
+
+    /* DISCORD CARD */
+
+    .discord-card {
+      max-width: 750px;
+      margin: 0 auto 50px;
+    }
+
+    .discord-banner {
+      height: 210px;
+      position: relative;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(14, 20, 48, 0.2),
+          rgba(55, 65, 130, 0.25)
+        ),
+        url("banner.jpg") center / cover no-repeat;
+    }
+
+    .discord-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        transparent 55%,
+        rgba(10, 15, 35, 0.25)
+      );
+    }
+
+    .discord-content {
+      position: relative;
+      padding: 0 32px 32px;
+    }
+
+    /* AVATAR */
+
+    .avatar-wrapper {
+      width: 126px;
+      height: 126px;
+      position: relative;
+      margin-top: -63px;
+      z-index: 2;
+    }
+
+    .avatar {
+      position: absolute;
+      width: 104px;
+      height: 104px;
+      top: 11px;
+      left: 11px;
+
+      border-radius: 50%;
+      object-fit: cover;
+
+      border: 5px solid #111a39;
+      background: #182344;
+    }
+
+    .avatar-decoration {
+      position: absolute;
+      inset: 0;
+      width: 126px;
+      height: 126px;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: 3;
+      display: none;
+    }
+
+    .status-dot {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+
+      right: 8px;
+      bottom: 9px;
+
+      background: #747f8d;
+      border: 5px solid #111a39;
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .status-dot.online {
+      background: #43b581;
+    }
+
+    .status-dot.idle {
+      background: #faa61a;
+    }
+
+    .status-dot.dnd {
+      background: #f04747;
+    }
+
+    .status-dot.offline {
+      background: #747f8d;
+    }
+
+    /* PROFILE TEXT */
+
+    .profile-label {
+      margin-top: 20px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 3px;
+    }
+
+    .profile-name {
+      font-family: Georgia, serif;
+      font-size: 32px;
+      margin: 12px 0 5px;
+    }
+
+    .username {
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 25px 0;
+    }
+
+    .section-title {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    .about-text {
+      color: #d3dcfa;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* STATUS */
+
+    .status-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 16px;
+      border-radius: 15px;
+
+      background: rgba(10, 17, 42, 0.55);
+      border: 1px solid var(--border);
+    }
+
+    .status-indicator {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #747f8d;
+      flex-shrink: 0;
+    }
+
+    .status-indicator.online {
+      background: #43b581;
+    }
+
+    .status-indicator.idle {
+      background: #faa61a;
+    }
+
+    .status-indicator.dnd {
+      background: #f04747;
+    }
+
+    .status-indicator.offline {
+      background: #747f8d;
+    }
+
+    .status-info {
+      min-width: 0;
+    }
+
+    .status-info strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .status-info small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ACTIVITIES */
+
+    .activity-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      padding: 14px;
+      border-radius: 15px;
+
+      background: rgba(10, 17, 42, 0.5);
+      border: 1px solid var(--border);
+    }
+
+    .activity-icon {
+      width: 55px;
+      height: 55px;
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(120, 145, 220, 0.15);
+      border-radius: 12px;
+      font-size: 25px;
+      overflow: hidden;
+    }
+
+    .activity-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .activity-details {
+      min-width: 0;
+    }
+
+    .activity-details strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .activity-details span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .discord-button {
+      display: block;
+      text-align: center;
+
+      margin-top: 25px;
+      padding: 14px 20px;
+
+      color: #edf0ff;
+      text-decoration: none;
+
+      border-radius: 15px;
+      background: linear-gradient(
+        135deg,
+        #485baf,
+        #6979c9
+      );
+
+      transition: 0.3s;
+    }
+
+    .discord-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(105, 121, 201, 0.3);
+    }
+
+    /* CONTACT CARD */
+
+    .contact-card {
+      padding: 35px;
+      max-width: 750px;
+      margin: 0 auto 65px;
+    }
+
+    .contact-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-heading h2 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: 29px;
+      margin: 12px 0;
+    }
+
+    .contact-heading p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      padding: 18px;
+      border-radius: 16px;
+
+      text-decoration: none;
+      color: var(--text);
+
+      background: rgba(12, 20, 47, 0.65);
+      border: 1px solid var(--border);
+
+      transition: 0.3s;
+      min-width: 0;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-4px);
+      background: rgba(88, 108, 180, 0.2);
+      border-color: rgba(190, 205, 255, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+
+      border-radius: 13px;
+      background: rgba(145, 165, 255, 0.12);
+
+      font-size: 22px;
+    }
+
+    .contact-text {
+      min-width: 0;
+    }
+
+    .contact-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .contact-text small {
+      display: block;
+      margin-top: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-link.server {
+      grid-column: 1 / -1;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      text-align: center;
+      padding: 20px 20px 45px;
+    }
+
+    .back-home {
+      display: inline-block;
+      text-decoration: none;
+      color: #d9e2ff;
+
+      padding: 14px 26px;
+      border-radius: 30px;
+
+      border: 1px solid var(--border);
+      background: rgba(25, 37, 78, 0.65);
+
+      font-size: 12px;
+      letter-spacing: 2px;
+
+      transition: 0.3s;
+    }
+
+    .back-home:hover {
+      background: rgba(120, 145, 220, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      margin-top: 35px;
+      color: #7886b3;
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 600px) {
+      .discord-banner {
+        height: 160px;
+      }
+
+      .discord-content {
+        padding: 0 20px 25px;
+      }
+
+      .contact-card {
+        padding: 24px 18px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-link.server {
+        grid-column: auto;
+      }
+
+      .navigation {
+        gap: 8px;
+      }
+
+      .navigation a {
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      .page-header {
+        padding-top: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
+  <!-- STARS -->
+  <div class="stars" id="stars"></div>
 
-<header>
-  <div class="logo">MOONLIT</div>
-
-  <nav>
+  <!-- NAVIGATION -->
+  <nav class="navigation">
     <a href="index.html">⌂ Home</a>
     <a href="about.html">☾ About</a>
     <a href="hobbies.html">✧ Hobbies</a>
-    <a href="discord.html">♡ Discord</a>
-    <a href="music.html" class="active">♫ Music</a>
-
-    <button id="langBtn" type="button">EN</button>
+    <a href="discord.html" class="active">♡ Discord</a>
   </nav>
-</header>
 
-<section class="intro">
-  <p class="eyebrow">✦ A LITTLE WORLD OF MELODY ✦</p>
+  <!-- LANGUAGE -->
+  <div class="language-switch">
+    <button id="langButton" onclick="toggleLanguage()">
+      EN
+    </button>
+  </div>
 
-  <h1>Music for my little dreams ♡</h1>
-
-  <p
-    class="subtitle"
-    data-vi="Một chút nhạc, một chút mơ mộng, và một khoảng trời của riêng mình."
-    data-en="A little music, a little daydreaming, and a universe of my own."
-  >
-    Một chút nhạc, một chút mơ mộng, và một khoảng trời của riêng mình.
-  </p>
-</section>
-
-<main class="music-layout">
-
-  <!-- LEFT: VINYL PLAYER -->
-
-  <section class="player glass">
-
-    <p class="player-label">
-      ✦ NOW PLAYING · ARI'S PICK ✦
-    </p>
-
-    <div class="vinyl-wrapper">
-      <div class="vinyl" id="vinyl">
-
-        <img
-          class="vinyl-cover"
-          id="vinylCover"
-          src="picturemusic1.png"
-          alt="Album cover"
-        >
-
-        <span class="vinyl-hole"></span>
-
-      </div>
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="eyebrow">
+      ✦ DIGITAL CONSTELLATION ✦
     </div>
 
-    <h2 class="song-title" id="currentTitle">
-      Em
-    </h2>
-
-    <p class="song-artist" id="currentArtist">
-      Binz
-    </p>
-
-    <p class="playing-status" id="playingStatus">
-      ♡ READY TO PLAY
-    </p>
-
-    <div class="progress">
-
-      <input
-        type="range"
-        id="progressBar"
-        min="0"
-        max="100"
-        value="0"
-        aria-label="Song progress"
-      >
-
-      <div class="time-row">
-        <span id="currentTime">0:00</span>
-        <span id="duration">0:00</span>
-      </div>
-
-    </div>
-
-    <div class="controls">
-
-      <button
-        class="control-btn"
-        id="prevBtn"
-        type="button"
-        aria-label="Previous song"
-      >
-        |◀
-      </button>
-
-      <button
-        class="play-btn"
-        id="playBtn"
-        type="button"
-        aria-label="Play"
-      >
-        ▶
-      </button>
-
-      <button
-        class="control-btn"
-        id="nextBtn"
-        type="button"
-        aria-label="Next song"
-      >
-        ▶|
-      </button>
-
-    </div>
-
-    <div class="volume">
-      <span>♫</span>
-
-      <input
-        type="range"
-        id="volumeBar"
-        min="0"
-        max="1"
-        step="0.01"
-        value="0.7"
-        aria-label="Volume"
-      >
-    </div>
-
-    <audio id="audioPlayer" preload="metadata"></audio>
-
-  </section>
-
-  <!-- RIGHT: PLAYLIST -->
-
-  <section class="playlist glass">
-
-    <div class="playlist-heading">
-      <h2>My Little Playlist ♡</h2>
-      <span class="song-count">06 songs ✧</span>
-    </div>
+    <h1 data-vi="Kết nối cùng Ari"
+        data-en="Connect with Ari">
+      Kết nối cùng Ari
+    </h1>
 
     <p
-      class="playlist-description"
-      data-vi="Chạm vào một chiếc thẻ để nghe nhạc."
-      data-en="Tap a little card to play your favorite melody."
-    >
-      Chạm vào một chiếc thẻ để nghe nhạc.
+      data-vi="Một góc nhỏ giữa ngân hà, nơi những kết nối bắt đầu."
+      data-en="A little corner of the galaxy, where connections begin.">
+      Một góc nhỏ giữa ngân hà, nơi những kết nối bắt đầu.
     </p>
+  </header>
 
-    <div class="song-grid" id="songGrid"></div>
+  <main class="container">
 
-  </section>
+    <!-- DISCORD PROFILE CARD -->
 
-</main>
+    <section class="glass-card discord-card">
 
-<div class="back-home">
-  <a
-    href="index.html"
-    data-vi="← TRỞ VỀ TRANG CHỦ"
-    data-en="← BACK TO HOME"
-  >
-    ← TRỞ VỀ TRANG CHỦ
-  </a>
-</div>
+      <div class="discord-banner"></div>
 
-<footer>
-  SOMEWHERE BETWEEN DREAMS AND REALITY · ARI © 2026
-</footer>
+      <div class="discord-content">
 
-<script>
+        <div class="avatar-wrapper">
+          <img
+            id="discordAvatar"
+            class="avatar"
+            alt="Discord Avatar"
+          >
 
-/* ==========================
-   MUSIC DATA
-========================== */
+          <img
+            id="avatarDecoration"
+            class="avatar-decoration"
+            alt=""
+          >
 
-const songs = [
-  {
-    title: "Em",
-    artist: "Binz",
-    audio: "audio1.mp3",
-    cover: "picturemusic1.png"
-  },
-  {
-    title: "Đừng Quên Tên Anh",
-    artist: "Hoa Vinh",
-    audio: "audio2.mp3",
-    cover: "picturemusic2.png"
-  },
-  {
-    title: "Lựa Chọn Của Em",
-    artist: "buitruonglinh",
-    audio: "audio3.mp3",
-    cover: "picturemusic3.png"
-  },
-  {
-    title: "Ấm",
-    artist: "Sweet Liquor",
-    audio: "audio4.mp3",
-    cover: "picturemusic4.png"
-  },
-  {
-    title: "Vườn Hoa Con Cá",
-    artist: "Olew",
-    audio: "audio5.mp3",
-    cover: "picturemusic5.png"
-  },
-  {
-    title: "Time Machine",
-    artist: "Mj Apanay",
-    audio: "audio6.mp3",
-    cover: "picturemusic6.png"
-  }
-];
+          <div
+            id="statusDot"
+            class="status-dot offline">
+          </div>
+        </div>
 
-/* ==========================
-   ELEMENTS
-========================== */
+        <div class="profile-label">
+          ✦ ARI'S SPACE
+        </div>
 
-const audio = document.getElementById("audioPlayer");
-const vinyl = document.getElementById("vinyl");
-const vinylCover = document.getElementById("vinylCover");
+        <h2 class="profile-name" id="displayName">
+          Ari
+        </h2>
 
-const currentTitle = document.getElementById("currentTitle");
-const currentArtist = document.getElementById("currentArtist");
+        <div class="username" id="discordUsername">
+          @p_f2_bpehvcl.
+        </div>
 
-const playBtn = document.getElementById("playBtn");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
+        <div class="divider"></div>
 
-const progressBar = document.getElementById("progressBar");
-const volumeBar = document.getElementById("volumeBar");
+        <h3 class="section-title"
+            data-vi="✦ GIỚI THIỆU"
+            data-en="✦ ABOUT ME">
+          ✦ GIỚI THIỆU
+        </h3>
 
-const currentTimeEl = document.getElementById("currentTime");
-const durationEl = document.getElementById("duration");
+        <div class="about-text">
+          Somewhere between dreams and reality, I exist.
+          <br>
+          ☾ A little soul wandering among the stars.
+        </div>
 
-const playingStatus = document.getElementById("playingStatus");
-const songGrid = document.getElementById("songGrid");
+        <div class="divider"></div>
 
-let currentSong = 0;
-let currentLang = "vi";
+        <h3 class="section-title"
+            data-vi="✦ TRẠNG THÁI"
+            data-en="✦ STATUS">
+          ✦ TRẠNG THÁI
+        </h3>
 
-/* ==========================
-   LANGUAGE
-========================== */
+        <div class="status-box">
 
-function updateLanguage() {
-  document.documentElement.lang = currentLang;
+          <div
+            id="statusIndicator"
+            class="status-indicator offline">
+          </div>
 
-  document.querySelectorAll("[data-vi]").forEach(el => {
-    el.textContent = el.dataset[currentLang];
-  });
+          <div class="status-info">
 
-  document.getElementById("langBtn").textContent =
-    currentLang === "vi" ? "EN" : "VI";
+            <strong id="statusText">
+              Đang kết nối...
+            </strong>
 
-  updatePlayerUI();
-}
+            <small>Lanyard API · Live Presence</small>
 
-document.getElementById("langBtn").addEventListener("click", () => {
-  currentLang = currentLang === "vi" ? "en" : "vi";
-  updateLanguage();
-});
+          </div>
+        </div>
 
-/* ==========================
-   PLAYLIST CARDS
-========================== */
+        <div class="divider"></div>
 
-function renderPlaylist() {
-  songGrid.innerHTML = "";
+        <h3 class="section-title"
+            data-vi="✦ HOẠT ĐỘNG HIỆN TẠI"
+            data-en="✦ CURRENT ACTIVITY">
+          ✦ HOẠT ĐỘNG HIỆN TẠI
+        </h3>
 
-  songs.forEach((song, index) => {
-    const card = document.createElement("button");
+        <div class="activity-list" id="activityList">
+          <div class="about-text">
+            Đang tải hoạt động...
+          </div>
+        </div>
 
-    card.type = "button";
-    card.className = "song-card";
+        <a
+          class="discord-button"
+          href="https://discord.com/users/965608704974151710"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-vi="✧ Xem hồ sơ Discord"
+          data-en="✧ View Discord Profile">
+          ✧ Xem hồ sơ Discord
+        </a>
 
-    if (index === currentSong) {
-      card.classList.add("active");
+      </div>
+    </section>
+
+    <!-- CONTACT CARD -->
+
+    <section class="glass-card contact-card">
+
+      <div class="contact-heading">
+
+        <div class="eyebrow">
+          ✦ FIND ME AMONG THE STARS ✦
+        </div>
+
+        <h2
+          data-vi="Những nơi có thể tìm thấy mình"
+          data-en="Where You Can Find Me">
+          Những nơi có thể tìm thấy mình
+        </h2>
+
+        <p
+          data-vi="Nếu những vì sao dẫn lối, có lẽ chúng ta sẽ gặp nhau ở một nơi nào đó."
+          data-en="If the stars guide our way, perhaps we will meet somewhere.">
+          Nếu những vì sao dẫn lối, có lẽ chúng ta sẽ gặp nhau ở một nơi nào đó.
+        </p>
+
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- FACEBOOK -->
+
+        <a
+          class="contact-link"
+          href="https://www.facebook.com/share/1Hk1dadxUE/"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <div class="contact-icon">f</div>
+
+          <div class="contact-text">
+            <strong>Facebook</strong>
+            <small>Ari's Facebook</small>
+          </div>
+        </a>
+
+        <!-- X -->
+
+        <a
+          class="contact-link"
+          href="https://x.com/PhmQunh42254275"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <div class="contact-icon">𝕏</div>
+
+          <div class="contact-text">
+            <strong>X / Twitter</strong>
+            <small>@PhmQunh42254275</small>
+          </div>
+        </a>
+
+        <!-- TIKTOK -->
+
+        <a
+          class="contact-link"
+          href="https://www.tiktok.com/@cheng_nekk"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <div class="contact-icon">♪</div>
+
+          <div class="contact-text">
+            <strong>TikTok</strong>
+            <small>@cheng_nekk</small>
+          </div>
+        </a>
+
+        <!-- EMAIL -->
+
+        <a
+          class="contact-link"
+          href="mailto:trangpham030611@gmail.com">
+
+          <div class="contact-icon">✉</div>
+
+          <div class="contact-text">
+            <strong>Email</strong>
+            <small>trangpham030611@gmail.com</small>
+          </div>
+        </a>
+
+        <!-- DISCORD SERVER -->
+
+        <a
+          class="contact-link server"
+          href="https://discord.gg/gachaparadise"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <div class="contact-icon">✦</div>
+
+          <div class="contact-text">
+
+            <strong>Gacha Paradise</strong>
+
+            <small
+              data-vi="Tham gia máy chủ Discord"
+              data-en="Join the Discord Server">
+              Tham gia máy chủ Discord
+            </small>
+
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <a
+      href="index.html"
+      class="back-home"
+      data-vi="← TRỞ VỀ TRANG CHỦ"
+      data-en="← BACK TO HOME">
+      ← TRỞ VỀ TRANG CHỦ
+    </a>
+
+    <div class="copyright">
+      MADE WITH MOONLIGHT · © 2026 ARI
+    </div>
+
+  </footer>
+
+  <script>
+
+    /* =====================================
+       CONFIG
+    ===================================== */
+
+    const DISCORD_ID = "965608704974151710";
+
+    const API_URL =
+      `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
+
+    let currentLanguage = "vi";
+
+    let discordData = null;
+
+    /* =====================================
+       STARS
+    ===================================== */
+
+    const starsContainer =
+      document.getElementById("stars");
+
+    for (let i = 0; i < 85; i++) {
+
+      const star = document.createElement("div");
+
+      star.className = "star";
+
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+
+      star.style.animationDelay =
+        Math.random() * 5 + "s";
+
+      star.style.animationDuration =
+        2 + Math.random() * 4 + "s";
+
+      starsContainer.appendChild(star);
     }
 
-    card.setAttribute(
-      "aria-label",
-      `Play ${song.title} by ${song.artist}`
-    );
+    /* =====================================
+       LANGUAGE
+    ===================================== */
 
-    const number = String(index + 1).padStart(2, "0");
+    function toggleLanguage() {
 
-    card.innerHTML = `
-      <div class="cover-box">
-        <img src="${song.cover}" alt="">
-        <span class="cover-overlay">▶</span>
-      </div>
+      currentLanguage =
+        currentLanguage === "vi" ? "en" : "vi";
 
-      <div class="song-info">
-        <p class="song-number">TRACK ${number}</p>
-        <p class="song-name">${song.title}</p>
-        <p class="artist-name">${song.artist}</p>
-      </div>
-    `;
+      document.querySelectorAll(
+        "[data-vi][data-en]"
+      ).forEach(element => {
 
-    card.addEventListener("click", () => {
-      if (index === currentSong) {
-        togglePlay();
-      } else {
-        loadSong(index);
-        playSong();
+        element.textContent =
+          element.dataset[currentLanguage];
+
+      });
+
+      document.getElementById(
+        "langButton"
+      ).textContent =
+        currentLanguage === "vi" ? "EN" : "VI";
+
+      document.documentElement.lang =
+        currentLanguage;
+
+      if (discordData) {
+        updateStatus(discordData.discord_status);
+        updateActivities(discordData);
       }
-    });
+    }
 
-    songGrid.appendChild(card);
-  });
-}
+    /* =====================================
+       AVATAR
+    ===================================== */
 
-/* ==========================
-   LOAD SONG
-========================== */
+    function updateAvatar(user) {
 
-function loadSong(index) {
-  currentSong = (index + songs.length) % songs.length;
+      const avatar =
+        document.getElementById("discordAvatar");
 
-  const song = songs[currentSong];
+      const fallback =
+        "https://cdn.discordapp.com/embed/avatars/0.png";
 
-  audio.src = song.audio;
-  audio.load();
+      if (user.avatar) {
 
-  vinylCover.src = song.cover;
-  currentTitle.textContent = song.title;
-  currentArtist.textContent = song.artist;
+        const extension =
+          user.avatar.startsWith("a_") ? "gif" : "png";
 
-  progressBar.value = 0;
-  currentTimeEl.textContent = "0:00";
-  durationEl.textContent = "0:00";
+        avatar.src =
+          `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${extension}?size=256`;
 
-  renderPlaylist();
-  updatePlayerUI();
-}
+      } else {
 
-/* ==========================
-   PLAY / PAUSE
-========================== */
+        avatar.src = fallback;
 
-async function playSong() {
-  try {
-    await audio.play();
-  } catch (error) {
-    console.warn("Audio playback failed:", error);
-    playingStatus.textContent =
-      currentLang === "vi"
-        ? "Không thể phát nhạc · Kiểm tra file MP3"
-        : "Unable to play · Check the MP3 file";
-  }
-}
+      }
 
-function pauseSong() {
-  audio.pause();
-}
+      avatar.onerror = function() {
+        this.onerror = null;
+        this.src = fallback;
+      };
 
-function togglePlay() {
-  if (audio.paused) {
-    playSong();
-  } else {
-    pauseSong();
-  }
-}
+      /* Discord Avatar Decoration */
 
-function updatePlayerUI() {
-  const isPlaying = !audio.paused;
+      const decoration =
+        document.getElementById("avatarDecoration");
 
-  vinyl.classList.toggle("playing", isPlaying);
+      const decorationData =
+        user.avatar_decoration_data;
 
-  playBtn.textContent = isPlaying ? "Ⅱ" : "▶";
-  playBtn.setAttribute(
-    "aria-label",
-    isPlaying ? "Pause" : "Play"
-  );
+      if (decorationData && decorationData.asset) {
 
-  playingStatus.textContent = isPlaying
-    ? "♫ NOW PLAYING"
-    : "♡ READY TO PLAY";
-}
+        decoration.src =
+          `https://cdn.discordapp.com/avatar-decoration-presets/${decorationData.asset}.png`;
 
-playBtn.addEventListener("click", togglePlay);
+        decoration.style.display = "block";
 
-/* ==========================
-   PREVIOUS / NEXT
-========================== */
+        decoration.onerror = function() {
+          this.style.display = "none";
+        };
 
-function nextSong() {
-  loadSong(currentSong + 1);
-  playSong();
-}
+      } else {
 
-function previousSong() {
-  loadSong(currentSong - 1);
-  playSong();
-}
+        decoration.style.display = "none";
 
-nextBtn.addEventListener("click", nextSong);
-prevBtn.addEventListener("click", previousSong);
+      }
+    }
 
-/* ==========================
-   PROGRESS
-========================== */
+    /* =====================================
+       STATUS
+    ===================================== */
 
-function formatTime(seconds) {
-  if (!Number.isFinite(seconds)) return "0:00";
+    function updateStatus(status) {
 
-  const minutes = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
+      const statusText =
+        document.getElementById("statusText");
 
-  return minutes + ":" + String(secs).padStart(2, "0");
-}
+      const statusDot =
+        document.getElementById("statusDot");
 
-audio.addEventListener("timeupdate", () => {
-  if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
-    return;
-  }
+      const indicator =
+        document.getElementById("statusIndicator");
 
-  progressBar.value =
-    (audio.currentTime / audio.duration) * 100;
+      const translations = {
 
-  currentTimeEl.textContent =
-    formatTime(audio.currentTime);
-});
+        online: {
+          vi: "Đang hoạt động",
+          en: "Online"
+        },
 
-audio.addEventListener("loadedmetadata", () => {
-  durationEl.textContent = formatTime(audio.duration);
-});
+        idle: {
+          vi: "Đang rảnh",
+          en: "Idle"
+        },
 
-progressBar.addEventListener("input", () => {
-  if (Number.isFinite(audio.duration) && audio.duration > 0) {
-    audio.currentTime =
-      (progressBar.value / 100) * audio.duration;
-  }
-});
+        dnd: {
+          vi: "Không làm phiền",
+          en: "Do Not Disturb"
+        },
 
-/* ==========================
-   VOLUME
-========================== */
+        offline: {
+          vi: "Ngoại tuyến",
+          en: "Offline"
+        }
 
-audio.volume = 0.7;
+      };
 
-volumeBar.addEventListener("input", () => {
-  audio.volume = Number(volumeBar.value);
-});
+      const validStatus =
+        translations[status] ? status : "offline";
 
-/* ==========================
-   AUDIO EVENTS
-========================== */
+      statusText.textContent =
+        translations[validStatus][currentLanguage];
 
-audio.addEventListener("play", updatePlayerUI);
-audio.addEventListener("pause", updatePlayerUI);
+      statusDot.className =
+        "status-dot " + validStatus;
 
-audio.addEventListener("ended", nextSong);
+      indicator.className =
+        "status-indicator " + validStatus;
+    }
 
-audio.addEventListener("error", () => {
-  playingStatus.textContent =
-    currentLang === "vi"
-      ? "Không tải được bài hát · Kiểm tra file MP3"
-      : "Song unavailable · Check the MP3 file";
-});
+    /* =====================================
+       ACTIVITIES
+    ===================================== */
 
-/* ==========================
-   STARS
-========================== */
+    function createActivityImage(activity) {
 
-const starsContainer = document.getElementById("stars");
+      const icon = document.createElement("div");
 
-for (let i = 0; i < 90; i++) {
-  const star = document.createElement("span");
+      icon.className = "activity-icon";
 
-  star.className = "star";
+      const largeImage =
+        activity.assets?.large_image;
 
-  star.style.left = Math.random() * 100 + "%";
-  star.style.top = Math.random() * 100 + "%";
+      if (largeImage) {
 
-  star.style.animationDelay = Math.random() * 5 + "s";
+        let imageURL = "";
 
-  starsContainer.appendChild(star);
-}
+        if (largeImage.startsWith("mp:external/")) {
 
-/* ==========================
-   INITIALIZE
-========================== */
+          imageURL =
+            "https://media.discordapp.net/" +
+            largeImage;
 
-loadSong(0);
-updateLanguage();
+        } else if (
+          largeImage.startsWith("https://")
+        ) {
 
-</script>
+          imageURL = largeImage;
+
+        } else if (activity.application_id) {
+
+          imageURL =
+            `https://cdn.discordapp.com/app-assets/${activity.application_id}/${largeImage}.png`;
+
+        }
+
+        if (imageURL) {
+
+          const img = document.createElement("img");
+
+          img.src = imageURL;
+          img.alt = "";
+          img.onerror = () => {
+            icon.textContent = "🎮";
+          };
+
+          icon.appendChild(img);
+
+          return icon;
+        }
+      }
+
+      icon.textContent = "🎮";
+
+      return icon;
+    }
+
+    function updateActivities(data) {
+
+      const list =
+        document.getElementById("activityList");
+
+      list.replaceChildren();
+
+      const activities =
+        Array.isArray(data.activities)
+          ? data.activities.filter(
+              activity => activity.type !== 4
+            )
+          : [];
+
+      /* Spotify */
+
+      if (data.listening_to_spotify && data.spotify) {
+
+        const spotify = data.spotify;
+
+        const item = document.createElement("div");
+        item.className = "activity-item";
+
+        const icon = document.createElement("div");
+        icon.className = "activity-icon";
+
+        if (spotify.album_art_url) {
+
+          const img = document.createElement("img");
+          img.src = spotify.album_art_url;
+          img.alt = "Spotify album cover";
+
+          icon.appendChild(img);
+
+        } else {
+
+          icon.textContent = "♫";
+
+        }
+
+        const details = document.createElement("div");
+        details.className = "activity-details";
+
+        const title = document.createElement("strong");
+        title.textContent = spotify.song || "Spotify";
+
+        const artist = document.createElement("span");
+        artist.textContent = spotify.artist || "";
+
+        const label = document.createElement("span");
+
+        label.textContent =
+          currentLanguage === "vi"
+            ? "♫ Đang nghe Spotify"
+            : "♫ Listening to Spotify";
+
+        details.append(title, artist, label);
+
+        item.append(icon, details);
+        list.appendChild(item);
+      }
+
+      /* Other Discord activities */
+
+      activities
+        .filter(activity =>
+          !(data.listening_to_spotify &&
+            activity.name === "Spotify")
+        )
+        .forEach(activity => {
+
+          const item = document.createElement("div");
+          item.className = "activity-item";
+
+          const icon = createActivityImage(activity);
+
+          const details = document.createElement("div");
+          details.className = "activity-details";
+
+          const name = document.createElement("strong");
+          name.textContent =
+            activity.name || "Discord Activity";
+
+          details.appendChild(name);
+
+          if (activity.details) {
+
+            const detail = document.createElement("span");
+            detail.textContent = activity.details;
+
+            details.appendChild(detail);
+          }
+
+          if (activity.state) {
+
+            const state = document.createElement("span");
+            state.textContent = activity.state;
+
+            details.appendChild(state);
+          }
+
+          item.append(icon, details);
+          list.appendChild(item);
+
+        });
+
+      /* No activity */
+
+      if (!list.children.length) {
+
+        const empty = document.createElement("div");
+        empty.className = "about-text";
+
+        empty.textContent =
+          currentLanguage === "vi"
+            ? "✧ Hiện chưa có hoạt động nào được hiển thị."
+            : "✧ No activities are currently displayed.";
+
+        list.appendChild(empty);
+      }
+    }
+
+    /* =====================================
+       LANYARD API
+    ===================================== */
+
+    async function fetchDiscord() {
+
+      try {
+
+        const response = await fetch(
+          API_URL,
+          { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Lanyard request failed");
+        }
+
+        const result = await response.json();
+
+        if (!result.success || !result.data) {
+          throw new Error("Invalid Lanyard data");
+        }
+
+        discordData = result.data;
+
+        const user = discordData.discord_user;
+
+        if (user) {
+
+          updateAvatar(user);
+
+          document.getElementById(
+            "displayName"
+          ).textContent =
+            user.global_name ||
+            user.username ||
+            "Ari";
+
+          document.getElementById(
+            "discordUsername"
+          ).textContent =
+            "@" + (user.username || "p_f2_bpehvcl.");
+
+        }
+
+        updateStatus(discordData.discord_status);
+
+        updateActivities(discordData);
+
+      } catch (error) {
+
+        console.error("Lanyard:", error);
+
+        if (!discordData) {
+
+          document.getElementById(
+            "statusText"
+          ).textContent =
+            currentLanguage === "vi"
+              ? "Không thể tải trạng thái"
+              : "Unable to load status";
+
+          document.getElementById(
+            "activityList"
+          ).textContent =
+            currentLanguage === "vi"
+              ? "Không thể kết nối với Lanyard."
+              : "Unable to connect to Lanyard.";
+
+        }
+      }
+    }
+
+    /* Initial load */
+
+    fetchDiscord();
+
+    /* Refresh every 30 seconds */
+
+    setInterval(fetchDiscord, 30000);
+
+  </script>
 
 </body>
-        </html>
+</html>
