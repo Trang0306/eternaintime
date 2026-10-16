@@ -3,22 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="theme-color" content="#080d21">
-  <meta name="description" content="Ari's Discord profile and social connections.">
 
-  <title>Discord & Contact | Moonlit</title>
+  <title>Music Room | Moonlit</title>
 
   <style>
     :root {
       --bg: #080d21;
-      --bg2: #101936;
-      --card: rgba(20, 30, 65, 0.66);
-      --border: rgba(181, 198, 255, 0.18);
+      --card: rgba(22, 32, 67, 0.68);
+      --border: rgba(181, 198, 255, 0.2);
       --text: #e9edff;
       --muted: #aeb9da;
-      --accent: #b9c8ff;
-      --accent2: #d5c5ff;
+      --accent: #c3d0ff;
+      --purple: #c9b8ff;
     }
 
     * {
@@ -32,14 +29,19 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Segoe UI", Arial, sans-serif;
       color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
 
       background:
         radial-gradient(
-          ellipse at 50% 0%,
-          rgba(84, 103, 182, 0.25),
-          transparent 55%
+          ellipse at 20% 10%,
+          rgba(91, 111, 190, 0.2),
+          transparent 40%
+        ),
+        radial-gradient(
+          ellipse at 90% 70%,
+          rgba(102, 79, 164, 0.13),
+          transparent 45%
         ),
         linear-gradient(
           160deg,
@@ -51,13 +53,17 @@
       overflow-x: hidden;
     }
 
-    /* STARS */
+    button {
+      font: inherit;
+    }
+
+    /* STAR BACKGROUND */
 
     .stars {
       position: fixed;
       inset: 0;
-      pointer-events: none;
       z-index: -1;
+      pointer-events: none;
       overflow: hidden;
     }
 
@@ -65,10 +71,10 @@
       position: absolute;
       width: 2px;
       height: 2px;
-      border-radius: 50%;
       background: white;
-      opacity: 0.65;
-      animation: twinkle 4s infinite alternate;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: twinkle 4s ease-in-out infinite alternate;
     }
 
     @keyframes twinkle {
@@ -78,8 +84,8 @@
       }
 
       to {
-        opacity: 0.95;
-        transform: scale(1.4);
+        opacity: 0.9;
+        transform: scale(1.3);
       }
     }
 
@@ -95,46 +101,43 @@
     }
 
     .navigation a {
+      padding: 10px 16px;
       color: #dce5ff;
       text-decoration: none;
-      font-size: 14px;
-      padding: 10px 17px;
-      border-radius: 30px;
-
+      font-size: 13px;
       border: 1px solid var(--border);
+      border-radius: 30px;
       background: rgba(19, 29, 64, 0.65);
-
-      transition: 0.3s;
+      transition: 0.3s ease;
     }
 
     .navigation a:hover,
     .navigation a.active {
       background: rgba(137, 159, 236, 0.22);
-      border-color: rgba(193, 207, 255, 0.5);
+      border-color: rgba(193, 207, 255, 0.55);
       box-shadow: 0 0 20px rgba(130, 155, 255, 0.15);
       transform: translateY(-2px);
     }
 
     /* LANGUAGE */
 
-    .language-switch {
-      position: relative;
+    .language {
       display: flex;
       justify-content: center;
-      margin: 5px 0 25px;
+      margin: 5px 0 30px;
     }
 
-    .language-switch button {
-      border: 1px solid var(--border);
-      border-radius: 25px;
+    .language button {
       padding: 9px 20px;
+      border-radius: 25px;
       color: var(--text);
+      border: 1px solid var(--border);
       background: rgba(25, 36, 78, 0.75);
       cursor: pointer;
       transition: 0.3s;
     }
 
-    .language-switch button:hover {
+    .language button:hover {
       background: rgba(120, 145, 220, 0.25);
     }
 
@@ -142,429 +145,471 @@
 
     .page-header {
       text-align: center;
-      padding: 35px 20px 45px;
+      padding: 10px 20px 45px;
     }
 
     .eyebrow {
       color: var(--accent);
-      letter-spacing: 4px;
       font-size: 11px;
-      text-transform: uppercase;
+      letter-spacing: 4px;
     }
 
     .page-header h1 {
-      margin: 18px 0;
+      margin: 18px 0 12px;
       font-family: Georgia, serif;
-      font-size: clamp(34px, 6vw, 58px);
+      font-size: clamp(36px, 5vw, 56px);
       font-weight: normal;
-      color: #e6eaff;
-      text-shadow: 0 0 30px rgba(160, 180, 255, 0.25);
+      text-shadow: 0 0 30px rgba(160, 180, 255, 0.23);
     }
 
     .page-header p {
       color: var(--muted);
       line-height: 1.8;
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    /* LAYOUT */
+    /* MAIN LAYOUT */
 
-    .container {
-      width: min(1050px, 92%);
-      margin: auto;
+    .music-layout {
+      width: min(1200px, 92%);
+      margin: 0 auto 75px;
+
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 35px;
+      align-items: start;
     }
 
-    .glass-card {
+    .glass {
       background: var(--card);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-
       border: 1px solid var(--border);
-      border-radius: 24px;
+      border-radius: 25px;
 
       box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.22),
+        0 15px 45px rgba(0, 0, 0, 0.2),
         inset 0 1px rgba(255, 255, 255, 0.04);
+    }
 
+    /* LEFT PLAYER */
+
+    .player-card {
+      padding: 28px 22px;
+      text-align: center;
+      position: sticky;
+      top: 25px;
       overflow: hidden;
     }
 
-    /* DISCORD CARD */
-
-    .discord-card {
-      max-width: 750px;
-      margin: 0 auto 50px;
-    }
-
-    .discord-banner {
-      height: 210px;
-      position: relative;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(14, 20, 48, 0.2),
-          rgba(55, 65, 130, 0.25)
-        ),
-        url("banner.jpg") center / cover no-repeat;
-    }
-
-    .discord-banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        transparent 55%,
-        rgba(10, 15, 35, 0.25)
-      );
-    }
-
-    .discord-content {
-      position: relative;
-      padding: 0 32px 32px;
-    }
-
-    /* AVATAR */
-
-    .avatar-wrapper {
-      width: 126px;
-      height: 126px;
-      position: relative;
-      margin-top: -63px;
-      z-index: 2;
-    }
-
-    .avatar {
-      position: absolute;
-      width: 104px;
-      height: 104px;
-      top: 11px;
-      left: 11px;
-
-      border-radius: 50%;
-      object-fit: cover;
-
-      border: 5px solid #111a39;
-      background: #182344;
-    }
-
-    .avatar-decoration {
-      position: absolute;
-      inset: 0;
-      width: 126px;
-      height: 126px;
-      object-fit: contain;
-      pointer-events: none;
-      z-index: 3;
-      display: none;
-    }
-
-    .status-dot {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-
-      right: 8px;
-      bottom: 9px;
-
-      background: #747f8d;
-      border: 5px solid #111a39;
-      border-radius: 50%;
-      z-index: 4;
-    }
-
-    .status-dot.online {
-      background: #43b581;
-    }
-
-    .status-dot.idle {
-      background: #faa61a;
-    }
-
-    .status-dot.dnd {
-      background: #f04747;
-    }
-
-    .status-dot.offline {
-      background: #747f8d;
-    }
-
-    /* PROFILE TEXT */
-
-    .profile-label {
-      margin-top: 20px;
-      color: var(--accent);
-      font-size: 11px;
+    .player-label {
+      font-size: 10px;
       letter-spacing: 3px;
-    }
-
-    .profile-name {
-      font-family: Georgia, serif;
-      font-size: 32px;
-      margin: 12px 0 5px;
-    }
-
-    .username {
-      color: var(--muted);
-      font-size: 14px;
-      overflow-wrap: anywhere;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 25px 0;
-    }
-
-    .section-title {
-      font-size: 13px;
-      letter-spacing: 2px;
       color: var(--accent);
-      margin-bottom: 15px;
+      margin-bottom: 25px;
     }
 
-    .about-text {
-      color: #d3dcfa;
-      font-size: 14px;
-      line-height: 1.9;
-    }
+    /* VINYL */
 
-    /* STATUS */
-
-    .status-box {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      padding: 16px;
-      border-radius: 15px;
-
-      background: rgba(10, 17, 42, 0.55);
-      border: 1px solid var(--border);
-    }
-
-    .status-indicator {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: #747f8d;
-      flex-shrink: 0;
-    }
-
-    .status-indicator.online {
-      background: #43b581;
-    }
-
-    .status-indicator.idle {
-      background: #faa61a;
-    }
-
-    .status-indicator.dnd {
-      background: #f04747;
-    }
-
-    .status-indicator.offline {
-      background: #747f8d;
-    }
-
-    .status-info {
-      min-width: 0;
-    }
-
-    .status-info strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .status-info small {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* ACTIVITIES */
-
-    .activity-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .activity-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-
-      padding: 14px;
-      border-radius: 15px;
-
-      background: rgba(10, 17, 42, 0.5);
-      border: 1px solid var(--border);
-    }
-
-    .activity-icon {
-      width: 55px;
-      height: 55px;
-      flex-shrink: 0;
+    .vinyl-stage {
+      width: min(100%, 340px);
+      aspect-ratio: 1;
+      margin: 0 auto 28px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      background: rgba(120, 145, 220, 0.15);
-      border-radius: 12px;
-      font-size: 25px;
-      overflow: hidden;
+      position: relative;
     }
 
-    .activity-icon img {
+    .vinyl-glow {
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      background: rgba(142, 160, 255, 0.12);
+      filter: blur(25px);
+    }
+
+    .vinyl {
+      width: 92%;
+      height: 92%;
+      border-radius: 50%;
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        repeating-radial-gradient(
+          circle,
+          #171c30 0,
+          #171c30 2px,
+          #252a40 3px,
+          #101526 5px,
+          #20253a 6px,
+          #101526 8px
+        );
+
+      border: 1px solid rgba(190, 205, 255, 0.25);
+
+      box-shadow:
+        0 0 0 5px rgba(170, 190, 255, 0.04),
+        0 0 40px rgba(108, 131, 220, 0.15),
+        inset 0 0 25px rgba(0, 0, 0, 0.85);
+
+      animation: spin 7s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .vinyl.playing {
+      animation-play-state: running;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .vinyl-center {
+      width: 39%;
+      height: 39%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+
+      border: 4px solid #202740;
+
+      background:
+        radial-gradient(
+          circle,
+          #b8c7ff,
+          #747fc0 45%,
+          #383f75 80%
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-shadow: 0 0 20px rgba(157, 177, 255, 0.25);
+    }
+
+    .vinyl-center img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .activity-details {
-      min-width: 0;
+    .vinyl-center span {
+      position: relative;
+      z-index: 1;
+      font-size: 28px;
+      text-shadow: 0 2px 10px #111936;
     }
 
-    .activity-details strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 5px;
-      overflow-wrap: anywhere;
+    .vinyl-hole {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #080d21;
+      border: 2px solid #c6d2ff;
+      z-index: 2;
     }
 
-    .activity-details span {
-      display: block;
+    /* PLAYER TEXT */
+
+    .now-playing-label {
+      font-size: 10px;
+      letter-spacing: 3px;
       color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
+      margin-bottom: 12px;
     }
 
-    .discord-button {
-      display: block;
-      text-align: center;
-
-      margin-top: 25px;
-      padding: 14px 20px;
-
-      color: #edf0ff;
-      text-decoration: none;
-
-      border-radius: 15px;
-      background: linear-gradient(
-        135deg,
-        #485baf,
-        #6979c9
-      );
-
-      transition: 0.3s;
-    }
-
-    .discord-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(105, 121, 201, 0.3);
-    }
-
-    /* CONTACT CARD */
-
-    .contact-card {
-      padding: 35px;
-      max-width: 750px;
-      margin: 0 auto 65px;
-    }
-
-    .contact-heading {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .contact-heading h2 {
+    .current-title {
       font-family: Georgia, serif;
-      font-weight: normal;
-      font-size: 29px;
-      margin: 12px 0;
+      font-size: 25px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+      margin: 0 0 8px;
     }
 
-    .contact-heading p {
+    .current-artist {
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: 13px;
+      margin-bottom: 25px;
+      overflow-wrap: anywhere;
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+    /* AUDIO CONTROLS */
+
+    .progress-area {
+      margin: 20px 0 8px;
     }
 
-    .contact-link {
+    .time-row {
       display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      width: 100%;
+      height: 5px;
+      border-radius: 10px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background: rgba(190, 205, 255, 0.2);
+      accent-color: #b9c8ff;
+    }
+
+    .progress::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #d7e0ff;
+      box-shadow: 0 0 10px rgba(185, 200, 255, 0.7);
+    }
+
+    .progress::-moz-range-thumb {
+      width: 11px;
+      height: 11px;
+      border: 0;
+      border-radius: 50%;
+      background: #d7e0ff;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 15px;
+      gap: 25px;
+      margin: 22px 0 12px;
+    }
 
-      padding: 18px;
-      border-radius: 16px;
-
-      text-decoration: none;
-      color: var(--text);
-
-      background: rgba(12, 20, 47, 0.65);
+    .control-button {
+      width: 42px;
+      height: 42px;
       border: 1px solid var(--border);
+      border-radius: 50%;
 
-      transition: 0.3s;
+      background: rgba(137, 159, 236, 0.1);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .control-button:hover {
+      background: rgba(137, 159, 236, 0.25);
+      transform: scale(1.06);
+    }
+
+    .control-button.main {
+      width: 54px;
+      height: 54px;
+      font-size: 20px;
+      background: linear-gradient(135deg, #6175bd, #9b9ce5);
+      border: none;
+      box-shadow: 0 0 25px rgba(111, 131, 220, 0.25);
+    }
+
+    .player-note {
+      color: #8592bb;
+      font-size: 10px;
+      line-height: 1.7;
+      margin-top: 20px;
+    }
+
+    /* RIGHT SIDE */
+
+    .playlist-section {
       min-width: 0;
     }
 
-    .contact-link:hover {
-      transform: translateY(-4px);
-      background: rgba(88, 108, 180, 0.2);
-      border-color: rgba(190, 205, 255, 0.5);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    .playlist-heading {
+      margin: 5px 0 23px;
     }
 
-    .contact-icon {
+    .playlist-heading h2 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: normal;
+      margin: 0 0 10px;
+    }
+
+    .playlist-heading p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* SIX MUSIC CARDS */
+
+    .song-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .song-card {
+      min-width: 0;
+      padding: 12px;
+      position: relative;
+      text-align: left;
+
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(20, 30, 65, 0.65);
+
+      cursor: pointer;
+      overflow: hidden;
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .song-card:hover {
+      transform: translateY(-4px);
+      background: rgba(75, 91, 150, 0.2);
+      border-color: rgba(192, 207, 255, 0.5);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .song-card.active {
+      border-color: rgba(196, 208, 255, 0.8);
+      background: rgba(98, 117, 190, 0.19);
+      box-shadow: 0 0 25px rgba(119, 143, 230, 0.13);
+    }
+
+    .cover-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 0.85;
+      position: relative;
+      overflow: hidden;
+      border-radius: 13px;
+      background: #182344;
+      margin-bottom: 15px;
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .song-card:hover .cover {
+      transform: scale(1.05);
+    }
+
+    .cover-placeholder {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      width: 45px;
-      height: 45px;
-      flex-shrink: 0;
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          rgba(173, 190, 255, 0.24),
+          transparent 55%
+        ),
+        linear-gradient(145deg, #222f5b, #11172f);
 
-      border-radius: 13px;
-      background: rgba(145, 165, 255, 0.12);
-
-      font-size: 22px;
+      font-size: 35px;
     }
 
-    .contact-text {
-      min-width: 0;
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(5, 10, 28, 0.25);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .contact-text strong {
+    .song-card:hover .play-overlay,
+    .song-card.active .play-overlay {
+      opacity: 1;
+    }
+
+    .play-overlay span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+
+      background: rgba(202, 214, 255, 0.9);
+      color: #101936;
+      font-size: 18px;
+      box-shadow: 0 0 25px rgba(160, 180, 255, 0.3);
+    }
+
+    .song-number {
       display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #9caddd;
+      margin-bottom: 7px;
+    }
+
+    .song-title {
       font-size: 14px;
       font-weight: 500;
-    }
-
-    .contact-text small {
-      display: block;
-      margin-top: 5px;
-      font-size: 11px;
-      color: var(--muted);
+      line-height: 1.5;
       overflow-wrap: anywhere;
+      margin: 0 0 6px;
     }
 
-    .contact-link.server {
-      grid-column: 1 / -1;
+    .song-artist {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      margin: 0;
+    }
+
+    .song-status {
+      display: none;
+      color: var(--accent);
+      font-size: 10px;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    .song-card.active .song-status {
+      display: block;
     }
 
     /* FOOTER */
 
     .footer {
       text-align: center;
-      padding: 20px 20px 45px;
+      padding: 10px 20px 45px;
     }
 
     .back-home {
@@ -590,7 +635,7 @@
     }
 
     .copyright {
-      margin-top: 35px;
+      margin-top: 30px;
       color: #7886b3;
       font-size: 10px;
       letter-spacing: 3px;
@@ -598,38 +643,66 @@
 
     /* RESPONSIVE */
 
-    @media (max-width: 600px) {
-      .discord-banner {
-        height: 160px;
-      }
-
-      .discord-content {
-        padding: 0 20px 25px;
-      }
-
-      .contact-card {
-        padding: 24px 18px;
-      }
-
-      .contact-grid {
+    @media (max-width: 850px) {
+      .music-layout {
         grid-template-columns: 1fr;
+        gap: 35px;
+        max-width: 650px;
       }
 
-      .contact-link.server {
-        grid-column: auto;
+      .player-card {
+        position: relative;
+        top: auto;
       }
 
+      .vinyl-stage {
+        width: min(75%, 300px);
+      }
+    }
+
+    @media (max-width: 480px) {
       .navigation {
         gap: 8px;
       }
 
       .navigation a {
-        padding: 9px 12px;
+        padding: 9px 11px;
         font-size: 12px;
       }
 
-      .page-header {
-        padding-top: 20px;
+      .song-grid {
+        gap: 11px;
+      }
+
+      .song-card {
+        padding: 9px;
+        border-radius: 16px;
+      }
+
+      .cover-wrap {
+        border-radius: 10px;
+      }
+
+      .song-title {
+        font-size: 12px;
+      }
+
+      .song-artist {
+        font-size: 11px;
+      }
+
+      .playlist-heading h2 {
+        font-size: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -637,7 +710,6 @@
 
 <body>
 
-  <!-- STARS -->
   <div class="stars" id="stars"></div>
 
   <!-- NAVIGATION -->
@@ -645,12 +717,13 @@
     <a href="index.html">⌂ Home</a>
     <a href="about.html">☾ About</a>
     <a href="hobbies.html">✧ Hobbies</a>
-    <a href="discord.html" class="active">♡ Discord</a>
+    <a href="discord.html">♡ Discord</a>
+    <a href="music.html" class="active">♫ Music</a>
   </nav>
 
   <!-- LANGUAGE -->
-  <div class="language-switch">
-    <button id="langButton" onclick="toggleLanguage()">
+  <div class="language">
+    <button id="languageButton" type="button">
       EN
     </button>
   </div>
@@ -658,247 +731,357 @@
   <!-- HEADER -->
   <header class="page-header">
     <div class="eyebrow">
-      ✦ DIGITAL CONSTELLATION ✦
+      ✦ A LITTLE UNIVERSE OF SOUND ✦
     </div>
 
-    <h1 data-vi="Kết nối cùng Ari"
-        data-en="Connect with Ari">
-      Kết nối cùng Ari
+    <h1
+      data-vi="Giai điệu của Ari"
+      data-en="Ari's Melodies">
+      Giai điệu của Ari
     </h1>
 
     <p
-      data-vi="Một góc nhỏ giữa ngân hà, nơi những kết nối bắt đầu."
-      data-en="A little corner of the galaxy, where connections begin.">
-      Một góc nhỏ giữa ngân hà, nơi những kết nối bắt đầu.
+      data-vi="Có những điều chẳng thể nói thành lời, chỉ có thể gửi vào giai điệu."
+      data-en="Some feelings cannot be spoken, only carried by melodies.">
+      Có những điều chẳng thể nói thành lời,
+      chỉ có thể gửi vào giai điệu.
     </p>
   </header>
 
-  <main class="container">
+  <main class="music-layout">
 
-    <!-- DISCORD PROFILE CARD -->
+    <!-- LEFT: VINYL PLAYER -->
+    <section class="glass player-card">
 
-    <section class="glass-card discord-card">
+      <div
+        class="player-label"
+        data-vi="✦ ĐĨA THAN CỦA TUI ✦"
+        data-en="✦ MY VINYL RECORD ✦">
+        ✦ ĐĨA THAN CỦA TUI ✦
+      </div>
 
-      <div class="discord-banner"></div>
+      <div class="vinyl-stage">
 
-      <div class="discord-content">
+        <div class="vinyl-glow"></div>
 
-        <div class="avatar-wrapper">
-          <img
-            id="discordAvatar"
-            class="avatar"
-            alt="Discord Avatar"
-          >
+        <div class="vinyl" id="vinyl">
 
-          <img
-            id="avatarDecoration"
-            class="avatar-decoration"
-            alt=""
-          >
-
-          <div
-            id="statusDot"
-            class="status-dot offline">
-          </div>
-        </div>
-
-        <div class="profile-label">
-          ✦ ARI'S SPACE
-        </div>
-
-        <h2 class="profile-name" id="displayName">
-          Ari
-        </h2>
-
-        <div class="username" id="discordUsername">
-          @p_f2_bpehvcl.
-        </div>
-
-        <div class="divider"></div>
-
-        <h3 class="section-title"
-            data-vi="✦ GIỚI THIỆU"
-            data-en="✦ ABOUT ME">
-          ✦ GIỚI THIỆU
-        </h3>
-
-        <div class="about-text">
-          Somewhere between dreams and reality, I exist.
-          <br>
-          ☾ A little soul wandering among the stars.
-        </div>
-
-        <div class="divider"></div>
-
-        <h3 class="section-title"
-            data-vi="✦ TRẠNG THÁI"
-            data-en="✦ STATUS">
-          ✦ TRẠNG THÁI
-        </h3>
-
-        <div class="status-box">
-
-          <div
-            id="statusIndicator"
-            class="status-indicator offline">
+          <div class="vinyl-center">
+            <img id="vinylCover" src="picturemusic1.png"
+                 alt="Album cover">
+            <span id="vinylFallback">☾</span>
           </div>
 
-          <div class="status-info">
+          <div class="vinyl-hole"></div>
 
-            <strong id="statusText">
-              Đang kết nối...
-            </strong>
+        </div>
+      </div>
 
-            <small>Lanyard API · Live Presence</small>
+      <div
+        class="now-playing-label"
+        data-vi="ĐANG PHÁT"
+        data-en="NOW PLAYING">
+        ĐANG PHÁT
+      </div>
 
-          </div>
+      <h2 class="current-title" id="currentTitle">
+        Em
+      </h2>
+
+      <p class="current-artist" id="currentArtist">
+        Binz
+      </p>
+
+      <!-- PROGRESS -->
+      <div class="progress-area">
+
+        <div class="time-row">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
         </div>
 
-        <div class="divider"></div>
-
-        <h3 class="section-title"
-            data-vi="✦ HOẠT ĐỘNG HIỆN TẠI"
-            data-en="✦ CURRENT ACTIVITY">
-          ✦ HOẠT ĐỘNG HIỆN TẠI
-        </h3>
-
-        <div class="activity-list" id="activityList">
-          <div class="about-text">
-            Đang tải hoạt động...
-          </div>
-        </div>
-
-        <a
-          class="discord-button"
-          href="https://discord.com/users/965608704974151710"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-vi="✧ Xem hồ sơ Discord"
-          data-en="✧ View Discord Profile">
-          ✧ Xem hồ sơ Discord
-        </a>
+        <input
+          id="progress"
+          class="progress"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          step="0.1"
+          aria-label="Music progress">
 
       </div>
+
+      <!-- CONTROLS -->
+      <div class="controls">
+
+        <button
+          class="control-button"
+          id="previousButton"
+          type="button"
+          aria-label="Previous song">
+          |◀
+        </button>
+
+        <button
+          class="control-button main"
+          id="playButton"
+          type="button"
+          aria-label="Play or pause">
+          ▶
+        </button>
+
+        <button
+          class="control-button"
+          id="nextButton"
+          type="button"
+          aria-label="Next song">
+          ▶|
+        </button>
+
+      </div>
+
+      <p
+        class="player-note"
+        data-vi="Chọn một bài hát ở bên phải để bắt đầu nghe."
+        data-en="Choose a song on the right to start listening.">
+        Chọn một bài hát ở bên phải để bắt đầu nghe.
+      </p>
+
+      <audio id="audioPlayer" preload="metadata"></audio>
+
     </section>
 
-    <!-- CONTACT CARD -->
+    <!-- RIGHT: PLAYLIST -->
+    <section class="playlist-section">
 
-    <section class="glass-card contact-card">
-
-      <div class="contact-heading">
+      <div class="playlist-heading">
 
         <div class="eyebrow">
-          ✦ FIND ME AMONG THE STARS ✦
+          ✦ THE LITTLE PLAYLIST ✦
         </div>
 
         <h2
-          data-vi="Những nơi có thể tìm thấy mình"
-          data-en="Where You Can Find Me">
-          Những nơi có thể tìm thấy mình
+          data-vi="Những bài hát yêu thích"
+          data-en="Favourite Songs">
+          Những bài hát yêu thích
         </h2>
 
         <p
-          data-vi="Nếu những vì sao dẫn lối, có lẽ chúng ta sẽ gặp nhau ở một nơi nào đó."
-          data-en="If the stars guide our way, perhaps we will meet somewhere.">
-          Nếu những vì sao dẫn lối, có lẽ chúng ta sẽ gặp nhau ở một nơi nào đó.
+          data-vi="Chạm vào bìa nhạc để chọn giai điệu của riêng mình."
+          data-en="Tap an album cover to choose your melody.">
+          Chạm vào bìa nhạc để chọn giai điệu của riêng mình.
         </p>
 
       </div>
 
-      <div class="contact-grid">
+      <div class="song-grid" id="songGrid">
 
-        <!-- FACEBOOK -->
+        <!-- SONG 1 -->
+        <button class="song-card active"
+                type="button"
+                data-index="0">
 
-        <a
-          class="contact-link"
-          href="https://www.facebook.com/share/1Hk1dadxUE/"
-          target="_blank"
-          rel="noopener noreferrer">
+          <div class="cover-wrap">
 
-          <div class="contact-icon">f</div>
+            <img class="cover"
+                 src="picturemusic1.png"
+                 alt="Em — Binz">
 
-          <div class="contact-text">
-            <strong>Facebook</strong>
-            <small>Ari's Facebook</small>
-          </div>
-        </a>
+            <div class="cover-placeholder">☾</div>
 
-        <!-- X -->
-
-        <a
-          class="contact-link"
-          href="https://x.com/PhmQunh42254275"
-          target="_blank"
-          rel="noopener noreferrer">
-
-          <div class="contact-icon">𝕏</div>
-
-          <div class="contact-text">
-            <strong>X / Twitter</strong>
-            <small>@PhmQunh42254275</small>
-          </div>
-        </a>
-
-        <!-- TIKTOK -->
-
-        <a
-          class="contact-link"
-          href="https://www.tiktok.com/@cheng_nekk"
-          target="_blank"
-          rel="noopener noreferrer">
-
-          <div class="contact-icon">♪</div>
-
-          <div class="contact-text">
-            <strong>TikTok</strong>
-            <small>@cheng_nekk</small>
-          </div>
-        </a>
-
-        <!-- EMAIL -->
-
-        <a
-          class="contact-link"
-          href="mailto:trangpham030611@gmail.com">
-
-          <div class="contact-icon">✉</div>
-
-          <div class="contact-text">
-            <strong>Email</strong>
-            <small>trangpham030611@gmail.com</small>
-          </div>
-        </a>
-
-        <!-- DISCORD SERVER -->
-
-        <a
-          class="contact-link server"
-          href="https://discord.gg/gachaparadise"
-          target="_blank"
-          rel="noopener noreferrer">
-
-          <div class="contact-icon">✦</div>
-
-          <div class="contact-text">
-
-            <strong>Gacha Paradise</strong>
-
-            <small
-              data-vi="Tham gia máy chủ Discord"
-              data-en="Join the Discord Server">
-              Tham gia máy chủ Discord
-            </small>
+            <div class="play-overlay">
+              <span>▶</span>
+            </div>
 
           </div>
-        </a>
+
+          <span class="song-number">TRACK 01</span>
+
+          <h3 class="song-title">Em</h3>
+
+          <p class="song-artist">Binz</p>
+
+          <span class="song-status"
+                data-vi="♫ ĐANG CHỌN"
+                data-en="♫ SELECTED">
+            ♫ ĐANG CHỌN
+          </span>
+
+        </button>
+
+        <!-- SONG 2 -->
+        <button class="song-card"
+                type="button"
+                data-index="1">
+
+          <div class="cover-wrap">
+
+            <img class="cover"
+                 src="picturemusic2.png"
+                 alt="Đừng Quên Tên Anh — Hoa Vinh">
+
+            <div class="cover-placeholder">✧</div>
+
+            <div class="play-overlay">
+              <span>▶</span>
+            </div>
+
+          </div>
+
+          <span class="song-number">TRACK 02</span>
+
+          <h3 class="song-title">Đừng Quên Tên Anh</h3>
+
+          <p class="song-artist">Hoa Vinh</p>
+
+          <span class="song-status"
+                data-vi="♫ ĐANG CHỌN"
+                data-en="♫ SELECTED">
+            ♫ ĐANG CHỌN
+          </span>
+
+        </button>
+
+        <!-- SONG 3 -->
+        <button class="song-card"
+                type="button"
+                data-index="2">
+
+          <div class="cover-wrap">
+
+            <img class="cover"
+                 src="picturemusic3.png"
+                 alt="Lựa Chọn Của Em — buitruonglinh">
+
+            <div class="cover-placeholder">✦</div>
+
+            <div class="play-overlay">
+              <span>▶</span>
+            </div>
+
+          </div>
+
+          <span class="song-number">TRACK 03</span>
+
+          <h3 class="song-title">Lựa Chọn Của Em</h3>
+
+          <p class="song-artist">buitruonglinh</p>
+
+          <span class="song-status"
+                data-vi="♫ ĐANG CHỌN"
+                data-en="♫ SELECTED">
+            ♫ ĐANG CHỌN
+          </span>
+
+        </button>
+
+        <!-- SONG 4 -->
+        <button class="song-card"
+                type="button"
+                data-index="3">
+
+          <div class="cover-wrap">
+
+            <img class="cover"
+                 src="picturemusic4.png"
+                 alt="Ấm — Sweet Liquor">
+
+            <div class="cover-placeholder">☽</div>
+
+            <div class="play-overlay">
+              <span>▶</span>
+            </div>
+
+          </div>
+
+          <span class="song-number">TRACK 04</span>
+
+          <h3 class="song-title">Ấm</h3>
+
+          <p class="song-artist">Sweet Liquor</p>
+
+          <span class="song-status"
+                data-vi="♫ ĐANG CHỌN"
+                data-en="♫ SELECTED">
+            ♫ ĐANG CHỌN
+          </span>
+
+        </button>
+
+        <!-- SONG 5 -->
+        <button class="song-card"
+                type="button"
+                data-index="4">
+
+          <div class="cover-wrap">
+
+            <img class="cover"
+                 src="picturemusic5.png"
+                 alt="Vườn Hoa Con Cá — Olew">
+
+            <div class="cover-placeholder">❋</div>
+
+            <div class="play-overlay">
+              <span>▶</span>
+            </div>
+
+          </div>
+
+          <span class="song-number">TRACK 05</span>
+
+          <h3 class="song-title">Vườn Hoa Con Cá</h3>
+
+          <p class="song-artist">Olew</p>
+
+          <span class="song-status"
+                data-vi="♫ ĐANG CHỌN"
+                data-en="♫ SELECTED">
+            ♫ ĐANG CHỌN
+          </span>
+
+        </button>
+
+        <!-- SONG 6 -->
+        <button class="song-card"
+                type="button"
+                data-index="5">
+
+          <div class="cover-wrap">
+
+            <img class="cover"
+                 src="picturemusic6.png"
+                 alt="Time Machine — Mj Apanay">
+
+            <div class="cover-placeholder">☆</div>
+
+            <div class="play-overlay">
+              <span>▶</span>
+            </div>
+
+          </div>
+
+          <span class="song-number">TRACK 06</span>
+
+          <h3 class="song-title">Time Machine</h3>
+
+          <p class="song-artist">Mj Apanay</p>
+
+          <span class="song-status"
+                data-vi="♫ ĐANG CHỌN"
+                data-en="♫ SELECTED">
+            ♫ ĐANG CHỌN
+          </span>
+
+        </button>
 
       </div>
+
     </section>
 
   </main>
 
   <!-- FOOTER -->
-
   <footer class="footer">
 
     <a
@@ -916,41 +1099,87 @@
   </footer>
 
   <script>
-
     /* =====================================
-       CONFIG
+       SONG LIST
     ===================================== */
 
-    const DISCORD_ID = "965608704974151710";
+    const songs = [
+      {
+        title: "Em",
+        artist: "Binz",
+        audio: "audio1.mp3",
+        cover: "picturemusic1.png"
+      },
+      {
+        title: "Đừng Quên Tên Anh",
+        artist: "Hoa Vinh",
+        audio: "audio2.mp3",
+        cover: "picturemusic2.png"
+      },
+      {
+        title: "Lựa Chọn Của Em",
+        artist: "buitruonglinh",
+        audio: "audio3.mp3",
+        cover: "picturemusic3.png"
+      },
+      {
+        title: "Ấm",
+        artist: "Sweet Liquor",
+        audio: "audio4.mp3",
+        cover: "picturemusic4.png"
+      },
+      {
+        title: "Vườn Hoa Con Cá",
+        artist: "Olew",
+        audio: "audio5.mp3",
+        cover: "picturemusic5.png"
+      },
+      {
+        title: "Time Machine",
+        artist: "Mj Apanay",
+        audio: "audio6.mp3",
+        cover: "picturemusic6.png"
+      }
+    ];
 
-    const API_URL =
-      `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
-
+    let currentIndex = 0;
     let currentLanguage = "vi";
 
-    let discordData = null;
+    const audio = document.getElementById("audioPlayer");
+    const vinyl = document.getElementById("vinyl");
+
+    const playButton = document.getElementById("playButton");
+    const progress = document.getElementById("progress");
+
+    const currentTitle = document.getElementById("currentTitle");
+    const currentArtist = document.getElementById("currentArtist");
+
+    const currentTime = document.getElementById("currentTime");
+    const duration = document.getElementById("duration");
+
+    const vinylCover = document.getElementById("vinylCover");
+    const vinylFallback = document.getElementById("vinylFallback");
+
+    const songCards = [
+      ...document.querySelectorAll(".song-card")
+    ];
 
     /* =====================================
        STARS
     ===================================== */
 
-    const starsContainer =
-      document.getElementById("stars");
+    const starsContainer = document.getElementById("stars");
 
     for (let i = 0; i < 85; i++) {
-
       const star = document.createElement("div");
 
       star.className = "star";
-
       star.style.left = Math.random() * 100 + "%";
       star.style.top = Math.random() * 100 + "%";
 
-      star.style.animationDelay =
-        Math.random() * 5 + "s";
-
+      star.style.animationDelay = Math.random() * 5 + "s";
       star.style.animationDuration =
-        2 + Math.random() * 4 + "s";
+        (2 + Math.random() * 4) + "s";
 
       starsContainer.appendChild(star);
     }
@@ -959,404 +1188,211 @@
        LANGUAGE
     ===================================== */
 
-    function toggleLanguage() {
+    document.getElementById("languageButton")
+      .addEventListener("click", () => {
 
-      currentLanguage =
-        currentLanguage === "vi" ? "en" : "vi";
+        currentLanguage =
+          currentLanguage === "vi" ? "en" : "vi";
 
-      document.querySelectorAll(
-        "[data-vi][data-en]"
-      ).forEach(element => {
+        document.querySelectorAll("[data-vi][data-en]")
+          .forEach(element => {
+            element.textContent =
+              element.dataset[currentLanguage];
+          });
 
-        element.textContent =
-          element.dataset[currentLanguage];
+        document.documentElement.lang = currentLanguage;
 
+        document.getElementById("languageButton")
+          .textContent =
+            currentLanguage === "vi" ? "EN" : "VI";
       });
 
-      document.getElementById(
-        "langButton"
-      ).textContent =
-        currentLanguage === "vi" ? "EN" : "VI";
+    /* =====================================
+       HELPERS
+    ===================================== */
 
-      document.documentElement.lang =
-        currentLanguage;
-
-      if (discordData) {
-        updateStatus(discordData.discord_status);
-        updateActivities(discordData);
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds)) {
+        return "0:00";
       }
+
+      const minutes = Math.floor(seconds / 60);
+      const remaining = Math.floor(seconds % 60);
+
+      return `${minutes}:${String(remaining).padStart(2, "0")}`;
+    }
+
+    function updatePlayButton() {
+      playButton.textContent = audio.paused ? "▶" : "Ⅱ";
+
+      vinyl.classList.toggle(
+        "playing",
+        !audio.paused
+      );
     }
 
     /* =====================================
-       AVATAR
+       CHANGE SONG
     ===================================== */
 
-    function updateAvatar(user) {
+    function selectSong(index, autoplay = true) {
+      currentIndex =
+        (index + songs.length) % songs.length;
 
-      const avatar =
-        document.getElementById("discordAvatar");
+      const song = songs[currentIndex];
 
-      const fallback =
-        "https://cdn.discordapp.com/embed/avatars/0.png";
+      audio.pause();
+      audio.src = song.audio;
+      audio.load();
 
-      if (user.avatar) {
+      currentTitle.textContent = song.title;
+      currentArtist.textContent = song.artist;
 
-        const extension =
-          user.avatar.startsWith("a_") ? "gif" : "png";
+      vinylCover.src = song.cover;
+      vinylFallback.style.display = "none";
 
-        avatar.src =
-          `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${extension}?size=256`;
-
-      } else {
-
-        avatar.src = fallback;
-
-      }
-
-      avatar.onerror = function() {
-        this.onerror = null;
-        this.src = fallback;
+      vinylCover.onerror = () => {
+        vinylFallback.style.display = "block";
       };
 
-      /* Discord Avatar Decoration */
-
-      const decoration =
-        document.getElementById("avatarDecoration");
-
-      const decorationData =
-        user.avatar_decoration_data;
-
-      if (decorationData && decorationData.asset) {
-
-        decoration.src =
-          `https://cdn.discordapp.com/avatar-decoration-presets/${decorationData.asset}.png`;
-
-        decoration.style.display = "block";
-
-        decoration.onerror = function() {
-          this.style.display = "none";
-        };
-
-      } else {
-
-        decoration.style.display = "none";
-
-      }
-    }
-
-    /* =====================================
-       STATUS
-    ===================================== */
-
-    function updateStatus(status) {
-
-      const statusText =
-        document.getElementById("statusText");
-
-      const statusDot =
-        document.getElementById("statusDot");
-
-      const indicator =
-        document.getElementById("statusIndicator");
-
-      const translations = {
-
-        online: {
-          vi: "Đang hoạt động",
-          en: "Online"
-        },
-
-        idle: {
-          vi: "Đang rảnh",
-          en: "Idle"
-        },
-
-        dnd: {
-          vi: "Không làm phiền",
-          en: "Do Not Disturb"
-        },
-
-        offline: {
-          vi: "Ngoại tuyến",
-          en: "Offline"
-        }
-
-      };
-
-      const validStatus =
-        translations[status] ? status : "offline";
-
-      statusText.textContent =
-        translations[validStatus][currentLanguage];
-
-      statusDot.className =
-        "status-dot " + validStatus;
-
-      indicator.className =
-        "status-indicator " + validStatus;
-    }
-
-    /* =====================================
-       ACTIVITIES
-    ===================================== */
-
-    function createActivityImage(activity) {
-
-      const icon = document.createElement("div");
-
-      icon.className = "activity-icon";
-
-      const largeImage =
-        activity.assets?.large_image;
-
-      if (largeImage) {
-
-        let imageURL = "";
-
-        if (largeImage.startsWith("mp:external/")) {
-
-          imageURL =
-            "https://media.discordapp.net/" +
-            largeImage;
-
-        } else if (
-          largeImage.startsWith("https://")
-        ) {
-
-          imageURL = largeImage;
-
-        } else if (activity.application_id) {
-
-          imageURL =
-            `https://cdn.discordapp.com/app-assets/${activity.application_id}/${largeImage}.png`;
-
-        }
-
-        if (imageURL) {
-
-          const img = document.createElement("img");
-
-          img.src = imageURL;
-          img.alt = "";
-          img.onerror = () => {
-            icon.textContent = "🎮";
-          };
-
-          icon.appendChild(img);
-
-          return icon;
-        }
-      }
-
-      icon.textContent = "🎮";
-
-      return icon;
-    }
-
-    function updateActivities(data) {
-
-      const list =
-        document.getElementById("activityList");
-
-      list.replaceChildren();
-
-      const activities =
-        Array.isArray(data.activities)
-          ? data.activities.filter(
-              activity => activity.type !== 4
-            )
-          : [];
-
-      /* Spotify */
-
-      if (data.listening_to_spotify && data.spotify) {
-
-        const spotify = data.spotify;
-
-        const item = document.createElement("div");
-        item.className = "activity-item";
-
-        const icon = document.createElement("div");
-        icon.className = "activity-icon";
-
-        if (spotify.album_art_url) {
-
-          const img = document.createElement("img");
-          img.src = spotify.album_art_url;
-          img.alt = "Spotify album cover";
-
-          icon.appendChild(img);
-
-        } else {
-
-          icon.textContent = "♫";
-
-        }
-
-        const details = document.createElement("div");
-        details.className = "activity-details";
-
-        const title = document.createElement("strong");
-        title.textContent = spotify.song || "Spotify";
-
-        const artist = document.createElement("span");
-        artist.textContent = spotify.artist || "";
-
-        const label = document.createElement("span");
-
-        label.textContent =
-          currentLanguage === "vi"
-            ? "♫ Đang nghe Spotify"
-            : "♫ Listening to Spotify";
-
-        details.append(title, artist, label);
-
-        item.append(icon, details);
-        list.appendChild(item);
-      }
-
-      /* Other Discord activities */
-
-      activities
-        .filter(activity =>
-          !(data.listening_to_spotify &&
-            activity.name === "Spotify")
-        )
-        .forEach(activity => {
-
-          const item = document.createElement("div");
-          item.className = "activity-item";
-
-          const icon = createActivityImage(activity);
-
-          const details = document.createElement("div");
-          details.className = "activity-details";
-
-          const name = document.createElement("strong");
-          name.textContent =
-            activity.name || "Discord Activity";
-
-          details.appendChild(name);
-
-          if (activity.details) {
-
-            const detail = document.createElement("span");
-            detail.textContent = activity.details;
-
-            details.appendChild(detail);
-          }
-
-          if (activity.state) {
-
-            const state = document.createElement("span");
-            state.textContent = activity.state;
-
-            details.appendChild(state);
-          }
-
-          item.append(icon, details);
-          list.appendChild(item);
-
-        });
-
-      /* No activity */
-
-      if (!list.children.length) {
-
-        const empty = document.createElement("div");
-        empty.className = "about-text";
-
-        empty.textContent =
-          currentLanguage === "vi"
-            ? "✧ Hiện chưa có hoạt động nào được hiển thị."
-            : "✧ No activities are currently displayed.";
-
-        list.appendChild(empty);
-      }
-    }
-
-    /* =====================================
-       LANYARD API
-    ===================================== */
-
-    async function fetchDiscord() {
-
-      try {
-
-        const response = await fetch(
-          API_URL,
-          { cache: "no-store" }
+      songCards.forEach((card, i) => {
+        card.classList.toggle(
+          "active",
+          i === currentIndex
         );
 
-        if (!response.ok) {
-          throw new Error("Lanyard request failed");
+        const overlay =
+          card.querySelector(".play-overlay span");
+
+        if (overlay) {
+          overlay.textContent =
+            i === currentIndex && !audio.paused
+              ? "Ⅱ"
+              : "▶";
         }
+      });
 
-        const result = await response.json();
+      progress.value = 0;
+      currentTime.textContent = "0:00";
+      duration.textContent = "0:00";
 
-        if (!result.success || !result.data) {
-          throw new Error("Invalid Lanyard data");
-        }
+      updatePlayButton();
 
-        discordData = result.data;
-
-        const user = discordData.discord_user;
-
-        if (user) {
-
-          updateAvatar(user);
-
-          document.getElementById(
-            "displayName"
-          ).textContent =
-            user.global_name ||
-            user.username ||
-            "Ari";
-
-          document.getElementById(
-            "discordUsername"
-          ).textContent =
-            "@" + (user.username || "p_f2_bpehvcl.");
-
-        }
-
-        updateStatus(discordData.discord_status);
-
-        updateActivities(discordData);
-
-      } catch (error) {
-
-        console.error("Lanyard:", error);
-
-        if (!discordData) {
-
-          document.getElementById(
-            "statusText"
-          ).textContent =
-            currentLanguage === "vi"
-              ? "Không thể tải trạng thái"
-              : "Unable to load status";
-
-          document.getElementById(
-            "activityList"
-          ).textContent =
-            currentLanguage === "vi"
-              ? "Không thể kết nối với Lanyard."
-              : "Unable to connect to Lanyard.";
-
-        }
+      if (autoplay) {
+        playAudio();
       }
     }
 
-    /* Initial load */
+    /* =====================================
+       PLAY / PAUSE
+    ===================================== */
 
-    fetchDiscord();
+    async function playAudio() {
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error("Không thể phát nhạc:", error);
 
-    /* Refresh every 30 seconds */
+        updatePlayButton();
 
-    setInterval(fetchDiscord, 30000);
+        alert(
+          currentLanguage === "vi"
+            ? "Không thể phát bài hát. Hãy kiểm tra file MP3 đã được tải lên GitHub chưa nhé!"
+            : "Unable to play this song. Please check that the MP3 file has been uploaded to GitHub."
+        );
+      }
+    }
 
+    playButton.addEventListener("click", () => {
+      if (audio.paused) {
+        playAudio();
+      } else {
+        audio.pause();
+      }
+    });
+
+    songCards.forEach((card, index) => {
+      card.addEventListener("click", () => {
+        selectSong(index, true);
+      });
+    });
+
+    document.getElementById("previousButton")
+      .addEventListener("click", () => {
+        selectSong(currentIndex - 1, true);
+      });
+
+    document.getElementById("nextButton")
+      .addEventListener("click", () => {
+        selectSong(currentIndex + 1, true);
+      });
+
+    /* =====================================
+       AUDIO EVENTS
+    ===================================== */
+
+    audio.addEventListener("play", () => {
+      updatePlayButton();
+
+      songCards.forEach((card, index) => {
+        const overlay =
+          card.querySelector(".play-overlay span");
+
+        if (overlay) {
+          overlay.textContent =
+            index === currentIndex ? "Ⅱ" : "▶";
+        }
+      });
+    });
+
+    audio.addEventListener("pause", () => {
+      updatePlayButton();
+
+      songCards.forEach((card, index) => {
+        const overlay =
+          card.querySelector(".play-overlay span");
+
+        if (overlay) {
+          overlay.textContent = "▶";
+        }
+      });
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+      duration.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      currentTime.textContent = formatTime(audio.currentTime);
+
+      if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        progress.value =
+          (audio.currentTime / audio.duration) * 100;
+      }
+    });
+
+    progress.addEventListener("input", () => {
+      if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime =
+          (Number(progress.value) / 100) * audio.duration;
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      if (currentIndex < songs.length - 1) {
+        selectSong(currentIndex + 1, true);
+      } else {
+        selectSong(0, false);
+      }
+    });
+
+    audio.addEventListener("error", () => {
+      updatePlayButton();
+    });
+
+    /* Initial selection: do not autoplay */
+    selectSong(0, false);
   </script>
 
 </body>
-</html>
+        </html>
