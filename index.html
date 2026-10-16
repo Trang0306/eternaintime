@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ari's Universe | Moonlight</title>
+
+    <meta name="description"
+          content="Welcome to Ari's little universe — somewhere between dreams and reality.">
+
+    <style>
+        /* ===== CÀI ĐẶT CHUNG ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #f4f6ff;
+            background:
+                radial-gradient(ellipse at 50% 35%,
+                    #1c2b50 0%,
+                    #0c142b 45%,
+                    #050916 100%);
+            overflow-x: hidden;
+        }
+
+        /* ===== BẦU TRỜI SAO ===== */
+        #stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 8px #a9c7ff;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.7);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        /* ===== THANH ĐIỀU HƯỚNG ===== */
+        header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 26px 8%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: #c5d9ff;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a,
+        #language {
+            color: #dbe5ff;
+            text-decoration: none;
+            font-size: 14px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        #language:hover {
+            color: #91b7ff;
+            text-shadow: 0 0 12px #91b7ff;
+        }
+
+        /* ===== TRANG CHỦ ===== */
+        main {
+            position: relative;
+            z-index: 1;
+            min-height: 82vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 24px 100px;
+        }
+
+        .moon {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #dce8ff 45%,
+                #91a9d9 100%
+            );
+            box-shadow:
+                0 0 25px rgba(180, 207, 255, 0.55),
+                0 0 80px rgba(113, 155, 255, 0.3);
+            margin-bottom: 45px;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .eyebrow {
+            color: #a9c7ff;
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(52px, 10vw, 100px);
+            font-weight: normal;
+            letter-spacing: 8px;
+            margin-bottom: 24px;
+            background: linear-gradient(
+                120deg,
+                #ffffff,
+                #a9c7ff,
+                #e3eaff
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: appear 1.5s ease both;
+        }
+
+        .quote {
+            max-width: 600px;
+            color: #c5cee5;
+            font-size: clamp(16px, 2.5vw, 20px);
+            line-height: 1.9;
+            font-style: italic;
+            animation: appear 2s ease both;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: #7898d5;
+            margin: 32px 0;
+        }
+
+        .intro {
+            color: #9baaca;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .explore {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 14px 28px;
+            border: 1px solid rgba(169, 199, 255, 0.5);
+            border-radius: 30px;
+            color: #dce8ff;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: 0.4s;
+        }
+
+        .explore:hover {
+            background: rgba(169, 199, 255, 0.12);
+            box-shadow: 0 0 25px rgba(169, 199, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== CHÂN TRANG ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 24px;
+            color: #7887a7;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== TƯƠNG THÍCH ĐIỆN THOẠI ===== */
+        @media (max-width: 600px) {
+            header {
+                padding: 20px 5%;
+            }
+
+            .logo {
+                font-size: 17px;
+                letter-spacing: 2px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .moon {
+                width: 85px;
+                height: 85px;
+            }
+
+            h1 {
+                letter-spacing: 4px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="stars" aria-hidden="true"></div>
+
+    <header>
+        <div class="logo">MOONLIT</div>
+
+        <nav>
+            <a href="index.html" data-vi="Trang chủ" data-en="Home">
+                Trang chủ
+            </a>
+
+            <a href="about.html" data-vi="Về tôi" data-en="About">
+                Về tôi
+            </a>
+
+            <button id="language" type="button" aria-label="Change language">
+                EN
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="moon" aria-label="Mặt trăng"></div>
+
+        <p class="eyebrow"
+           data-vi="Chào mừng đến với thế giới của tôi"
+           data-en="Welcome to my universe">
+            Chào mừng đến với thế giới của tôi
+        </p>
+
+        <h1>ARI</h1>
+
+        <p class="quote"
+           data-vi="Somewhere between dreams and reality, I exist."
+           data-en="Somewhere between dreams and reality, I exist.">
+            Somewhere between dreams and reality, I exist.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="intro"
+           data-vi="Một tâm hồn nhỏ bé giữa vũ trụ rộng lớn."
+           data-en="A little soul in an endless universe.">
+            Một tâm hồn nhỏ bé giữa vũ trụ rộng lớn.
+        </p>
+
+        <a class="explore"
+           href="about.html"
+           data-vi="KHÁM PHÁ THẾ GIỚI CỦA TÔI ↗"
+           data-en="EXPLORE MY WORLD ↗">
+            KHÁM PHÁ THẾ GIỚI CỦA TÔI ↗
+        </a>
+    </main>
+
+    <footer>
+        <p>MADE WITH MOONLIGHT · © 2026 ARI</p>
+    </footer>
+
+    <script>
+        // Tạo những vì sao ngẫu nhiên trên bầu trời
+        const stars = document.getElementById("stars");
+
+        for (let i = 0; i < 120; i++) {
+            const star = document.createElement("span");
+
+            star.className = "star";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.top = Math.random() * 100 + "%";
+            star.style.animationDelay = Math.random() * 3 + "s";
+            star.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            stars.appendChild(star);
+        }
+
+        // Chuyển đổi tiếng Việt và tiếng Anh
+        const languageButton = document.getElementById("language");
+
+        let currentLanguage = "vi";
+
+        languageButton.addEventListener("click", () => {
+            currentLanguage =
+                currentLanguage === "vi" ? "en" : "vi";
+
+            document.documentElement.lang = currentLanguage;
+
+            document.querySelectorAll("[data-vi][data-en]")
+                .forEach(element => {
+                    element.textContent =
+                        element.dataset[currentLanguage];
+                });
+
+            languageButton.textContent =
+                currentLanguage === "vi" ? "EN" : "VI";
+        });
+    </script>
+
+</body>
+</html>
