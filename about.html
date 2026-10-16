@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="effects.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>About Ari | Moonlit</title>
@@ -362,7 +361,45 @@
         }
     </style>
 </head>
+    <link rel="stylesheet" href="effects.css">
 <body>
+    <nav class="main-nav">
+  <a href="index.html">⌂ Home</a>
+  <a href="about.html">☾ About</a>
+  <a href="hobbies.html">✧ Hobbies</a>
+  <a href="discord.html">♡ Discord</a>
+</nav>
+
+<style>
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 12px;
+    margin: 0 auto;
+  }
+
+  .main-nav a {
+    color: #dce6ff;
+    text-decoration: none;
+    padding: 10px 16px;
+    border: 1px solid rgba(180, 200, 255, 0.3);
+    border-radius: 20px;
+    background: rgba(20, 30, 65, 0.55);
+    transition: 0.3s ease;
+  }
+
+  .main-nav a:hover {
+    color: white;
+    background: rgba(120, 145, 220, 0.3);
+    border-color: #c5d4ff;
+    box-shadow: 0 0 15px rgba(150, 180, 255, 0.3);
+    transform: translateY(-2px);
+  }
+</style>
+    
 <script src="effects.js"></script>
     <div id="stars" aria-hidden="true"></div>
 
@@ -580,42 +617,7 @@
                 currentLanguage === "vi" ? "EN" : "VI";
         });
     </script>
-    <nav class="main-nav">
-  <a href="index.html">⌂ Home</a>
-  <a href="about.html">☾ About</a>
-  <a href="hobbies.html">✧ Hobbies</a>
-  <a href="discord.html">♡ Discord</a>
-</nav>
-
-<style>
-  .main-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 18px 12px;
-    margin: 0 auto;
-  }
-
-  .main-nav a {
-    color: #dce6ff;
-    text-decoration: none;
-    padding: 10px 16px;
-    border: 1px solid rgba(180, 200, 255, 0.3);
-    border-radius: 20px;
-    background: rgba(20, 30, 65, 0.55);
-    transition: 0.3s ease;
-  }
-
-  .main-nav a:hover {
-    color: white;
-    background: rgba(120, 145, 220, 0.3);
-    border-color: #c5d4ff;
-    box-shadow: 0 0 15px rgba(150, 180, 255, 0.3);
-    transform: translateY(-2px);
-  }
-</style>
-
+    
 </body>
+    <script src="effects.js"></script>
   </html>
