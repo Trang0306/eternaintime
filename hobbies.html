@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Hobbies | Moonlit</title>
+
+    <meta name="description"
+          content="Explore Ari's little universe of art, writing, music and games.">
+
+    <link rel="stylesheet" href="effects.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #f4f6ff;
+
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    #1c2b50 0%,
+                    #0c142b 50%,
+                    #050916 100%
+                );
+
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+
+        header {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 24px 8%;
+            border-bottom: 1px solid #ffffff15;
+        }
+
+        .logo {
+            color: #c5d9ff;
+            font-size: 23px;
+            letter-spacing: 4px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a,
+        #language {
+            color: #dbe5ff;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        #language:hover {
+            color: #91b7ff;
+            text-shadow: 0 0 12px #91b7ff;
+        }
+
+        /* PAGE INTRO */
+
+        .hero {
+            position: relative;
+            z-index: 1;
+
+            text-align: center;
+            padding: 95px 20px 55px;
+
+            animation: appear 1s ease both;
+        }
+
+        .eyebrow {
+            color: #a9c7ff;
+            font-size: 12px;
+            letter-spacing: 5px;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 8vw, 78px);
+            font-weight: normal;
+            letter-spacing: 4px;
+
+            background: linear-gradient(
+                120deg,
+                #ffffff,
+                #a9c7ff,
+                #e3eaff
+            );
+
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            max-width: 580px;
+            margin: 22px auto 0;
+
+            color: #aab8d6;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        /* HOBBY GRID */
+
+        .hobby-container {
+            position: relative;
+            z-index: 1;
+
+            width: min(1050px, 88%);
+            margin: 0 auto;
+            padding: 20px 0 100px;
+        }
+
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .hobby-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 285px;
+            padding: 30px 25px;
+
+            border: 1px solid #ffffff18;
+            border-radius: 22px;
+
+            background: rgba(255, 255, 255, 0.045);
+            backdrop-filter: blur(12px);
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .hobby-card::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: radial-gradient(
+                circle at top right,
+                rgba(137, 176, 255, 0.13),
+                transparent 65%
+            );
+
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-8px);
+
+            border-color: #a9c7ff77;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.15),
+                0 0 24px rgba(137, 176, 255, 0.08);
+        }
+
+        .hobby-card:hover::before {
+            opacity: 1;
+        }
+
+        .hobby-icon {
+            display: block;
+            margin-bottom: 25px;
+            font-size: 38px;
+
+            filter: drop-shadow(0 0 12px #a9c7ff25);
+
+            transition: transform 0.35s ease;
+        }
+
+        .hobby-card:hover .hobby-icon {
+            transform: translateY(-4px) scale(1.08);
+        }
+
+        .hobby-number {
+            display: block;
+            margin-bottom: 12px;
+
+            color: #7898d5;
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .hobby-card h2 {
+            margin-bottom: 14px;
+
+            color: #e1eaff;
+            font-size: 23px;
+            font-weight: normal;
+        }
+
+        .hobby-card p {
+            color: #aab8d6;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* QUOTE */
+
+        .quote {
+            margin-top: 55px;
+            padding: 35px 25px;
+
+            border-top: 1px solid #ffffff15;
+            border-bottom: 1px solid #ffffff15;
+
+            text-align: center;
+        }
+
+        .quote p {
+            color: #c5d9ff;
+            font-size: clamp(18px, 3vw, 24px);
+            font-style: italic;
+            line-height: 1.9;
+        }
+
+        .quote span {
+            display: block;
+            margin-top: 15px;
+
+            color: #7887a7;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        /* BACK HOME */
+
+        .back-home {
+            display: block;
+            width: fit-content;
+
+            margin: 45px auto 0;
+            padding: 14px 25px;
+
+            border: 1px solid #a9c7ff66;
+            border-radius: 30px;
+
+            color: #dce8ff;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: #a9c7ff15;
+            box-shadow: 0 0 25px #a9c7ff20;
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+
+            padding: 25px;
+            border-top: 1px solid #ffffff10;
+
+            color: #7887a7;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+            .hobby-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 550px) {
+            header {
+                padding: 20px 5%;
+            }
+
+            .logo {
+                font-size: 17px;
+                letter-spacing: 2px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a,
+            #language {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+
+            .hobby-container {
+                width: 90%;
+            }
+
+            .hobby-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .hobby-card {
+                min-height: auto;
+                padding: 27px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <div class="logo">MOONLIT</div>
+
+        <nav>
+            <a href="index.html"
+               data-vi="Trang chủ"
+               data-en="Home">Trang chủ</a>
+
+            <a href="about.html"
+               data-vi="Về tôi"
+               data-en="About">Về tôi</a>
+
+            <a href="hobbies.html"
+               data-vi="Sở thích"
+               data-en="Hobbies">Sở thích</a>
+
+            <button id="language" type="button">EN</button>
+        </nav>
+    </header>
+
+    <!-- INTRODUCTION -->
+
+    <section class="hero">
+
+        <p class="eyebrow"
+           data-vi="NHỮNG ĐIỀU LÀM NÊN TÔI"
+           data-en="THE THINGS THAT MAKE ME">
+            NHỮNG ĐIỀU LÀM NÊN TÔI
+        </p>
+
+        <h1 data-vi="My Hobbies"
+            data-en="My Hobbies">
+            My Hobbies
+        </h1>
+
+        <p class="subtitle"
+           data-vi="Mỗi sở thích là một ô cửa nhỏ, mở ra một thế giới khác trong tâm hồn."
+           data-en="Every hobby is a little window into another world within the soul.">
+            Mỗi sở thích là một ô cửa nhỏ, mở ra một thế giới khác trong tâm hồn.
+        </p>
+
+    </section>
+
+    <!-- HOBBY CARDS -->
+
+    <main class="hobby-container">
+
+        <section class="hobby-grid">
+
+            <article class="hobby-card">
+
+                <span class="hobby-icon">🎨</span>
+                <span class="hobby-number">01 / ART</span>
+
+                <h2 data-vi="Vẽ vời"
+                    data-en="Drawing">
+                    Vẽ vời
+                </h2>
+
+                <p
+                    data-vi="Biến những ý tưởng mơ hồ thành hình ảnh, tạo nên nhân vật và thế giới của riêng mình."
+                    data-en="Turning vague ideas into images, creating characters and worlds of my own.">
+                    Biến những ý tưởng mơ hồ thành hình ảnh, tạo nên nhân vật và thế giới của riêng mình.
+                </p>
+
+            </article>
+
+            <article class="hobby-card">
+
+                <span class="hobby-icon">📖</span>
+                <span class="hobby-number">02 / WORDS</span>
+
+                <h2 data-vi="Viết lách"
+                    data-en="Writing">
+                    Viết lách
+                </h2>
+
+                <p
+                    data-vi="Gom nhặt những suy nghĩ, thả chúng vào câu chữ và tạo nên những câu chuyện mang màu sắc riêng."
+                    data-en="Gathering thoughts, weaving them into words, and creating stories with a voice of my own.">
+                    Gom nhặt những suy nghĩ, thả chúng vào câu chữ và tạo nên những câu chuyện mang màu sắc riêng.
+                </p>
+
+            </article>
+
+            <article class="hobby-card">
+
+                <span class="hobby-icon">🎮</span>
+                <span class="hobby-number">03 / GAMES</span>
+
+                <h2 data-vi="Thế giới game"
+                    data-en="Gaming">
+                    Thế giới game
+                </h2>
+
+                <p
+                    data-vi="Khám phá những vùng đất mới, gặp gỡ các nhân vật thú vị và tận hưởng những câu chuyện tuyệt đẹp."
+                    data-en="Exploring new worlds, meeting fascinating characters, and enjoying beautiful stories.">
+                    Khám phá những vùng đất mới, gặp gỡ các nhân vật thú vị và tận hưởng những câu chuyện tuyệt đẹp.
+                </p>
+
+            </article>
+
+            <article class="hobby-card">
+
+                <span class="hobby-icon">🎧</span>
+                <span class="hobby-number">04 / MUSIC</span>
+
+                <h2 data-vi="Âm nhạc"
+                    data-en="Music">
+                    Âm nhạc
+                </h2>
+
+                <p
+                    data-vi="Tìm thấy một chút bình yên trong giai điệu, để âm nhạc nói hộ những điều đôi khi khó diễn đạt."
+                    data-en="Finding peace in melodies and letting music express what words sometimes cannot.">
+                    Tìm thấy một chút bình yên trong giai điệu, để âm nhạc nói hộ những điều đôi khi khó diễn đạt.
+                </p>
+
+            </article>
+
+            <article class="hobby-card">
+
+                <span class="hobby-icon">🌙</span>
+                <span class="hobby-number">05 / DREAMS</span>
+
+                <h2 data-vi="Mộng tưởng"
+                    data-en="Daydreaming">
+                    Mộng tưởng
+                </h2>
+
+                <p
+                    data-vi="Lang thang giữa những ý tưởng, những giấc mơ và vô vàn khả năng chưa thành hình."
+                    data-en="Wandering through ideas, dreams, and countless possibilities yet to take shape.">
+                    Lang thang giữa những ý tưởng, những giấc mơ và vô vàn khả năng chưa thành hình.
+                </p>
+
+            </article>
+
+            <article class="hobby-card">
+
+                <span class="hobby-icon">🎸</span>
+                <span class="hobby-number">06 / MELODIES</span>
+
+                <h2 data-vi="Guitar"
+                    data-en="Guitar">
+                    Guitar
+                </h2>
+
+                <p
+                    data-vi="Học cách kể một câu chuyện bằng những hợp âm, từng nốt nhạc một."
+                    data-en="Learning to tell a story through chords, one note at a time.">
+                    Học cách kể một câu chuyện bằng những hợp âm, từng nốt nhạc một.
+                </p>
+
+            </article>
+
+        </section>
+
+        <!-- QUOTE -->
+
+        <section class="quote">
+
+            <p
+                data-vi="“Có những thế giới chỉ tồn tại khi ta đủ dịu dàng để lắng nghe chính mình.”"
+                data-en="“Some worlds exist only when we are gentle enough to listen to ourselves.”">
+                “Có những thế giới chỉ tồn tại khi ta đủ dịu dàng để lắng nghe chính mình.”
+            </p>
+
+            <span>✦ A LITTLE THOUGHT BY ARI ✦</span>
+
+        </section>
+
+        <a class="back-home"
+           href="index.html"
+           data-vi="← TRỞ VỀ TRANG CHỦ"
+           data-en="← BACK TO HOME">
+            ← TRỞ VỀ TRANG CHỦ
+        </a>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+        MADE WITH MOONLIGHT · © 2026 ARI
+    </footer>
+
+    <!-- SHARED EFFECTS -->
+
+    <script src="effects.js"></script>
+
+    <!-- LANGUAGE SWITCHER -->
+
+    <script>
+        const languageButton = document.getElementById("language");
+
+        let currentLanguage = "vi";
+
+        languageButton.addEventListener("click", () => {
+
+            currentLanguage =
+                currentLanguage === "vi" ? "en" : "vi";
+
+            document.documentElement.lang = currentLanguage;
+
+            document.querySelectorAll("[data-vi][data-en]")
+                .forEach(element => {
+                    element.textContent =
+                        element.dataset[currentLanguage];
+                });
+
+            languageButton.textContent =
+                currentLanguage === "vi" ? "EN" : "VI";
+
+        });
+    </script>
+
+</body>
+  </html>
