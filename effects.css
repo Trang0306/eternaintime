@@ -1,0 +1,138 @@
+/* =================================
+   MOONLIT — CELESTIAL EFFECTS
+   ================================= */
+
+/* 1. ÁNH SÁNG THEO CON TRỎ */
+.cursor-glow {
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(130, 170, 255, 0.10) 0%,
+        rgba(130, 170, 255, 0.04) 40%,
+        transparent 72%
+    );
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+
+    transition: left 0.12s linear, top 0.12s linear;
+}
+
+/* 2. SAO BĂNG */
+.shooting-star {
+    position: fixed;
+    top: var(--star-top, 20%);
+    left: 100%;
+
+    width: 140px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(169, 199, 255, 0.9),
+        white
+    );
+
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    transform: rotate(-25deg);
+    filter: drop-shadow(0 0 5px #a9c7ff);
+
+    animation: shooting 1.2s linear forwards;
+}
+
+@keyframes shooting {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(-25deg);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-120vw, 40vh) rotate(-25deg);
+    }
+}
+
+/* 3. NỘI DUNG XUẤT HIỆN KHI CUỘN */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 4. CHUYỂN CẢNH GIỮA CÁC TRANG */
+body.page-enter {
+    animation: pageEnter 0.65s ease both;
+}
+
+body.page-leave {
+    animation: pageLeave 0.28s ease both;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageLeave {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* 5. TÔN TRỌNG THIẾT LẬP GIẢM CHUYỂN ĐỘNG */
+@media (prefers-reduced-motion: reduce) {
+    .cursor-glow {
+        display: none;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    body.page-enter,
+    body.page-leave,
+    .shooting-star {
+        animation: none;
+    }
+}
+
+/* Không dùng con trỏ tùy chỉnh trên thiết bị cảm ứng */
+@media (hover: none), (pointer: coarse) {
+    .cursor-glow {
+        display: none;
+    }
+}
