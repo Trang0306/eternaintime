@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ari's Music Room ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+  --pink: #f5d9e8;
+  --blue: #d9e9ff;
+  --lavender: #e8defe;
+  --ink: #4f5277;
+  --muted: #8d91b1;
+  --white: rgba(255,255,255,.76);
+  --line: rgba(255,255,255,.8);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: 'Quicksand', 'Be Vietnam Pro', sans-serif;
+  background:
+    radial-gradient(ellipse at 10% 10%, #fff3fa, transparent 45%),
+    radial-gradient(ellipse at 90% 80%, #e3eaff, transparent 45%),
+    linear-gradient(135deg, #f9eaf3, #eaf2ff 55%, #f1eaff);
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page {
+  width: min(1180px, 94%);
+  margin: auto;
+  padding: 25px 0 40px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -.7px;
+}
+
+.logo span {
+  color: #b99edc;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+nav a {
+  padding: 9px 13px;
+  border: 1px solid transparent;
+  border-radius: 22px;
+  color: #797e9e;
+  font-size: 12px;
+  transition: .25s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #565a81;
+  background: rgba(255,255,255,.7);
+  border-color: white;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: #b18ecb;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.intro h1 {
+  margin: 9px 0;
+  font-size: clamp(29px, 5vw, 43px);
+  letter-spacing: -1.5px;
+}
+
+.intro p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* Main layout */
+
+.music-layout {
+  display: grid;
+  grid-template-columns: minmax(270px, 1fr) minmax(0, 2fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.glass {
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: 0 18px 55px rgba(128, 132, 180, .13);
+  backdrop-filter: blur(16px);
+  border-radius: 27px;
+}
+
+/* Player */
+
+.player {
+  padding: 26px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-label {
+  color: #a0a1bd;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.disc-wrap {
+  width: min(100%, 290px);
+  aspect-ratio: 1;
+  margin: 27px auto 25px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  filter: drop-shadow(0 16px 17px rgba(119, 111, 161, .2));
+}
+
+.disc {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    repeating-radial-gradient(
+      circle,
+      #45445f 0,
+      #45445f 2px,
+      #55536f 3px,
+      #45445f 5px
+    );
+  border: 8px solid #65627c;
+  transition: background .3s;
+}
+
+.disc::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+}
+
+.disc::after {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+}
+
+.disc-label {
+  width: 39%;
+  height: 39%;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f9d9e9, #d7e4ff, #e9dcff);
+  border: 5px solid #f7f0fb;
+}
+
+.disc-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.disc-hole {
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  z-index: 2;
+  border: 3px solid #fff7ff;
+  background: #9d95b9;
+  border-radius: 50%;
+}
+
+.disc.playing {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.song-title {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.song-artist {
+  margin-top: 7px;
+  color: #9595b1;
+  font-size: 13px;
+}
+
+.now-playing {
+  margin-top: 13px;
+  color: #a48dbf;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.progress-area {
+  width: 100%;
+  margin-top: 23px;
+}
+
+.progress {
+  width: 100%;
+  accent-color: #b5a2e0;
+  cursor: pointer;
+}
+
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  color: #9699b4;
+  font-size: 10px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.control {
+  width: 39px;
+  height: 39px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.82);
+  color: #747795;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.control:hover {
+  transform: scale(1.07);
+  background: white;
+}
+
+.control.main {
+  width: 53px;
+  height: 53px;
+  color: white;
+  font-size: 19px;
+  background: linear-gradient(135deg, #c3b3ed, #e7b8d6);
+  box-shadow: 0 7px 17px rgba(191, 163, 224, .3);
+}
+
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 19px;
+  width: 80%;
+  color: #9899b3;
+  font-size: 12px;
+}
+
+.volume-row input {
+  width: 100%;
+  accent-color: #b5a2e0;
+}
+
+.player-note {
+  color: #a0a1ba;
+  font-size: 10px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+/* Playlist */
+
+.playlist {
+  padding: 24px;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.playlist-header h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.playlist-header p {
+  color: #9699b4;
+  margin: 6px 0 0;
+  font-size: 11px;
+}
+
+.song-count {
+  padding: 8px 11px;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: #8e83b4;
+  background: rgba(255,255,255,.6);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.song-card {
+  min-width: 0;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 19px;
+  background: rgba(255,255,255,.49);
+  cursor: pointer;
+  color: var(--ink);
+  transition: .25s ease;
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 12px 25px rgba(139, 129, 180, .13);
+}
+
+.song-card.active {
+  border-color: #c2a9e9;
+  background: rgba(241, 231, 255, .88);
+  box-shadow: 0 0 0 2px rgba(197, 171, 234, .15);
+}
+
+.cover {
+  width: 100%;
+  aspect-ratio: 1.25;
+  position: relative;
+  overflow: hidden;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #f4d7e8, #dbe6ff, #e7ddff);
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s;
+}
+
+.song-card:hover .cover img {
+  transform: scale(1.04);
+}
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(50, 46, 82, .08);
+}
+
+.play-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: #6d648b;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: .2s;
+}
+
+.song-card:hover .play-icon,
+.song-card.active .play-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.song-info {
+  padding: 11px 3px 3px;
+}
+
+.song-info h3 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.song-info p {
+  margin: 5px 0 0;
+  color: #9697b1;
+  font-size: 11px;
+}
+
+.song-number {
+  float: right;
+  color: #b4a5d6;
+  font-size: 10px;
+}
+
+footer {
+  padding: 27px 0 0;
+  text-align: center;
+  color: #a3a1bc;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+
+@media (max-width: 760px) {
+  .page {
+    width: 92%;
+  }
+
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .music-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .player {
+    min-height: 0;
+  }
+
+  .disc-wrap {
+    width: min(70%, 260px);
+    margin: 22px auto;
+  }
+
+  .playlist {
+    padding: 17px;
+  }
+
+  .song-grid {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .song-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header>
+    <a class="logo" href="index.html">Ari's <span>Music Room ♡</span></a>
+
+    <nav>
+      <a href="index.html">⌂ Home</a>
+      <a href="about.html">☾ About</a>
+      <a href="hobbies.html">✧ Hobbies</a>
+      <a href="discord.html">♡ Discord</a>
+      <a class="active" href="music.html">♫ Music</a>
+    </nav>
+  </header>
+
+  <section class="intro">
+    <div class="eyebrow">A LITTLE WORLD OF MELODY</div>
+    <h1>Music for my little dreams ♡</h1>
+    <p>Một chút nhạc, một chút mơ mộng, và một khoảng trời của riêng mình.</p>
+  </section>
+
+  <main class="music-layout">
+
+    <!-- LEFT: VINYL PLAYER -->
+    <section class="player glass">
+
+      <div class="player-label">NOW PLAYING · ARI'S PICK</div>
+
+      <div class="disc-wrap">
+        <div class="disc" id="disc">
+          <div class="disc-label">
+            <img id="discImage"
+                 src="picturemusic1.png"
+                 alt="Album cover">
+          </div>
+          <div class="disc-hole"></div>
+        </div>
+      </div>
+
+      <h2 class="song-title" id="currentTitle">Em</h2>
+      <div class="song-artist" id="currentArtist">Binz</div>
+      <div class="now-playing" id="playState">♡ READY TO PLAY</div>
+
+      <div class="progress-area">
+        <input
+          id="progress"
+          class="progress"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          aria-label="Tiến trình bài hát"
+        >
+
+        <div class="time-row">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control" id="prev" aria-label="Bài trước">|◀</button>
+        <button class="control main" id="toggle" aria-label="Phát nhạc">▶</button>
+        <button class="control" id="next" aria-label="Bài tiếp theo">▶|</button>
+      </div>
+
+      <div class="volume-row">
+        <span>♫</span>
+        <input
+          id="volume"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.7"
+          aria-label="Âm lượng"
+        >
+      </div>
+
+      <p class="player-note">made with music & daydreams ✧</p>
+
+      <audio id="audio" preload="metadata"></audio>
+    </section>
+
+    <!-- RIGHT: SIX SONG CARDS -->
+    <section class="playlist glass">
+
+      <div class="playlist-header">
+        <div>
+          <h2>My Little Playlist ♡</h2>
+          <p>Chạm vào một chiếc thẻ để nghe nhạc.</p>
+        </div>
+        <div class="song-count">06 songs ✧</div>
+      </div>
+
+      <div class="song-grid" id="songGrid"></div>
+
+    </section>
+  </main>
+
+  <footer>
+    SOMEWHERE BETWEEN DREAMS AND REALITY · ARI © 2026
+  </footer>
+
+</div>
+
+<script>
+const songs = [
+  {
+    title: "Em",
+    artist: "Binz",
+    audio: "audio1.mp3",
+    image: "picturemusic1.png"
+  },
+  {
+    title: "Đừng Quên Tên Anh",
+    artist: "Hoa Vinh",
+    audio: "audio2.mp3",
+    image: "picturemusic2.png"
+  },
+  {
+    title: "Cho Mình Em",
+    artist: "Đen Vâu",
+    audio: "audio3.mp3",
+    image: "picturemusic3.png"
+  },
+  {
+    title: "Ấm",
+    artist: "Sweet Liquor",
+    audio: "audio4.mp3",
+    image: "picturemusic4.png"
+  },
+  {
+    title: "Vườn Hoa Con Cá",
+    artist: "Olew",
+    audio: "audio5.mp3",
+    image: "picturemusic5.png"
+  },
+  {
+    title: "Time Machine",
+    artist: "Mj Apanay",
+    audio: "audio6.mp3",
+    image: "picturemusic6.png"
+  }
+];
+
+const audio = document.getElementById("audio");
+const disc = document.getElementById("disc");
+const discImage = document.getElementById("discImage");
+const title = document.getElementById("currentTitle");
+const artist = document.getElementById("currentArtist");
+const toggle = document.getElementById("toggle");
+const playState = document.getElementById("playState");
+const progress = document.getElementById("progress");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
+const songGrid = document.getElementById("songGrid");
+
+let currentIndex = 0;
+let isSeeking = false;
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "0:00";
+
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+
+  return `${mins}:${String(secs).padStart(2, "0")}`;
+}
+
+function renderPlaylist() {
+  songGrid.innerHTML = songs.map((song, index) => `
+    <button
+      class="song-card ${index === currentIndex ? "active" : ""}"
+      data-index="${index}"
+      aria-label="Phát ${song.title} của ${song.artist}"
+    >
+      <div class="cover">
+        <img
+          src="${song.image}"
+          alt="Ảnh bìa ${song.title}"
+          loading="lazy"
+          onerror="this.style.opacity='.15'"
+        >
+        <div class="play-overlay">
+          <span class="play-icon">▶</span>
+        </div>
+      </div>
+
+      <div class="song-info">
+        <span class="song-number">0${index + 1}</span>
+        <h3>${song.title}</h3>
+        <p>${song.artist}</p>
+      </div>
+    </button>
+  `).join("");
+
+  songGrid.querySelectorAll(".song-card").forEach(card => {
+    card.addEventListener("click", () => {
+      selectSong(Number(card.dataset.index), true);
+    });
+  });
+}
+
+function selectSong(index, shouldPlay = false) {
+  currentIndex = (index + songs.length) % songs.length;
+  const song = songs[currentIndex];
+
+  title.textContent = song.title;
+  artist.textContent = song.artist;
+  discImage.src = song.image;
+  audio.src = song.audio;
+
+  progress.value = 0;
+  currentTime.textContent = "0:00";
+  duration.textContent = "0:00";
+
+  renderPlaylist();
+
+  if (shouldPlay) {
+    playSong();
+  } else {
+    disc.classList.remove("playing");
+    toggle.textContent = "▶";
+    playState.textContent = "♡ READY TO PLAY";
+  }
+}
+
+async function playSong() {
+  try {
+    await audio.play();
+
+    disc.classList.add("playing");
+    toggle.textContent = "Ⅱ";
+    playState.textContent = "♫ NOW PLAYING";
+  } catch (error) {
+    disc.classList.remove("playing");
+    toggle.textContent = "▶";
+    playState.textContent = "♪ CHECK AUDIO FILE";
+    alert(
+      "Chưa phát được bài hát. Hãy kiểm tra file " +
+      songs[currentIndex].audio +
+      " đã được tải lên thư mục gốc của GitHub chưa nhé!"
+    );
+  }
+}
+
+function pauseSong() {
+  audio.pause();
+  disc.classList.remove("playing");
+  toggle.textContent = "▶";
+  playState.textContent = "♡ PAUSED";
+}
+
+toggle.addEventListener("click", () => {
+  if (audio.paused) {
+    playSong();
+  } else {
+    pauseSong();
+  }
+});
+
+document.getElementById("prev").addEventListener("click", () => {
+  selectSong(currentIndex - 1, true);
+});
+
+document.getElementById("next").addEventListener("click", () => {
+  selectSong(currentIndex + 1, true);
+});
+
+audio.addEventListener("loadedmetadata", () => {
+  duration.textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (!isSeeking && Number.isFinite(audio.duration)) {
+    progress.value = (audio.currentTime / audio.duration) * 100;
+  }
+
+  currentTime.textContent = formatTime(audio.currentTime);
+});
+
+progress.addEventListener("input", () => {
+  isSeeking = true;
+});
+
+progress.addEventListener("change", () => {
+  if (Number.isFinite(audio.duration)) {
+    audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+  }
+
+  isSeeking = false;
+});
+
+document.getElementById("volume").addEventListener("input", event => {
+  audio.volume = Number(event.target.value);
+});
+
+audio.addEventListener("play", () => {
+  disc.classList.add("playing");
+  toggle.textContent = "Ⅱ";
+  playState.textContent = "♫ NOW PLAYING";
+});
+
+audio.addEventListener("pause", () => {
+  disc.classList.remove("playing");
+  toggle.textContent = "▶";
+});
+
+audio.addEventListener("ended", () => {
+  selectSong(currentIndex + 1, true);
+});
+
+audio.addEventListener("error", () => {
+  disc.classList.remove("playing");
+  toggle.textContent = "▶";
+  playState.textContent = "♪ AUDIO UNAVAILABLE";
+});
+
+audio.volume = 0.7;
+renderPlaylist();
+selectSong(0, false);
+</script>
+
+</body>
+          </html>
