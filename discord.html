@@ -4,57 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Ari | Digital Space</title>
+  <title>Ari | Moonlight Connections</title>
 
-  <meta name="theme-color" content="#0b1025">
-  <meta name="description"
-        content="Ari's digital space — Discord profile and social links.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #080d1d;
-      --panel: rgba(20, 30, 58, 0.78);
-      --border: rgba(177, 198, 255, 0.2);
-      --text: #edf2ff;
-      --muted: #a8b7dc;
-      --accent: #b9ceff;
-      --glow: rgba(137, 168, 255, 0.2);
+      --bg: #050b1c;
+      --card: rgba(16, 27, 58, 0.72);
+      --border: rgba(179, 201, 255, 0.19);
+      --text: #eef3ff;
+      --muted: #a8b8dc;
+      --accent: #b7c9ff;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       min-height: 100vh;
-      color: var(--text);
       background:
-        radial-gradient(ellipse at 15% 0%, #17264a 0%, transparent 38%),
-        radial-gradient(ellipse at 100% 60%, #111d3c 0%, transparent 35%),
-        var(--bg);
-      font-family: "Segoe UI", Arial, sans-serif;
+        radial-gradient(ellipse at 50% 0%,
+          #1b305f 0%,
+          #0b1734 38%,
+          #050b1c 78%);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
       overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    button {
-      font: inherit;
     }
 
     .stars {
       position: fixed;
       inset: 0;
-      overflow: hidden;
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
+      overflow: hidden;
     }
 
     .star {
@@ -62,375 +51,263 @@
       width: 2px;
       height: 2px;
       border-radius: 50%;
-      background: #fff;
-      opacity: 0.5;
+      background: white;
+      box-shadow: 0 0 7px #c5d6ff;
       animation: twinkle 3s ease-in-out infinite alternate;
     }
 
     @keyframes twinkle {
-      from {
-        opacity: 0.15;
-        transform: scale(0.8);
-      }
-
-      to {
-        opacity: 0.9;
-        transform: scale(1.5);
-      }
+      from { opacity: .15; }
+      to { opacity: .95; }
     }
 
-    .site-header {
-      width: min(1100px, 92%);
-      margin: auto;
-      padding: 25px 0;
+    .moon {
+      position: absolute;
+      top: 90px;
+      right: 10%;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #e6edff;
+      box-shadow:
+        0 0 35px #a6baff70,
+        0 0 100px #9bb7ff40;
+      opacity: .55;
+      filter: blur(.3px);
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(92%, 760px);
+      margin: 0 auto;
+      padding: 38px 0 70px;
+    }
+
+    .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 52px;
     }
 
-    .brand {
-      font-family: Georgia, serif;
-      font-size: 21px;
-      letter-spacing: 2px;
-      text-decoration: none;
-    }
-
-    .brand span {
-      color: var(--accent);
-    }
-
-    .language-switch {
-      display: flex;
-      gap: 5px;
-      padding: 5px;
+    .home-btn,
+    .lang-btn {
+      color: var(--text);
+      background: rgba(26, 42, 82, .5);
       border: 1px solid var(--border);
-      background: rgba(10, 16, 36, 0.75);
       border-radius: 30px;
-    }
-
-    .language-switch button {
-      border: 0;
-      color: var(--muted);
-      background: transparent;
-      padding: 8px 13px;
-      border-radius: 22px;
+      padding: 11px 18px;
+      text-decoration: none;
+      font-size: 13px;
       cursor: pointer;
-      transition: 0.25s;
+      backdrop-filter: blur(12px);
+      transition: .3s;
     }
 
-    .language-switch button.active,
-    .language-switch button:hover {
-      background: rgba(153, 180, 255, 0.18);
-      color: white;
-    }
-
-    .navigation {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      width: min(1100px, 92%);
-      margin: 0 auto 30px;
-    }
-
-    .navigation a {
-      text-decoration: none;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      background: rgba(20, 30, 58, 0.55);
-      border-radius: 30px;
-      padding: 10px 16px;
-      font-size: 14px;
-      transition: 0.25s;
-    }
-
-    .navigation a:hover {
-      color: white;
-      border-color: var(--accent);
-      background: rgba(137, 168, 255, 0.15);
+    .home-btn:hover,
+    .lang-btn:hover {
+      background: rgba(109, 140, 213, .25);
       transform: translateY(-2px);
+      box-shadow: 0 0 18px #8daeff35;
     }
 
-    .page-heading {
+    .intro {
       text-align: center;
-      margin: 30px 18px 35px;
+      margin-bottom: 38px;
     }
 
     .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 4px;
+      color: #a7bce9;
       font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
     }
 
-    .page-heading h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(34px, 6vw, 55px);
-      font-weight: 400;
-      letter-spacing: 2px;
-      margin: 15px 0 12px;
+    h1, h2 {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
     }
 
-    .page-heading p {
-      max-width: 550px;
-      margin: auto;
+    h1 {
+      font-size: clamp(35px, 7vw, 56px);
+      margin: 12px 0;
+      text-shadow: 0 0 25px #b6caff55;
+    }
+
+    .subtitle {
+      font-size: 14px;
       color: var(--muted);
       line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .content {
-      width: min(960px, 92%);
-      margin: 0 auto;
-      padding-bottom: 65px;
-    }
-
-    .section-title {
-      margin: 36px 0 16px;
-      color: var(--accent);
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
     }
 
     .card {
-      background: var(--panel);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 22px;
+      border-radius: 23px;
       overflow: hidden;
-      box-shadow: 0 15px 55px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: border-color 0.3s, transform 0.3s;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 15px 55px #0005,
+        inset 0 1px 0 #ffffff12;
+      margin-bottom: 26px;
+      transition: transform .35s, box-shadow .35s;
     }
 
     .card:hover {
-      border-color: rgba(190, 210, 255, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 65px #0007;
     }
 
-    /* Discord profile card */
+    /* DISCORD PROFILE */
 
-    .discord-banner {
+    .profile-banner {
+      height: 180px;
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          rgba(5, 11, 28, .25)
+        ),
+        url("banner.jpg") center / cover no-repeat,
+        linear-gradient(120deg, #233d78, #101b3c);
       position: relative;
-      height: 210px;
-      background: #111b38 url("banner.svg") center / cover no-repeat;
     }
 
-    .discord-banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 40%,
-        rgba(8, 13, 29, 0.45)
-      );
+    .profile-content {
+      padding: 0 28px 30px;
     }
 
-    .profile-body {
-      padding: 0 28px 28px;
-    }
-
-    .avatar-row {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 15px;
-      margin-top: -62px;
+    .avatar-area {
       position: relative;
-      z-index: 1;
-    }
-
-    .avatar-wrap {
-      position: relative;
-      width: 124px;
-      height: 124px;
-      flex-shrink: 0;
-      border-radius: 50%;
-      background: #141d39;
-      border: 6px solid #111a33;
-      box-shadow: 0 0 25px var(--glow);
+      width: 112px;
+      height: 112px;
+      margin-top: -53px;
+      margin-bottom: 16px;
+      z-index: 2;
     }
 
     .avatar {
-      display: block;
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      background: #1b294b;
+      background: #172548;
+      border: 5px solid #101a36;
     }
 
-    .avatar-decoration {
-      display: none;
+    .decoration {
       position: absolute;
-      inset: -9px;
-      width: calc(100% + 18px);
-      height: calc(100% + 18px);
-      object-fit: contain;
+      width: 137%;
+      height: 137%;
+      top: -18.5%;
+      left: -18.5%;
       pointer-events: none;
+      object-fit: contain;
+      display: none;
     }
 
-    .status-indicator {
+    .status-dot {
       position: absolute;
+      right: 3px;
+      bottom: 6px;
       width: 23px;
       height: 23px;
-      right: 1px;
-      bottom: 3px;
-      border: 4px solid #111a33;
       border-radius: 50%;
-      background: #747f91;
+      border: 5px solid #101a36;
+      background: #747f8d;
+      z-index: 3;
     }
 
-    .status-indicator.online {
-      background: #43d98b;
-    }
-
-    .status-indicator.idle {
-      background: #f0b84b;
-    }
-
-    .status-indicator.dnd {
-      background: #f05b68;
-    }
-
-    .status-indicator.offline {
-      background: #747f91;
-    }
-
-    .discord-open {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-      background: rgba(148, 175, 255, 0.13);
-      border-radius: 25px;
-      padding: 11px 16px;
-      text-decoration: none;
-      font-size: 13px;
-      transition: 0.25s;
-    }
-
-    .discord-open:hover {
-      background: rgba(148, 175, 255, 0.25);
-      transform: translateY(-2px);
-    }
-
-    .identity {
-      margin-top: 20px;
-    }
-
-    .identity h2 {
-      margin: 0 0 7px;
-      font-family: Georgia, serif;
-      font-size: 28px;
-      font-weight: 400;
+    .display-name {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     .username {
-      color: var(--muted);
       font-size: 14px;
-      overflow-wrap: anywhere;
+      color: var(--muted);
     }
 
-    .status-line {
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #a6b8e8;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .about-text {
+      color: #d0dcf6;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .presence {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 15px;
-      font-size: 13px;
-      color: #c4d2f3;
-    }
-
-    .mini-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #747f91;
-      flex-shrink: 0;
-    }
-
-    .mini-dot.online {
-      background: #43d98b;
-    }
-
-    .mini-dot.idle {
-      background: #f0b84b;
-    }
-
-    .mini-dot.dnd {
-      background: #f05b68;
-    }
-
-    .status-detail {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border: 1px solid rgba(177, 198, 255, 0.13);
-      background: rgba(8, 13, 29, 0.36);
-      border-radius: 14px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-      overflow-wrap: anywhere;
-    }
-
-    .status-detail strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .status-detail:empty {
-      display: none;
-    }
-
-    .profile-quote {
-      margin: 22px 0 0;
-      padding-left: 15px;
-      border-left: 2px solid rgba(185, 206, 255, 0.55);
-      color: #c5d1ed;
-      font-family: Georgia, serif;
-      font-size: 15px;
-      font-style: italic;
-      line-height: 1.8;
-    }
-
-    .profile-actions {
-      display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-      margin-top: 22px;
-    }
-
-    .action-button {
+      padding: 13px 15px;
+      background: rgba(100, 130, 200, .09);
       border: 1px solid var(--border);
-      background: rgba(148, 175, 255, 0.1);
-      color: var(--text);
-      border-radius: 25px;
-      padding: 11px 16px;
-      cursor: pointer;
-      text-decoration: none;
+      border-radius: 13px;
+      margin-top: 20px;
       font-size: 13px;
-      transition: 0.25s;
+      color: #dbe6ff;
     }
 
-    .action-button:hover {
-      background: rgba(148, 175, 255, 0.22);
-      border-color: var(--accent);
+    .presence-dot {
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+      background: #747f8d;
+      border-radius: 50%;
     }
 
-    /* Social card */
-
-    .social-card {
-      padding: 25px;
+    .discord-link {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 12px 22px;
+      background: #5865f2;
+      border-radius: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .3s;
     }
 
-    .social-intro {
-      margin: 0 0 20px;
+    .discord-link:hover {
+      background: #7580ff;
+      box-shadow: 0 0 22px #5865f255;
+    }
+
+    /* CONTACT CARD */
+
+    .contact-card {
+      padding: 30px 28px;
+    }
+
+    .contact-heading {
+      text-align: center;
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+
+    .contact-subtitle {
+      text-align: center;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: 13px;
+      margin-bottom: 28px;
     }
 
     .social-list {
@@ -439,142 +316,84 @@
       gap: 12px;
     }
 
-    .social-link {
+    .social {
       display: flex;
       align-items: center;
-      gap: 13px;
-      min-width: 0;
+      gap: 12px;
       padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(130, 155, 220, .07);
+      color: #edf2ff;
       text-decoration: none;
-      border: 1px solid rgba(177, 198, 255, 0.15);
-      background: rgba(8, 13, 29, 0.3);
-      border-radius: 15px;
-      transition: 0.25s;
+      transition: .3s;
+      min-width: 0;
     }
 
-    .social-link:hover {
+    .social:hover {
+      background: rgba(130, 155, 220, .18);
       transform: translateY(-3px);
-      background: rgba(137, 168, 255, 0.12);
-      border-color: rgba(185, 206, 255, 0.45);
+      border-color: #9eb6f4;
     }
 
     .social-icon {
-      display: grid;
-      place-items: center;
-      width: 43px;
-      height: 43px;
+      font-size: 22px;
+      width: 30px;
+      text-align: center;
       flex-shrink: 0;
-      border-radius: 13px;
-      background: rgba(151, 179, 255, 0.13);
-      color: #dbe5ff;
-      font-size: 19px;
     }
 
-    .social-text {
+    .social-info {
       min-width: 0;
     }
 
-    .social-text strong {
+    .social-name {
       display: block;
       font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 5px;
+      font-weight: 600;
     }
 
-    .social-text span {
+    .social-handle {
       display: block;
+      font-size: 11px;
       color: var(--muted);
-      font-size: 12px;
+      margin-top: 4px;
       overflow-wrap: anywhere;
     }
 
     .footer {
       text-align: center;
-      padding: 28px 16px 35px;
-      border-top: 1px solid rgba(177, 198, 255, 0.12);
-      color: #8798c0;
+      margin-top: 35px;
+      color: #8599c5;
       font-size: 12px;
-      line-height: 2;
+      letter-spacing: 1px;
     }
 
-    .footer a {
-      color: #c7d6ff;
-      text-decoration: none;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: reveal 0.8s ease forwards;
-    }
-
-    @keyframes reveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .site-header {
-        padding-top: 18px;
-      }
-
-      .brand {
-        font-size: 17px;
-      }
-
-      .navigation {
-        gap: 7px;
-      }
-
-      .navigation a {
-        padding: 9px 12px;
-        font-size: 12px;
-      }
-
-      .discord-banner {
-        height: 155px;
-      }
-
-      .profile-body {
-        padding: 0 18px 22px;
-      }
-
-      .avatar-row {
-        margin-top: -49px;
-        align-items: flex-end;
-      }
-
-      .avatar-wrap {
-        width: 100px;
-        height: 100px;
-      }
-
-      .discord-open {
-        padding: 9px 12px;
-        font-size: 11px;
-      }
-
-      .identity h2 {
-        font-size: 25px;
-      }
-
-      .social-card {
-        padding: 16px;
-      }
-
+    @media (max-width: 520px) {
       .social-list {
         grid-template-columns: 1fr;
       }
 
-      .social-link {
-        padding: 13px;
+      .profile-banner {
+        height: 145px;
       }
 
-      .profile-actions .action-button {
-        flex: 1 1 auto;
-        text-align: center;
+      .profile-content {
+        padding: 0 20px 25px;
+      }
+
+      .contact-card {
+        padding: 25px 20px;
+      }
+
+      .moon {
+        width: 75px;
+        height: 75px;
+        right: 8%;
+      }
+
+      .topbar {
+        margin-bottom: 38px;
       }
     }
 
@@ -582,578 +401,407 @@
       *,
       *::before,
       *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="stars" id="stars" aria-hidden="true"></div>
 
-  <header class="site-header">
-    <a class="brand" href="index.html">ETERNA <span>✦</span> IN TIME</a>
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
 
-    <div class="language-switch" aria-label="Language">
-      <button id="viButton" class="active" type="button" aria-pressed="true">
-        VI
-      </button>
-      <button id="enButton" type="button" aria-pressed="false">
-        EN
+  <main class="container">
+
+    <!-- NAVIGATION -->
+    <div class="topbar">
+      <a href="index.html" class="home-btn" data-vi="← Trở về trang chủ" data-en="← Back to Home">
+        ← Trở về trang chủ
+      </a>
+
+      <button class="lang-btn" id="langBtn">
+        EN / VI
       </button>
     </div>
-  </header>
 
-  <nav class="navigation" aria-label="Main navigation">
-    <a href="index.html" data-vi="⌂ Trang chủ" data-en="⌂ Home">⌂ Trang chủ</a>
-    <a href="about.html" data-vi="☾ Về tôi" data-en="☾ About">☾ Về tôi</a>
-    <a href="hobbies.html" data-vi="✧ Sở thích" data-en="✧ Hobbies">✧ Sở thích</a>
-    <a href="discord.html" data-vi="♡ Liên hệ" data-en="♡ Contact">♡ Liên hệ</a>
-  </nav>
+    <!-- INTRO -->
+    <section class="intro">
+      <div class="eyebrow">✦ Ari's little universe ✦</div>
 
-  <section class="page-heading reveal">
-    <div class="eyebrow" data-vi="Góc nhỏ của Ari" data-en="A little corner of Ari">
-      Góc nhỏ của Ari
-    </div>
+      <h1>Moonlight Connections</h1>
 
-    <h1 data-vi="My Digital Space" data-en="My Digital Space">
-      My Digital Space
-    </h1>
+      <p class="subtitle"
+         data-vi="Một góc nhỏ giữa những vì sao, nơi những kết nối bắt đầu."
+         data-en="A little corner among the stars, where connections begin.">
+        Một góc nhỏ giữa những vì sao, nơi những kết nối bắt đầu.
+      </p>
+    </section>
 
-    <p
-      data-vi="Một góc nhỏ để kết nối, trò chuyện và tìm thấy nhau giữa biển sao."
-      data-en="A little space to connect, talk, and find each other among the stars."
-    >
-      Một góc nhỏ để kết nối, trò chuyện và tìm thấy nhau giữa biển sao.
-    </p>
-  </section>
+    <!-- CARD 1: DISCORD -->
+    <section class="card">
 
-  <main class="content">
-    <!-- DISCORD PROFILE -->
-    <h2
-      class="section-title reveal"
-      data-vi="01 — Hồ sơ Discord"
-      data-en="01 — Discord Profile"
-    >
-      01 — Hồ sơ Discord
-    </h2>
+      <div class="profile-banner"></div>
 
-    <section class="card reveal" aria-label="Discord profile">
-      <div class="discord-banner" role="img" aria-label="Moonlight banner"></div>
+      <div class="profile-content">
 
-      <div class="profile-body">
-        <div class="avatar-row">
-          <div class="avatar-wrap">
-            <img
-              class="avatar"
-              id="discordAvatar"
-              src="https://cdn.discordapp.com/embed/avatars/0.png"
-              alt="Discord avatar"
-            >
-
-            <img
-              class="avatar-decoration"
-              id="avatarDecoration"
-              alt=""
-              aria-hidden="true"
-            >
-
-            <span
-              class="status-indicator offline"
-              id="statusIndicator"
-              aria-label="Discord status"
-            ></span>
-          </div>
-
-          <a
-            class="discord-open"
-            href="https://discord.com/users/965608704974151710"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-vi="Mở hồ sơ ↗"
-            data-en="Open profile ↗"
+        <div class="avatar-area">
+          <img
+            class="avatar"
+            id="discordAvatar"
+            src="https://cdn.discordapp.com/embed/avatars/0.png"
+            alt="Discord avatar"
           >
-            Mở hồ sơ ↗
-          </a>
+
+          <img
+            class="decoration"
+            id="avatarDecoration"
+            alt=""
+          >
+
+          <span class="status-dot" id="statusDot"></span>
         </div>
 
-        <div class="identity">
-          <h2 id="discordDisplayName">Ari</h2>
-          <div class="username" id="discordUsername">@p_f2_bpehvcl</div>
-
-          <div class="status-line">
-            <span class="mini-dot offline" id="statusDot"></span>
-            <span id="discordStatus" aria-live="polite">
-              Đang kết nối Lanyard...
-            </span>
-          </div>
+        <div class="display-name" id="displayName">
+          Ari
         </div>
 
-        <div class="status-detail" id="activityDetails" aria-live="polite"></div>
+        <div class="username" id="discordUsername">
+          @p_f2_bpehvcl.
+        </div>
 
-        <blockquote class="profile-quote">
+        <div class="divider"></div>
+
+        <div class="section-label"
+             data-vi="ĐÔI ĐIỀU VỀ TỚ"
+             data-en="ABOUT ME">
+          ĐÔI ĐIỀU VỀ TỚ
+        </div>
+
+        <div class="about-text">
           Somewhere between dreams and reality, I exist.
-        </blockquote>
-
-        <div class="profile-actions">
-          <button
-            class="action-button"
-            id="copyUsername"
-            type="button"
-            data-vi="⧉ Sao chép username"
-            data-en="⧉ Copy username"
-          >
-            ⧉ Sao chép username
-          </button>
-
-          <a
-            class="action-button"
-            href="https://discord.gg/gachaparadise"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-vi="✧ Gacha Paradise"
-            data-en="✧ Gacha Paradise"
-          >
-            ✧ Gacha Paradise
-          </a>
+          <br>
+          ☾ Lost in moonlight, found among the stars.
         </div>
+
+        <div class="presence">
+          <span class="presence-dot" id="presenceDot"></span>
+
+          <span id="presenceText"
+                data-vi="Đang kết nối với Discord..."
+                data-en="Connecting to Discord...">
+            Đang kết nối với Discord...
+          </span>
+        </div>
+
+        <a
+          class="discord-link"
+          href="https://discord.com/users/965608704974151710"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-vi="✦ Xem Discord của tớ"
+          data-en="✦ View My Discord">
+          ✦ Xem Discord của tớ
+        </a>
+
       </div>
     </section>
 
-    <!-- SOCIAL LINKS -->
-    <h2
-      class="section-title reveal"
-      data-vi="02 — Những nơi có thể tìm thấy tui"
-      data-en="02 — Find me elsewhere"
-    >
-      02 — Những nơi có thể tìm thấy tui
-    </h2>
+    <!-- CARD 2: SOCIAL CONTACTS -->
+    <section class="card contact-card">
 
-    <section class="card social-card reveal">
-      <p
-        class="social-intro"
-        data-vi="Ngoài Discord, bà còn có thể tìm tui ở những góc nhỏ này."
-        data-en="Outside Discord, you can also find me in these little corners."
-      >
-        Ngoài Discord, bà còn có thể tìm tui ở những góc nhỏ này.
+      <h2 class="contact-heading"
+          data-vi="Find Me Among the Stars"
+          data-en="Find Me Among the Stars">
+        Find Me Among the Stars
+      </h2>
+
+      <p class="contact-subtitle"
+         data-vi="Những nơi cậu có thể tìm thấy tớ ♡"
+         data-en="Little places where you can find me ♡">
+        Những nơi cậu có thể tìm thấy tớ ♡
       </p>
 
       <div class="social-list">
+
+        <!-- FACEBOOK -->
         <a
-          class="social-link"
+          class="social"
           href="https://www.facebook.com/share/1Hk1dadxUE/"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="social-icon" aria-hidden="true">f</span>
-          <span class="social-text">
-            <strong>Facebook</strong>
-            <span data-vi="Ghé trang Facebook của tui ↗" data-en="Visit my Facebook ↗">
-              Ghé trang Facebook của tui ↗
-            </span>
+          rel="noopener noreferrer">
+
+          <span class="social-icon">ⓕ</span>
+
+          <span class="social-info">
+            <span class="social-name">Facebook</span>
+            <span class="social-handle">My Facebook profile</span>
           </span>
         </a>
 
+        <!-- X -->
         <a
-          class="social-link"
+          class="social"
           href="https://x.com/PhmQunh42254275"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="social-icon" aria-hidden="true">𝕏</span>
-          <span class="social-text">
-            <strong>X / Twitter</strong>
-            <span>@PhmQunh42254275</span>
+          rel="noopener noreferrer">
+
+          <span class="social-icon">𝕏</span>
+
+          <span class="social-info">
+            <span class="social-name">X / Twitter</span>
+            <span class="social-handle">@PhmQunh42254275</span>
           </span>
         </a>
 
+        <!-- DISCORD SERVER -->
         <a
-          class="social-link"
-          href="https://www.tiktok.com/@cheng_nekk?_r=1&_t=ZS-9AbGZ207cD0"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="social-icon" aria-hidden="true">♪</span>
-          <span class="social-text">
-            <strong>TikTok</strong>
-            <span>@cheng_nekk</span>
-          </span>
-        </a>
-
-        <a
-          class="social-link"
-          href="mailto:trangpham030611@gmail.com"
-        >
-          <span class="social-icon" aria-hidden="true">✉</span>
-          <span class="social-text">
-            <strong>Email</strong>
-            <span>trangpham030611@gmail.com</span>
-          </span>
-        </a>
-
-        <a
-          class="social-link"
+          class="social"
           href="https://discord.gg/gachaparadise"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="social-icon" aria-hidden="true">✧</span>
-          <span class="social-text">
-            <strong>Gacha Paradise</strong>
-            <span data-vi="Tham gia máy chủ Discord ↗" data-en="Join the Discord server ↗">
-              Tham gia máy chủ Discord ↗
-            </span>
+          rel="noopener noreferrer">
+
+          <span class="social-icon">✦</span>
+
+          <span class="social-info">
+            <span class="social-name">Gacha Paradise</span>
+            <span class="social-handle">Discord Server</span>
           </span>
         </a>
+
+        <!-- EMAIL -->
+        <a
+          class="social"
+          href="mailto:trangpham030611@gmail.com">
+
+          <span class="social-icon">✉</span>
+
+          <span class="social-info">
+            <span class="social-name">Email</span>
+            <span class="social-handle">trangpham030611@gmail.com</span>
+          </span>
+        </a>
+
+        <!-- TIKTOK -->
+        <a
+          class="social"
+          href="https://www.tiktok.com/@cheng_nekk?_r=1&amp;_t=ZS-9AbGZ207cD0"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <span class="social-icon">♪</span>
+
+          <span class="social-info">
+            <span class="social-name">TikTok</span>
+            <span class="social-handle">@cheng_nekk</span>
+          </span>
+        </a>
+
       </div>
     </section>
+
+    <footer class="footer">
+      ☾ Made of moonlight & little dreams ✧
+      <br><br>
+      © Ari's Universe
+    </footer>
+
   </main>
 
-  <footer class="footer">
-    <div>☾ ✦ ☽</div>
-    <div data-vi="Được tạo từ một góc nhỏ của vũ trụ — Ari."
-         data-en="Made from a little corner of the universe — Ari.">
-      Được tạo từ một góc nhỏ của vũ trụ — Ari.
-    </div>
-    <a href="index.html" data-vi="Trở về trang chủ" data-en="Back to home">
-      Trở về trang chủ
-    </a>
-  </footer>
-
   <script>
-    // ==========================================
-    // ARI'S DISCORD CONFIGURATION
-    // ==========================================
+    // ======================================
+    // CONFIGURATION
+    // ======================================
 
     const DISCORD_ID = "965608704974151710";
-    const FALLBACK_USERNAME = "p_f2_bpehvcl";
 
-    const LANYARD_API =
+    const API_URL =
       `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
 
-    let currentLanguage = "vi";
-    let currentUsername = FALLBACK_USERNAME;
+    let currentLang = "vi";
+    let currentStatus = "loading";
 
-    // ==========================================
-    // STAR BACKGROUND
-    // ==========================================
+    // ======================================
+    // LANGUAGE SWITCHER
+    // ======================================
 
-    const starsContainer = document.getElementById("stars");
+    const langBtn = document.getElementById("langBtn");
 
-    for (let i = 0; i < 90; i++) {
-      const star = document.createElement("span");
-      star.className = "star";
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 4}s`;
-      star.style.animationDuration = `${2 + Math.random() * 4}s`;
-      starsContainer.appendChild(star);
-    }
+    langBtn.addEventListener("click", () => {
+      currentLang = currentLang === "vi" ? "en" : "vi";
 
-    // ==========================================
-    // LANGUAGE SWITCH
-    // ==========================================
+      document.documentElement.lang = currentLang;
 
-    function setLanguage(language) {
-      currentLanguage = language;
-      document.documentElement.lang = language;
+      document.querySelectorAll("[data-vi][data-en]")
+        .forEach(element => {
+          element.textContent = element.dataset[currentLang];
+        });
 
-      document.querySelectorAll("[data-vi][data-en]").forEach(element => {
-        element.textContent = element.dataset[language];
-      });
+      updateStatusText();
+    });
 
-      document.getElementById("viButton").classList.toggle(
-        "active",
-        language === "vi"
-      );
+    // ======================================
+    // DISCORD STATUS
+    // ======================================
 
-      document.getElementById("enButton").classList.toggle(
-        "active",
-        language === "en"
-      );
-
-      document.getElementById("viButton").setAttribute(
-        "aria-pressed",
-        String(language === "vi")
-      );
-
-      document.getElementById("enButton").setAttribute(
-        "aria-pressed",
-        String(language === "en")
-      );
-
-      // Refresh dynamic status labels in the selected language.
-      if (lastPresence) {
-        renderPresence(lastPresence);
-      } else {
-        document.getElementById("discordStatus").textContent =
-          language === "vi"
-            ? "Đang kết nối Lanyard..."
-            : "Connecting to Lanyard...";
-      }
-    }
-
-    document.getElementById("viButton").addEventListener(
-      "click",
-      () => setLanguage("vi")
-    );
-
-    document.getElementById("enButton").addEventListener(
-      "click",
-      () => setLanguage("en")
-    );
-
-    // ==========================================
-    // LANYARD DISCORD PRESENCE
-    // ==========================================
-
-    let lastPresence = null;
+    const statusColors = {
+      online: "#43b581",
+      idle: "#faa61a",
+      dnd: "#f04747",
+      offline: "#747f8d",
+      loading: "#747f8d",
+      error: "#747f8d"
+    };
 
     const statusLabels = {
       vi: {
-        online: "Đang trực tuyến",
-        idle: "Đang chờ",
+        online: "Đang hoạt động",
+        idle: "Đang rảnh",
         dnd: "Không làm phiền",
         offline: "Ngoại tuyến",
-        loading: "Đang kết nối Lanyard...",
-        unavailable: "Chưa nhận được trạng thái",
-        playing: "Đang chơi",
-        listening: "Đang nghe",
-        watching: "Đang xem",
-        streaming: "Đang phát trực tiếp",
-        activity: "Hoạt động",
-        spotify: "Đang nghe Spotify",
-        noActivity: "Chưa có hoạt động nào được chia sẻ."
+        loading: "Đang kết nối với Discord...",
+        error: "Không thể cập nhật trạng thái"
       },
+
       en: {
         online: "Online",
         idle: "Idle",
         dnd: "Do Not Disturb",
         offline: "Offline",
-        loading: "Connecting to Lanyard...",
-        unavailable: "Presence unavailable",
-        playing: "Playing",
-        listening: "Listening to",
-        watching: "Watching",
-        streaming: "Streaming",
-        activity: "Activity",
-        spotify: "Listening to Spotify",
-        noActivity: "No activity is being shared."
+        loading: "Connecting to Discord...",
+        error: "Unable to update status"
       }
     };
 
-    function label(key) {
-      return statusLabels[currentLanguage][key];
+    function updateStatusText() {
+      const text = document.getElementById("presenceText");
+      text.textContent =
+        statusLabels[currentLang][currentStatus]
+        || statusLabels[currentLang].offline;
     }
 
-    function getAssetUrl(asset, applicationId) {
-      if (!asset) return "";
+    function setStatus(status) {
+      currentStatus = statusColors[status] ? status : "offline";
 
-      // Discord activity assets can be external URLs or asset IDs.
-      if (asset.startsWith("http://") || asset.startsWith("https://")) {
-        return asset;
-      }
+      const color = statusColors[currentStatus];
 
-      if (asset.startsWith("mp:external/")) {
-        const externalPath = asset.replace("mp:external/", "");
-        return `https://media.discordapp.net/external/${externalPath}`;
-      }
+      document.getElementById("statusDot")
+        .style.background = color;
 
-      if (applicationId) {
-        return `https://cdn.discordapp.com/app-assets/${applicationId}/${asset}.png`;
-      }
+      document.getElementById("presenceDot")
+        .style.background = color;
 
-      return "";
+      updateStatusText();
     }
 
-    function setStatusClasses(status) {
-      const allowed = ["online", "idle", "dnd", "offline"];
-      const safeStatus = allowed.includes(status) ? status : "offline";
+    // ======================================
+    // FETCH LANYARD DATA
+    // ======================================
 
-      const indicator = document.getElementById("statusIndicator");
-      const dot = document.getElementById("statusDot");
-
-      indicator.className = `status-indicator ${safeStatus}`;
-      dot.className = `mini-dot ${safeStatus}`;
-    }
-
-    function renderPresence(data) {
-      if (!data) return;
-
-      const user = data.discord_user || {};
-
-      const displayName =
-        user.global_name ||
-        user.display_name ||
-        user.username ||
-        "Ari";
-
-      currentUsername = user.username || FALLBACK_USERNAME;
-
-      document.getElementById("discordDisplayName").textContent = displayName;
-      document.getElementById("discordUsername").textContent =
-        `@${currentUsername}`;
-
-      // Avatar
-      const avatar = document.getElementById("discordAvatar");
-
-      if (user.id && user.avatar) {
-        const extension = user.avatar.startsWith("a_") ? "gif" : "png";
-        avatar.src =
-          `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${extension}?size=256`;
-      }
-
-      avatar.onerror = () => {
-        avatar.src = "https://cdn.discordapp.com/embed/avatars/0.png";
-      };
-
-      // Avatar decoration, when supplied by Lanyard.
-      const decoration = document.getElementById("avatarDecoration");
-      const decorationAsset = user.avatar_decoration_data?.asset;
-
-      if (decorationAsset) {
-        decoration.src =
-          `https://cdn.discordapp.com/avatar-decoration-presets/${decorationAsset}.png?size=256`;
-        decoration.style.display = "block";
-
-        decoration.onerror = () => {
-          decoration.style.display = "none";
-        };
-      } else {
-        decoration.style.display = "none";
-        decoration.removeAttribute("src");
-      }
-
-      // Status
-      const status = data.discord_status || "offline";
-      setStatusClasses(status);
-
-      document.getElementById("discordStatus").textContent =
-        label(status) || label("offline");
-
-      // Activity / Spotify
-      const activityBox = document.getElementById("activityDetails");
-      const parts = [];
-      const spotify = data.spotify;
-      const activities = Array.isArray(data.activities) ? data.activities : [];
-
-      if (spotify) {
-        const song = escapeHTML(spotify.song || "Unknown track");
-        const artist = escapeHTML(spotify.artist || "Unknown artist");
-
-        parts.push(
-          `<strong>♫ ${label("spotify")}:</strong> ${song} — ${artist}`
-        );
-      }
-
-      const visibleActivities = activities.filter(activity => {
-        // Avoid duplicating Spotify as a normal activity.
-        return activity.name !== "Spotify" && activity.type !== 4;
-      });
-
-      for (const activity of visibleActivities) {
-        const name = escapeHTML(activity.name || label("activity"));
-        const details = activity.details
-          ? ` — ${escapeHTML(activity.details)}`
-          : "";
-        const state = activity.state
-          ? ` · ${escapeHTML(activity.state)}`
-          : "";
-
-        let activityLabel = label("activity");
-
-        if (activity.type === 0) activityLabel = label("playing");
-        if (activity.type === 1) activityLabel = label("streaming");
-        if (activity.type === 2) activityLabel = label("listening");
-        if (activity.type === 3) activityLabel = label("watching");
-
-        parts.push(
-          `<strong>${activityLabel}:</strong> ${name}${details}${state}`
-        );
-      }
-
-      activityBox.innerHTML = parts.length
-        ? parts.join("<br>")
-        : escapeHTML(label("noActivity"));
-    }
-
-    // Escape API text before placing it into HTML.
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, character => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      })[character]);
-    }
-
-    async function fetchPresence() {
+    async function loadDiscordProfile() {
       try {
-        const response = await fetch(LANYARD_API, {
+        const response = await fetch(API_URL, {
           cache: "no-store"
         });
 
         if (!response.ok) {
-          throw new Error("Lanyard request failed");
+          throw new Error("Lanyard API error");
         }
 
         const result = await response.json();
 
         if (!result.success || !result.data) {
-          throw new Error("No Lanyard presence data");
+          throw new Error("Invalid Lanyard data");
         }
 
-        lastPresence = result.data;
-        renderPresence(lastPresence);
-      } catch (error) {
-        console.warn("Unable to load Lanyard presence:", error);
+        const data = result.data;
+        const user = data.discord_user;
 
-        document.getElementById("discordStatus").textContent =
-          label("unavailable");
+        // Display name
+        const displayName =
+          user.global_name ||
+          user.display_name ||
+          user.username ||
+          "Ari";
+
+        document.getElementById("displayName")
+          .textContent = displayName;
+
+        // Username
+        document.getElementById("discordUsername")
+          .textContent = "@" + (user.username || "p_f2_bpehvcl.");
+
+        // Avatar
+        const avatar = document.getElementById("discordAvatar");
+
+        if (user.avatar) {
+          const format =
+            user.avatar.startsWith("a_") ? "gif" : "png";
+
+          avatar.src =
+            `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.avatar}.${format}?size=256`;
+        }
+
+        // Avatar decoration
+        const decoration =
+          document.getElementById("avatarDecoration");
+
+        const decorationAsset =
+          user.avatar_decoration_data?.asset ||
+          user.avatar_decoration ||
+          null;
+
+        if (decorationAsset) {
+          decoration.src =
+            `https://cdn.discordapp.com/avatar-decoration-presets/${decorationAsset}.png`;
+
+          decoration.style.display = "block";
+
+          decoration.onerror = () => {
+            decoration.style.display = "none";
+          };
+        } else {
+          decoration.style.display = "none";
+        }
+
+        // Live status
+        setStatus(data.discord_status || "offline");
+
+      } catch (error) {
+        console.error("Discord loading error:", error);
+        setStatus("error");
       }
     }
 
-    // ==========================================
-    // COPY DISCORD USERNAME
-    // ==========================================
+    loadDiscordProfile();
 
-    document.getElementById("copyUsername").addEventListener(
-      "click",
-      async () => {
-        const button = document.getElementById("copyUsername");
+    // Refresh every 30 seconds
+    setInterval(loadDiscordProfile, 30000);
 
-        try {
-          await navigator.clipboard.writeText(currentUsername);
+    // ======================================
+    // STARS
+    // ======================================
 
-          button.textContent =
-            currentLanguage === "vi"
-              ? "✓ Đã sao chép!"
-              : "✓ Copied!";
+    const starsContainer = document.getElementById("stars");
 
-          setTimeout(() => {
-            button.textContent =
-              currentLanguage === "vi"
-                ? "⧉ Sao chép username"
-                : "⧉ Copy username";
-          }, 1800);
-        } catch {
-          window.prompt(
-            currentLanguage === "vi"
-              ? "Sao chép username này:"
-              : "Copy this username:",
-            currentUsername
-          );
-        }
-      }
-    );
+    for (let i = 0; i < 75; i++) {
+      const star = document.createElement("span");
 
-    // Initial fetch and periodic refresh.
-    fetchPresence();
-    setInterval(fetchPresence, 30000);
+      star.className = "star";
+
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+
+      star.style.animationDelay =
+        Math.random() * 4 + "s";
+
+      star.style.opacity =
+        Math.random() * .7 + .2;
+
+      starsContainer.appendChild(star);
+    }
   </script>
+
 </body>
 </html>
