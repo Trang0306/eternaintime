@@ -3,20 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d20">
-  <meta name="description" content="Ari's Discord profile — somewhere between dreams and reality.">
-  <title>Discord | Ari's Moonlight</title>
+
+  <title>Discord & Contact | Eterna in Time</title>
+  <meta name="theme-color" content="#090d20">
+  <meta name="description" content="Ari's Discord profile and social links. Somewhere between dreams and reality, I exist.">
 
   <style>
     :root {
-      --bg: #080d20;
-      --panel: rgba(19, 29, 58, 0.76);
-      --line: rgba(190, 207, 255, 0.17);
-      --text: #e9eeff;
-      --muted: #9daed5;
-      --accent: #b8c9ff;
-      --purple: #a99aff;
-      --green: #43df91;
+      --bg: #080b19;
+      --bg-soft: #101831;
+      --card: rgba(20, 29, 57, 0.76);
+      --border: rgba(181, 199, 255, 0.17);
+      --text: #edf1ff;
+      --muted: #a4b0d0;
+      --accent: #b7c9ff;
+      --accent-2: #9bafff;
+      --glow: rgba(139, 166, 255, 0.18);
+      --green: #3ba55c;
+      --yellow: #f0b232;
+      --red: #ed4245;
+      --gray: #747f8d;
     }
 
     * {
@@ -25,851 +31,1086 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       min-height: 100vh;
-      color: var(--text);
-      font-family: "Segoe UI", sans-serif;
-      background:
-        radial-gradient(ellipse at 15% 5%, #1c2850 0%, transparent 42%),
-        radial-gradient(ellipse at 90% 80%, #241b49 0%, transparent 38%),
-        var(--bg);
       overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 15% 10%, #182448 0%, transparent 40%),
+        radial-gradient(ellipse at 85% 80%, #171b3c 0%, transparent 38%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
     }
 
     a {
       color: inherit;
-      text-decoration: none;
     }
 
     button {
       font: inherit;
     }
 
-    #stars {
+    #starfield {
       position: fixed;
       inset: 0;
       z-index: -1;
-      pointer-events: none;
       overflow: hidden;
+      pointer-events: none;
     }
 
     .star {
       position: absolute;
       width: 2px;
       height: 2px;
-      background: #fff;
       border-radius: 50%;
-      opacity: .65;
-      animation: twinkle 3s ease-in-out infinite alternate;
+      background: #e4eaff;
+      box-shadow: 0 0 8px #a7bcff;
+      animation: twinkle var(--duration, 3s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
     }
 
     @keyframes twinkle {
-      from { opacity: .2; transform: scale(.7); }
-      to { opacity: .9; transform: scale(1.5); }
+      from { opacity: 0.2; transform: scale(0.7); }
+      to { opacity: 0.95; transform: scale(1.4); }
     }
 
-    .navbar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 22px 15px;
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
     }
 
-    .navbar a {
-      color: var(--muted);
-      font-size: .9rem;
-      padding: 9px 15px;
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      background: rgba(15, 23, 48, .65);
-      transition: .25s;
-    }
-
-    .navbar a:hover,
-    .navbar a.active {
-      color: white;
-      border-color: #a8bcff80;
-      background: #8199df24;
-      box-shadow: 0 0 20px #8199df17;
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .page {
-      width: min(100% - 32px, 760px);
-      margin: 20px auto 70px;
+      width: min(100% - 32px, 1000px);
+      margin: auto;
+      padding: 22px 0 55px;
+      animation: enter 0.7s ease both;
     }
 
-    .intro {
+    /* Navigation */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: var(--accent);
+      font-family: Georgia, serif;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a,
+    .lang-btn {
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: rgba(14, 21, 43, 0.7);
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active,
+    .lang-btn:hover {
+      color: white;
+      border-color: var(--accent);
+      background: rgba(116, 143, 222, 0.17);
+      box-shadow: 0 0 15px var(--glow);
+    }
+
+    .lang-btn {
+      cursor: pointer;
+    }
+
+    /* Heading */
+
+    .page-heading {
       text-align: center;
-      margin-bottom: 28px;
-      animation: rise .8s ease both;
+      margin: 0 auto 30px;
     }
 
     .eyebrow {
       color: var(--accent);
-      font-size: .75rem;
-      letter-spacing: .3em;
+      font-size: 0.78rem;
+      letter-spacing: 4px;
       text-transform: uppercase;
     }
 
     h1 {
-      margin: 12px 0;
-      font-size: clamp(2rem, 7vw, 3.3rem);
-      font-weight: 500;
-      letter-spacing: .04em;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 6vw, 3.3rem);
+      line-height: 1.25;
+      margin: 8px 0 12px;
+      text-shadow: 0 0 25px rgba(159, 182, 255, 0.22);
     }
 
-    .intro p {
+    .subtitle {
       color: var(--muted);
-      line-height: 1.8;
-      font-size: .94rem;
+      font-size: 0.95rem;
     }
 
-    .profile {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 25px;
-      background: var(--panel);
+    /* Main cards */
+
+    .main-card {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--card);
       backdrop-filter: blur(18px);
-      box-shadow: 0 25px 80px #0004;
-      animation: rise .8s .1s ease both;
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.19);
+      overflow: hidden;
+      margin-bottom: 25px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
-    .banner {
-      height: 175px;
+    .main-card:hover {
+      border-color: rgba(181, 199, 255, 0.32);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25),
+                  0 0 25px rgba(128, 157, 255, 0.05);
+    }
+
+    .section-title {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* Discord banner */
+
+    .discord-banner {
+      height: 180px;
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(circle at 75% 28%, #f0f3ff 0 2px, transparent 4px),
-        radial-gradient(circle at 75% 28%, #c4d4ff 0 20px, #9db6ff35 21px, transparent 65px),
-        radial-gradient(ellipse at 20% 120%, #8a91ed 0%, transparent 45%),
-        linear-gradient(125deg, #101a3c, #323d70 55%, #16162f);
+        radial-gradient(ellipse at 70% 20%, rgba(191, 205, 255, 0.24), transparent 25%),
+        radial-gradient(ellipse at 20% 100%, rgba(94, 114, 199, 0.32), transparent 50%),
+        linear-gradient(135deg, #18264d, #10152f 55%, #29234d);
     }
 
-    .banner::before,
-    .banner::after {
-      content: "✦  ·  ✧     ·      ✦     ·   ✧";
+    .discord-banner::before {
+      content: "☾";
       position: absolute;
-      color: #ffffff80;
-      font-size: 22px;
-      letter-spacing: 15px;
-      white-space: nowrap;
+      right: 13%;
+      top: -52px;
+      font-size: 180px;
+      color: rgba(221, 230, 255, 0.13);
+      line-height: 1;
+      transform: rotate(-15deg);
     }
 
-    .banner::before {
-      top: 35px;
-      left: 10%;
+    .banner-caption {
+      position: absolute;
+      left: 24px;
+      bottom: 18px;
+      color: #d9e3ff;
+      font-family: Georgia, serif;
+      font-style: italic;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
     }
 
-    .banner::after {
-      bottom: 27px;
-      right: 0;
-      transform: rotate(-8deg);
+    .discord-content {
+      padding: 0 28px 28px;
     }
 
-    .profile-content {
-      padding: 0 27px 27px;
-    }
-
-    .identity {
+    .identity-row {
       display: flex;
-      align-items: end;
-      gap: 18px;
-      margin-top: -57px;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: -48px;
       position: relative;
     }
 
     .avatar-wrap {
+      position: relative;
       width: 112px;
       height: 112px;
       flex: 0 0 112px;
-      position: relative;
       border-radius: 50%;
       padding: 5px;
-      background: #151e3c;
-      border: 1px solid #b9caff60;
-      box-shadow: 0 0 30px #a8baff20;
+      background: #11172d;
+      border: 1px solid rgba(198, 211, 255, 0.6);
+      box-shadow: 0 0 24px rgba(142, 166, 255, 0.2);
     }
 
-    #avatar {
+    .avatar {
       width: 100%;
       height: 100%;
-      display: block;
-      object-fit: cover;
       border-radius: 50%;
-      background: #26345c;
+      object-fit: cover;
+      display: block;
+      background: #202b4d;
     }
 
-    #avatar-decoration {
+    .avatar-decoration {
       position: absolute;
-      inset: -9px;
-      width: calc(100% + 18px);
-      height: calc(100% + 18px);
+      inset: -7px;
+      width: calc(100% + 14px);
+      height: calc(100% + 14px);
       object-fit: contain;
       pointer-events: none;
       display: none;
     }
 
-    .status-dot {
-      position: absolute;
-      bottom: 5px;
-      right: 4px;
-      width: 23px;
-      height: 23px;
-      border: 4px solid #151e3c;
-      border-radius: 50%;
-      background: #747f92;
-    }
-
-    .identity-text {
-      min-width: 0;
-      padding-bottom: 8px;
-    }
-
-    .identity-text h2 {
-      font-size: 1.7rem;
-      font-weight: 600;
-      overflow-wrap: anywhere;
-    }
-
-    .username {
-      color: var(--muted);
-      margin-top: 4px;
-      font-size: .88rem;
-      overflow-wrap: anywhere;
-    }
-
-    .discord-status {
-      display: inline-flex;
+    .avatar-fallback {
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 7px;
-      color: var(--muted);
-      font-size: .78rem;
-      margin-top: 9px;
-    }
-
-    .mini-dot {
-      width: 7px;
-      height: 7px;
-      background: #747f92;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
+      color: #e6ebff;
+      background: linear-gradient(145deg, #52659c, #202746);
+      font-size: 2.5rem;
     }
 
-    .divider {
-      height: 1px;
-      background: var(--line);
-      margin: 23px 0;
+    .identity {
+      padding-top: 47px;
+      flex: 1;
+      min-width: 180px;
     }
 
-    .section-label {
+    .display-name {
+      font-size: 1.65rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+      line-height: 1.3;
+    }
+
+    .discord-username {
+      color: var(--muted);
+      font-size: 0.93rem;
+      overflow-wrap: anywhere;
+    }
+
+    .id-label {
+      display: inline-block;
+      color: #b8c8ff;
+      font-size: 0.72rem;
+      margin-top: 5px;
+      padding: 2px 9px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .status-panel {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid var(--border);
+      background: rgba(8, 13, 30, 0.45);
+      padding: 14px 16px;
+      border-radius: 15px;
+      margin-top: 24px;
+    }
+
+    .status-dot {
+      width: 11px;
+      height: 11px;
+      flex: 0 0 11px;
+      border-radius: 50%;
+      margin-top: 7px;
+      background: var(--gray);
+      box-shadow: 0 0 10px rgba(116, 127, 141, 0.4);
+    }
+
+    .status-dot.online {
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(59, 165, 92, 0.65);
+    }
+
+    .status-dot.idle {
+      background: var(--yellow);
+      box-shadow: 0 0 12px rgba(240, 178, 50, 0.55);
+    }
+
+    .status-dot.dnd {
+      background: var(--red);
+      box-shadow: 0 0 12px rgba(237, 66, 69, 0.45);
+    }
+
+    .status-dot.offline {
+      background: var(--gray);
+    }
+
+    .status-main {
+      font-weight: 600;
+      font-size: 0.94rem;
+    }
+
+    .status-detail {
+      color: var(--muted);
+      font-size: 0.85rem;
+      overflow-wrap: anywhere;
+    }
+
+    .custom-status {
+      color: #cbd6ff;
+      margin-top: 3px;
+      font-size: 0.86rem;
+      overflow-wrap: anywhere;
+    }
+
+    .activity-box {
+      margin-top: 12px;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(123, 147, 216, 0.07);
+      border: 1px solid rgba(181, 199, 255, 0.1);
+    }
+
+    .activity-label {
       color: var(--accent);
-      font-size: .72rem;
-      letter-spacing: .18em;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 13px;
+      margin-bottom: 5px;
     }
 
-    .bio {
-      color: #dce4ff;
-      line-height: 1.8;
-      font-size: .93rem;
+    .activity-name {
+      font-weight: 600;
+    }
+
+    .activity-detail {
+      color: var(--muted);
+      font-size: 0.86rem;
+      overflow-wrap: anywhere;
+    }
+
+    .profile-about {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .small-heading {
+      font-size: 0.76rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
     }
 
     .quote {
-      margin-top: 13px;
-      color: #9faed4;
+      color: #dfe6ff;
       font-family: Georgia, serif;
       font-style: italic;
-      line-height: 1.8;
+      font-size: 1.02rem;
     }
 
-    .activity {
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border: 1px solid var(--line);
-      background: #080f25a3;
-      border-radius: 16px;
-    }
-
-    .activity-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      flex: 0 0 50px;
-      object-fit: cover;
-      background: #263354;
-    }
-
-    .activity-copy {
-      min-width: 0;
-    }
-
-    .activity-copy strong {
-      display: block;
-      font-size: .95rem;
-      margin-bottom: 5px;
-      overflow-wrap: anywhere;
-    }
-
-    .activity-copy p {
+    .profile-note {
+      margin-top: 9px;
+      font-size: 0.78rem;
       color: var(--muted);
-      font-size: .82rem;
-      line-height: 1.55;
-      overflow-wrap: anywhere;
     }
 
-    .activity-type {
-      color: #a8bcff;
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      margin-bottom: 5px;
-    }
-
-    .spotify {
-      margin-top: 12px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .tag {
-      padding: 8px 12px;
-      border-radius: 30px;
-      border: 1px solid var(--line);
-      color: #d6e0ff;
-      background: #b5c5ff0b;
-      font-size: .8rem;
-    }
-
-    .buttons {
+    .profile-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 19px;
+      margin-top: 22px;
     }
 
     .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 15px;
+      border: 1px solid rgba(183, 201, 255, 0.32);
+      color: var(--text);
+      background: rgba(125, 150, 230, 0.13);
+      padding: 10px 16px;
       border-radius: 12px;
-      border: 1px solid #a9bbff50;
-      background: #8fa8ff17;
-      color: #edf1ff;
-      font-size: .84rem;
+      text-decoration: none;
       cursor: pointer;
-      transition: .25s;
+      transition: 0.25s ease;
+      font-size: 0.88rem;
     }
 
     .button:hover {
-      background: #a5baff30;
+      background: rgba(125, 150, 230, 0.25);
       transform: translateY(-2px);
     }
 
     .button.primary {
-      background: #a6b9ff;
-      color: #10162e;
-      border-color: transparent;
-      font-weight: 600;
+      background: #5865f2;
+      border-color: #5865f2;
+      color: white;
     }
 
-    .contacts {
+    .button.primary:hover {
+      background: #4752c4;
+    }
+
+    /* Social card */
+
+    .social-content {
+      padding: 27px;
+    }
+
+    .social-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 12px;
+      margin-top: 23px;
     }
 
-    .contact {
+    .social-link {
+      min-width: 0;
       display: flex;
       align-items: center;
-      gap: 11px;
-      min-width: 0;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #0a122a80;
-      transition: .25s;
+      gap: 13px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 15px;
+      background: rgba(9, 15, 34, 0.42);
+      transition: 0.25s ease;
     }
 
-    .contact:hover {
-      transform: translateY(-2px);
-      border-color: #b7c7ff70;
-      background: #a7baff10;
+    .social-link:hover {
+      transform: translateY(-3px);
+      border-color: rgba(183, 201, 255, 0.5);
+      background: rgba(123, 147, 216, 0.12);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
     }
 
-    .contact-icon {
-      width: 35px;
-      height: 35px;
-      flex: 0 0 35px;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      background: #a8baff17;
-      color: #dbe4ff;
-      font-size: 1rem;
+    .social-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 0 43px;
+      height: 43px;
+      border-radius: 13px;
+      color: #e1e8ff;
+      background: rgba(147, 167, 238, 0.12);
+      border: 1px solid rgba(183, 201, 255, 0.12);
+      font-size: 1.15rem;
     }
 
-    .contact-text {
-      min-width: 0;
+    .social-name {
+      font-weight: 600;
+      font-size: 0.95rem;
     }
 
-    .contact-text strong {
-      display: block;
-      font-size: .84rem;
-      margin-bottom: 4px;
-    }
-
-    .contact-text small {
-      display: block;
+    .social-handle {
       color: var(--muted);
-      font-size: .72rem;
+      font-size: 0.78rem;
       overflow-wrap: anywhere;
+      line-height: 1.5;
     }
 
-    #toast {
-      position: fixed;
-      bottom: 25px;
-      left: 50%;
-      transform: translate(-50%, 15px);
-      opacity: 0;
-      pointer-events: none;
-      background: #e4eaff;
-      color: #10162e;
-      padding: 11px 18px;
-      border-radius: 30px;
-      font-size: .85rem;
-      transition: .3s;
-      z-index: 10;
-    }
-
-    #toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    footer {
+    .footer {
+      color: #8996b9;
       text-align: center;
-      color: #7e8db4;
-      font-size: .78rem;
-      margin-top: 27px;
-      line-height: 1.8;
+      font-size: 0.8rem;
+      padding-top: 10px;
     }
 
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+    .footer a {
+      color: #c3d0ff;
+      text-decoration: none;
     }
 
-    @media (max-width: 520px) {
-      .banner { height: 140px; }
-      .profile-content { padding: 0 17px 22px; }
-      .identity { gap: 12px; margin-top: -46px; }
-      .avatar-wrap { width: 90px; height: 90px; flex-basis: 90px; }
-      .identity-text h2 { font-size: 1.35rem; }
-      .contacts { grid-template-columns: 1fr; }
-      .navbar { gap: 7px; }
-      .navbar a { padding: 8px 11px; font-size: .8rem; }
+    @media (max-width: 600px) {
+      .page {
+        width: min(100% - 22px, 1000px);
+        padding-top: 15px;
+      }
+
+      .topbar {
+        justify-content: center;
+        margin-bottom: 26px;
+      }
+
+      .brand {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .discord-banner {
+        height: 145px;
+      }
+
+      .discord-content,
+      .social-content {
+        padding: 18px;
+      }
+
+      .identity-row {
+        gap: 12px;
+      }
+
+      .avatar-wrap {
+        width: 88px;
+        height: 88px;
+        flex-basis: 88px;
+      }
+
+      .identity {
+        padding-top: 42px;
+        min-width: 135px;
+      }
+
+      .display-name {
+        font-size: 1.35rem;
+      }
+
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .social-link {
+        padding: 13px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <div id="stars" aria-hidden="true"></div>
-
-  <nav class="navbar" aria-label="Main navigation">
-    <a href="index.html">⌂ Home</a>
-    <a href="about.html">☾ About</a>
-    <a href="hobbies.html">✧ Hobbies</a>
-    <a href="discord.html" class="active">♡ Discord</a>
-  </nav>
+  <div id="starfield" aria-hidden="true"></div>
 
   <main class="page">
-    <header class="intro">
-      <div class="eyebrow">✦ Ari's digital space ✦</div>
-      <h1>Discord Profile</h1>
-      <p>
-        A little universe behind the screen.<br>
-        <span style="font-style:italic">Somewhere between dreams and reality, I exist.</span>
-      </p>
+
+    <!-- NAVIGATION -->
+    <header class="topbar">
+      <a class="brand" href="index.html">☾ Eterna in Time</a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html" data-i18n="navHome">⌂ Home</a>
+        <a href="about.html" data-i18n="navAbout">☾ About</a>
+        <a href="hobbies.html" data-i18n="navHobbies">✧ Hobbies</a>
+        <a href="discord.html" class="active" data-i18n="navDiscord">♡ Discord</a>
+        <button class="lang-btn" id="languageToggle" type="button">EN</button>
+      </nav>
     </header>
 
-    <section class="profile">
-      <div class="banner"></div>
+    <!-- PAGE HEADING -->
+    <section class="page-heading">
+      <div class="eyebrow" data-i18n="eyebrow">A little corner of my universe</div>
+      <h1 data-i18n="pageTitle">Discord & Contact</h1>
+      <p class="subtitle" data-i18n="pageSubtitle">
+        Find me somewhere between dreams and reality.
+      </p>
+    </section>
 
-      <div class="profile-content">
-        <div class="identity">
+    <!-- CARD 1: DISCORD PROFILE -->
+    <section class="main-card" aria-labelledby="discordHeading">
+
+      <div class="discord-banner">
+        <div class="banner-caption">✧ Lost somewhere in the moonlight ✧</div>
+      </div>
+
+      <div class="discord-content">
+
+        <div class="identity-row">
           <div class="avatar-wrap">
-            <img id="avatar" alt="Ari's Discord avatar"
-              src="https://cdn.discordapp.com/embed/avatars/0.png">
-            <img id="avatar-decoration" alt="">
-            <span class="status-dot" id="status-dot"></span>
+            <div class="avatar-fallback" id="avatarFallback" aria-label="Avatar placeholder">☾</div>
+            <img
+              class="avatar"
+              id="discordAvatar"
+              alt="Discord avatar"
+              hidden
+            >
+            <img
+              class="avatar-decoration"
+              id="avatarDecoration"
+              alt=""
+            >
           </div>
 
-          <div class="identity-text">
-            <h2 id="display-name">Ari</h2>
-            <div class="username" id="discord-username">@p_f2_bpehvcl.</div>
-            <div class="discord-status">
-              <span class="mini-dot" id="mini-dot"></span>
-              <span id="status-text">Đang kết nối Lanyard...</span>
-            </div>
+          <div class="identity">
+            <h2 class="display-name" id="discordDisplayName">Ari</h2>
+            <div class="discord-username" id="discordUsername">@p_f2_bpehvcl.</div>
+            <span class="id-label">✧ Discord Profile</span>
           </div>
         </div>
 
-        <div class="divider"></div>
+        <div class="status-panel" aria-live="polite">
+          <span class="status-dot" id="statusDot"></span>
+          <div>
+            <div class="status-main" id="statusText">Connecting to Lanyard…</div>
+            <div class="status-detail" id="statusDetail">
+              <span data-i18n="loadingStatus">Fetching Discord presence</span>
+            </div>
+            <div class="custom-status" id="customStatus"></div>
+          </div>
+        </div>
 
-        <section>
-          <div class="section-label">✧ About me</div>
-          <p class="bio">
-            A small soul living beneath a moonlit sky.
-            Drawing dreams, collecting stories, and finding magic in little things.
-          </p>
+        <div class="activity-box">
+          <div class="activity-label" data-i18n="activityLabel">Currently doing</div>
+          <div class="activity-name" id="activityName" data-i18n="activityLoading">
+            Waiting for activity…
+          </div>
+          <div class="activity-detail" id="activityDetail"></div>
+        </div>
+
+        <div class="profile-about">
+          <div class="small-heading" id="discordHeading" data-i18n="aboutMe">
+            About me
+          </div>
           <p class="quote">
             “Somewhere between dreams and reality, I exist.”
           </p>
-        </section>
+          <p class="profile-note" data-i18n="profileNote">
+            Presence is provided by Lanyard when available.
+          </p>
+        </div>
 
-        <div class="divider"></div>
+        <div class="profile-actions">
+          <a
+            class="button primary"
+            href="https://discord.gg/gachaparadise"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="serverButton"
+          >Join Gacha Paradise</a>
 
-        <section>
-          <div class="section-label">☾ Current activity</div>
+          <button
+            class="button"
+            id="copyUsername"
+            type="button"
+            data-i18n="copyButton"
+          >Copy username</button>
+        </div>
 
-          <div class="activity">
-            <img class="activity-icon" id="activity-icon"
-              alt="" src="https://cdn.discordapp.com/embed/avatars/0.png">
-            <div class="activity-copy">
-              <div class="activity-type" id="activity-type">Discord presence</div>
-              <strong id="activity-name">Đang tải trạng thái...</strong>
-              <p id="activity-details">Đang lấy dữ liệu từ Lanyard.</p>
-            </div>
-          </div>
-
-          <div class="activity spotify" id="spotify-card" hidden>
-            <img class="activity-icon" id="spotify-art" alt="Spotify album art" src="">
-            <div class="activity-copy">
-              <div class="activity-type">♫ Listening to Spotify</div>
-              <strong id="spotify-song">—</strong>
-              <p id="spotify-artist">—</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="divider"></div>
-
-        <section>
-          <div class="section-label">✦ Interests</div>
-          <div class="tags">
-            <span class="tag">🎨 Drawing</span>
-            <span class="tag">📖 Writing</span>
-            <span class="tag">🎮 Genshin Impact</span>
-            <span class="tag">🌌 Honkai: Star Rail</span>
-            <span class="tag">🎧 Music</span>
-            <span class="tag">☁️ Daydreaming</span>
-          </div>
-
-          <div class="buttons">
-            <button class="button primary" id="copy-user" type="button">
-              ♡ Copy Discord username
-            </button>
-            <a class="button" href="https://discord.gg/gachaparadise"
-              target="_blank" rel="noopener noreferrer">
-              ✧ Gacha Paradise
-            </a>
-          </div>
-        </section>
-
-        <div class="divider"></div>
-
-        <section>
-          <div class="section-label">♡ Find me elsewhere</div>
-
-          <div class="contacts">
-            <a class="contact"
-              href="https://www.facebook.com/share/1Hk1dadxUE/"
-              target="_blank" rel="noopener noreferrer">
-              <span class="contact-icon">f</span>
-              <span class="contact-text">
-                <strong>Facebook</strong>
-                <small>Visit my profile ↗</small>
-              </span>
-            </a>
-
-            <a class="contact"
-              href="https://x.com/PhmQunh42254275"
-              target="_blank" rel="noopener noreferrer">
-              <span class="contact-icon">𝕏</span>
-              <span class="contact-text">
-                <strong>X / Twitter</strong>
-                <small>@PhmQunh42254275</small>
-              </span>
-            </a>
-
-            <a class="contact"
-              href="https://www.tiktok.com/@cheng_nekk?_r=1&_t=ZS-9AbGZ207cD0"
-              target="_blank" rel="noopener noreferrer">
-              <span class="contact-icon">♪</span>
-              <span class="contact-text">
-                <strong>TikTok</strong>
-                <small>@cheng_nekk</small>
-              </span>
-            </a>
-
-            <a class="contact" href="mailto:trangpham030611@gmail.com">
-              <span class="contact-icon">✉</span>
-              <span class="contact-text">
-                <strong>Email</strong>
-                <small>Send me a message ↗</small>
-              </span>
-            </a>
-          </div>
-        </section>
       </div>
     </section>
 
-    <footer>
-      Made with moonlight and a little bit of magic ✦<br>
-      © Ari · Eterna in Time
+    <!-- CARD 2: SOCIALS & CONTACT -->
+    <section class="main-card">
+      <div class="social-content">
+        <h2 class="section-title" data-i18n="socialTitle">Socials & Contact</h2>
+        <p class="section-description" data-i18n="socialDescription">
+          Different places, the same little universe.
+        </p>
+
+        <div class="social-grid">
+
+          <a
+            class="social-link"
+            href="https://www.facebook.com/share/1Hk1dadxUE/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-icon" aria-hidden="true">f</span>
+            <span>
+              <span class="social-name">Facebook</span><br>
+              <span class="social-handle">Find me on Facebook ↗</span>
+            </span>
+          </a>
+
+          <a
+            class="social-link"
+            href="https://x.com/PhmQunh42254275"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-icon" aria-hidden="true">𝕏</span>
+            <span>
+              <span class="social-name">X / Twitter</span><br>
+              <span class="social-handle">@PhmQunh42254275 ↗</span>
+            </span>
+          </a>
+
+          <a
+            class="social-link"
+            href="https://discord.gg/gachaparadise"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-icon" aria-hidden="true">♫</span>
+            <span>
+              <span class="social-name">Gacha Paradise</span><br>
+              <span class="social-handle">Discord Community ↗</span>
+            </span>
+          </a>
+
+          <a
+            class="social-link"
+            href="mailto:trangpham030611@gmail.com"
+          >
+            <span class="social-icon" aria-hidden="true">✉</span>
+            <span>
+              <span class="social-name">Email</span><br>
+              <span class="social-handle">trangpham030611@gmail.com</span>
+            </span>
+          </a>
+
+          <a
+            class="social-link"
+            href="https://www.tiktok.com/@cheng_nekk?_r=1&_t=ZS-9AbGZ207cD0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="social-icon" aria-hidden="true">♪</span>
+            <span>
+              <span class="social-name">TikTok</span><br>
+              <span class="social-handle">@cheng_nekk ↗</span>
+            </span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p data-i18n="footerText">Made of moonlight, stardust and a little bit of mystery.</p>
+      <p>© <span id="year"></span> Ari · <a href="index.html">Eterna in Time</a></p>
     </footer>
+
   </main>
 
-  <div id="toast" role="status" aria-live="polite">Copied!</div>
-
   <script>
-    // Discord ID dùng để lấy avatar và trạng thái qua Lanyard.
-    const DISCORD_ID = "965608704974151710";
-    const LANYARD_API =
-      `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
+    /*
+      CONFIGURATION
+      Discord user ID: 965608704974151710
+      Lanyard API: https://api.lanyard.rest/v1/users/965608704974151710
+    */
 
-    const statusInfo = {
-      online: {
-        vi: "Đang trực tuyến",
-        en: "Online",
-        color: "#43df91"
+    const DISCORD_ID = "965608704974151710";
+    const FALLBACK_USERNAME = "p_f2_bpehvcl.";
+
+    const translations = {
+      vi: {
+        navHome: "⌂ Trang chủ",
+        navAbout: "☾ Về tôi",
+        navHobbies: "✧ Sở thích",
+        navDiscord: "♡ Discord",
+        eyebrow: "Một góc nhỏ trong vũ trụ của tui",
+        pageTitle: "Discord & Liên hệ",
+        pageSubtitle: "Tìm tui ở đâu đó giữa giấc mơ và hiện thực.",
+        loadingStatus: "Đang lấy trạng thái Discord",
+        activityLabel: "Đang làm gì",
+        activityLoading: "Đang chờ dữ liệu hoạt động…",
+        aboutMe: "Về tui",
+        profileNote: "Trạng thái được lấy từ Lanyard khi có dữ liệu.",
+        serverButton: "Tham gia Gacha Paradise",
+        copyButton: "Sao chép username",
+        socialTitle: "Mạng xã hội & Liên hệ",
+        socialDescription: "Những nơi khác nhau, cùng một vũ trụ nhỏ.",
+        footerText: "Được tạo từ ánh trăng, bụi sao và một chút bí ẩn.",
+        online: "Đang trực tuyến",
+        idle: "Vắng mặt",
+        dnd: "Không làm phiền",
+        offline: "Ngoại tuyến",
+        connected: "Đã kết nối với Lanyard",
+        notConnected: "Chưa lấy được dữ liệu Lanyard",
+        noActivity: "Chưa chia sẻ hoạt động nào",
+        activityUnavailable: "Hoạt động chưa được Discord chia sẻ.",
+        copied: "Đã sao chép username!",
+        copyFailed: "Không thể tự sao chép. Username: ",
+        customStatus: "Trạng thái cá nhân",
+        listening: "Đang nghe",
+        playing: "Đang chơi",
+        watching: "Đang xem",
+        streaming: "Đang phát trực tiếp",
+        competing: "Đang thi đấu"
       },
-      idle: {
-        vi: "Đang không hoạt động",
-        en: "Idle",
-        color: "#f0b94d"
-      },
-      dnd: {
-        vi: "Không làm phiền",
-        en: "Do Not Disturb",
-        color: "#f05b68"
-      },
-      offline: {
-        vi: "Ngoại tuyến",
-        en: "Offline",
-        color: "#747f92"
+      en: {
+        navHome: "⌂ Home",
+        navAbout: "☾ About",
+        navHobbies: "✧ Hobbies",
+        navDiscord: "♡ Discord",
+        eyebrow: "A little corner of my universe",
+        pageTitle: "Discord & Contact",
+        pageSubtitle: "Find me somewhere between dreams and reality.",
+        loadingStatus: "Fetching Discord presence",
+        activityLabel: "Currently doing",
+        activityLoading: "Waiting for activity…",
+        aboutMe: "About me",
+        profileNote: "Presence is provided by Lanyard when available.",
+        serverButton: "Join Gacha Paradise",
+        copyButton: "Copy username",
+        socialTitle: "Socials & Contact",
+        socialDescription: "Different places, the same little universe.",
+        footerText: "Made of moonlight, stardust and a little bit of mystery.",
+        online: "Online",
+        idle: "Idle",
+        dnd: "Do Not Disturb",
+        offline: "Offline",
+        connected: "Connected to Lanyard",
+        notConnected: "Unable to fetch Lanyard data",
+        noActivity: "No activity shared",
+        activityUnavailable: "Activity has not been shared by Discord.",
+        customStatus: "Custom status",
+        listening: "Listening to",
+        playing: "Playing",
+        watching: "Watching",
+        streaming: "Streaming",
+        competing: "Competing in"
       }
     };
 
-    function setStatus(status) {
-      const info = statusInfo[status] || statusInfo.offline;
+    let language = "vi";
 
-      document.getElementById("status-text").textContent = info.vi;
-      document.getElementById("status-dot").style.background = info.color;
-      document.getElementById("mini-dot").style.background = info.color;
+    function setLanguage(nextLanguage) {
+      language = nextLanguage;
+      document.documentElement.lang = language;
+
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.dataset.i18n;
+        if (translations[language][key]) {
+          element.textContent = translations[language][key];
+        }
+      });
+
+      document.getElementById("languageToggle").textContent =
+        language === "vi" ? "EN" : "VI";
+
+      renderStatus(lastData);
     }
 
-    function setActivity(title, details, type = "Discord presence") {
-      document.getElementById("activity-name").textContent = title;
-      document.getElementById("activity-details").textContent = details;
-      document.getElementById("activity-type").textContent = type;
-    }
+    document.getElementById("languageToggle").addEventListener("click", () => {
+      setLanguage(language === "vi" ? "en" : "vi");
+    });
 
-    async function loadDiscordPresence() {
-      try {
-        const response = await fetch(LANYARD_API, {
-          cache: "no-store"
-        });
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-        if (!response.ok) {
-          throw new Error("Lanyard API unavailable");
-        }
+    // Decorative stars
+    const starfield = document.getElementById("starfield");
 
-        const result = await response.json();
-
-        if (!result.success || !result.data) {
-          throw new Error("Discord presence not found");
-        }
-
-        const data = result.data;
-        const user = data.discord_user;
-
-        if (user) {
-          const name = user.global_name || user.username || "Ari";
-          document.getElementById("display-name").textContent = name;
-          document.getElementById("discord-username").textContent =
-            "@" + (user.username || "p_f2_bpehvcl.");
-
-          if (user.avatar) {
-            const format = user.avatar.startsWith("a_") ? "gif" : "png";
-            document.getElementById("avatar").src =
-              `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.avatar}.${format}?size=256`;
-          }
-
-          // Hiện decoration nếu dữ liệu Lanyard có cung cấp asset.
-          const decoration = user.avatar_decoration_data;
-          if (decoration && decoration.asset) {
-            const decorationImage =
-              document.getElementById("avatar-decoration");
-
-            decorationImage.src =
-              `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png?size=256`;
-            decorationImage.style.display = "block";
-          }
-        }
-
-        setStatus(data.discord_status);
-
-        const activities = data.activities || [];
-        const customStatus = activities.find(
-          activity => activity.type === 4 && activity.state
-        );
-
-        const game = activities.find(
-          activity => activity.type === 0
-        );
-
-        if (game) {
-          const details = [
-            game.details,
-            game.state
-          ].filter(Boolean).join(" · ");
-
-          setActivity(
-            game.name || "Đang chơi game",
-            details || "Đang hoạt động trên Discord",
-            "🎮 Playing"
-          );
-
-          const image = document.getElementById("activity-icon");
-
-          if (game.application_id && game.assets &&
-              game.assets.large_image) {
-            const asset = game.assets.large_image;
-
-            if (asset.startsWith("mp:external/")) {
-              image.src =
-                "https://media.discordapp.net/" +
-                asset.replace("mp:", "");
-            } else {
-              image.src =
-                `https://cdn.discordapp.com/app-assets/${game.application_id}/${asset}.png`;
-            }
-          } else {
-            image.src =
-              "https://cdn.discordapp.com/embed/avatars/0.png";
-          }
-        } else if (customStatus) {
-          setActivity(
-            customStatus.emoji
-              ? `${customStatus.emoji.name || ""} ${customStatus.state}`.trim()
-              : customStatus.state,
-            "Discord custom status",
-            "✧ Custom status"
-          );
-        } else if (data.listening_to_spotify && data.spotify) {
-          setActivity(
-            "Listening to Spotify",
-            data.spotify.song || "Đang nghe nhạc",
-            "♫ Spotify"
-          );
-        } else {
-          setActivity(
-            "Chưa có hoạt động công khai",
-            "Hoạt động sẽ hiện ở đây khi Lanyard nhận được dữ liệu.",
-            "☾ Current presence"
-          );
-        }
-
-        // Thông tin Spotify riêng, nếu có.
-        const spotifyCard = document.getElementById("spotify-card");
-
-        if (data.listening_to_spotify && data.spotify) {
-          const spotify = data.spotify;
-
-          spotifyCard.hidden = false;
-          document.getElementById("spotify-song").textContent =
-            spotify.song || "Unknown track";
-          document.getElementById("spotify-artist").textContent =
-            spotify.artist || "Unknown artist";
-
-          if (spotify.album_art_url) {
-            document.getElementById("spotify-art").src =
-              spotify.album_art_url;
-          }
-        } else {
-          spotifyCard.hidden = true;
-        }
-
-      } catch (error) {
-        setStatus("offline");
-        setActivity(
-          "Không lấy được trạng thái",
-          "Hãy kiểm tra việc tham gia Lanyard server và thử tải lại trang.",
-          "Lanyard connection"
-        );
-        console.error("Lanyard error:", error);
-      }
-    }
-
-    document.getElementById("copy-user").addEventListener(
-      "click",
-      async () => {
-        const username =
-          document.getElementById("discord-username").textContent
-            .replace(/^@/, "");
-
-        try {
-          await navigator.clipboard.writeText(username);
-          showToast("Đã sao chép username Discord ♡");
-        } catch {
-          showToast("Username: " + username);
-        }
-      }
-    );
-
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      setTimeout(() => toast.classList.remove("show"), 2200);
-    }
-
-    // Tạo sao nền.
-    const starField = document.getElementById("stars");
-
-    for (let i = 0; i < 75; i++) {
+    for (let i = 0; i < 90; i++) {
       const star = document.createElement("span");
       star.className = "star";
       star.style.left = Math.random() * 100 + "%";
       star.style.top = Math.random() * 100 + "%";
-      star.style.animationDelay = Math.random() * 3 + "s";
-      star.style.animationDuration = (2 + Math.random() * 4) + "s";
-      starField.appendChild(star);
+      star.style.setProperty("--duration", (2 + Math.random() * 4) + "s");
+      star.style.setProperty("--delay", (Math.random() * 4) + "s");
+      starfield.appendChild(star);
     }
 
-    loadDiscordPresence();
+    let lastData = null;
+    let apiFailed = false;
 
-    // Cập nhật định kỳ; không cần tải lại trang thủ công.
-    setInterval(loadDiscordPresence, 30000);
+    function setStatusDot(status) {
+      const dot = document.getElementById("statusDot");
+      dot.className = "status-dot";
+
+      if (["online", "idle", "dnd", "offline"].includes(status)) {
+        dot.classList.add(status);
+      } else {
+        dot.classList.add("offline");
+      }
+    }
+
+    function getStatusLabel(status) {
+      const labels = {
+        online: translations[language].online,
+        idle: translations[language].idle,
+        dnd: translations[language].dnd,
+        offline: translations[language].offline
+      };
+
+      return labels[status] || translations[language].offline;
+    }
+
+    function renderStatus(data) {
+      const statusText = document.getElementById("statusText");
+      const statusDetail = document.getElementById("statusDetail");
+      const customStatus = document.getElementById("customStatus");
+      const activityName = document.getElementById("activityName");
+      const activityDetail = document.getElementById("activityDetail");
+
+      if (!data) {
+        statusText.textContent = translations[language].notConnected;
+        statusDetail.textContent = translations[language].activityUnavailable;
+        customStatus.textContent = "";
+        activityName.textContent = translations[language].noActivity;
+        activityDetail.textContent = translations[language].activityUnavailable;
+        setStatusDot("offline");
+        return;
+      }
+
+      const status = data.discord_status || "offline";
+      statusText.textContent = getStatusLabel(status);
+      statusDetail.textContent = translations[language].connected;
+      setStatusDot(status);
+
+      const activities = Array.isArray(data.activities) ? data.activities : [];
+      const custom = activities.find(activity => activity.type === 4);
+
+      if (custom) {
+        const emoji = custom.emoji && custom.emoji.name
+          ? custom.emoji.name + " "
+          : "";
+        customStatus.textContent =
+          "✧ " + translations[language].customStatus + ": " +
+          emoji + (custom.state || "");
+      } else {
+        customStatus.textContent = "";
+      }
+
+      const activity = activities.find(item => item.type !== 4);
+
+      if (!activity) {
+        activityName.textContent = translations[language].noActivity;
+        activityDetail.textContent = "";
+        return;
+      }
+
+      const activityTypes = {
+        0: translations[language].playing,
+        1: translations[language].streaming,
+        2: translations[language].listening,
+        3: translations[language].watching,
+        5: translations[language].competing
+      };
+
+      const prefix = activityTypes[activity.type] || "";
+      activityName.textContent =
+        (prefix ? prefix + " " : "") + (activity.name || "Activity");
+
+      const details = [activity.details, activity.state]
+        .filter(Boolean)
+        .join(" · ");
+
+      activityDetail.textContent = details;
+    }
+
+    function renderUser(user) {
+      if (!user) return;
+
+      const displayName = user.global_name || user.display_name || user.username || "Ari";
+      const username = user.username || FALLBACK_USERNAME;
+
+      document.getElementById("discordDisplayName").textContent = displayName;
+      document.getElementById("discordUsername").textContent = "@" + username;
+
+      const avatar = document.getElementById("discordAvatar");
+      const fallback = document.getElementById("avatarFallback");
+
+      if (user.avatar) {
+        const extension = user.avatar.startsWith("a_") ? "gif" : "png";
+        avatar.src =
+          `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${user.avatar}.${extension}?size=256`;
+        avatar.hidden = false;
+        fallback.style.display = "none";
+      }
+
+      // Render the Discord avatar decoration if Lanyard supplies its asset.
+      const decoration = user.avatar_decoration_data;
+      const decorationImage = document.getElementById("avatarDecoration");
+
+      if (decoration && decoration.asset) {
+        decorationImage.src =
+          `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png?size=256`;
+        decorationImage.style.display = "block";
+        decorationImage.onerror = () => {
+          decorationImage.style.display = "none";
+        };
+      } else {
+        decorationImage.style.display = "none";
+      }
+
+      // Discord banner, when included in the API response.
+      const banner = user.banner;
+      const bannerElement = document.querySelector(".discord-banner");
+
+      if (banner) {
+        const extension = banner.startsWith("a_") ? "gif" : "png";
+        bannerElement.style.backgroundImage =
+          `linear-gradient(90deg, rgba(8,11,25,.3), rgba(8,11,25,.1)), url("https://cdn.discordapp.com/banners/${DISCORD_ID}/${banner}.${extension}?size=1024")`;
+        bannerElement.style.backgroundSize = "cover";
+        bannerElement.style.backgroundPosition = "center";
+      }
+
+      if (user.banner_color && !banner) {
+        bannerElement.style.backgroundColor = user.banner_color;
+      }
+    }
+
+    async function fetchPresence() {
+      try {
+        const response = await fetch(
+          `https://api.lanyard.rest/v1/users/${DISCORD_ID}`,
+          { cache: "no-store" }
+        );
+
+        if (!response.ok) throw new Error("Lanyard request failed");
+
+        const result = await response.json();
+
+        if (!result.success || !result.data) {
+          throw new Error("No Lanyard presence data");
+        }
+
+        lastData = result.data;
+        apiFailed = false;
+
+        renderUser(result.data.discord_user);
+        renderStatus(result.data);
+      } catch (error) {
+        apiFailed = true;
+        lastData = null;
+        renderStatus(null);
+        console.warn("Lanyard presence unavailable:", error);
+      }
+    }
+
+    // Initial fetch, then refresh periodically.
+    fetchPresence();
+    setInterval(fetchPresence, 30000);
+
+    // Copy the current Discord username.
+    document.getElementById("copyUsername").addEventListener("click", async () => {
+      const username =
+        document.getElementById("discordUsername").textContent.replace(/^@/, "");
+
+      try {
+        await navigator.clipboard.writeText(username);
+        const button = document.getElementById("copyUsername");
+        const originalText = translations[language].copyButton;
+        button.textContent = translations[language].copied;
+
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 1800);
+      } catch (error) {
+        alert(translations[language].copyFailed + username);
+      }
+    });
   </script>
 </body>
   </html>
