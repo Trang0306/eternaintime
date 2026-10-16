@@ -1,0 +1,522 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ari — Digital Ocean</title>
+<meta name="theme-color" content="#17172f"><style>
+:root {
+  --bg: #11111f;
+  --panel: #1c1c32;
+  --panel2: #252541;
+  --blue: #8bdcff;
+  --purple: #b5a0ff;
+  --text: #f3f0ff;
+  --muted: #aaa9c8;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 15% 5%, #33315e 0, transparent 35%),
+    radial-gradient(ellipse at 90% 80%, #183c5b 0, transparent 35%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+  padding: 35px 16px 55px;
+}
+button, a { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .4;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white 50%, transparent),
+    radial-gradient(1px 1px at 70% 20%, white 50%, transparent),
+    radial-gradient(2px 2px at 80% 70%, white 50%, transparent),
+    radial-gradient(1px 1px at 35% 85%, white 50%, transparent);
+  background-size: 180px 180px;
+}
+.container {
+  width: min(760px, 100%);
+  margin: auto;
+  position: relative;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.brand { color: var(--blue); letter-spacing: 2px; }
+.card {
+  overflow: hidden;
+  border: 1px solid #ffffff19;
+  border-radius: 22px;
+  background: #19192deF;
+  box-shadow: 0 25px 90px #0005;
+}
+.banner {
+  height: 190px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg, #142b52aa, #7158a877),
+    url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1400&q=85")
+    center 48% / cover;
+}
+.banner::before {
+  content: "FURINA";
+  position: absolute;
+  right: 22px;
+  bottom: 8px;
+  font-size: clamp(38px, 10vw, 78px);
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #ffffff30;
+}
+.banner-label {
+  position: absolute;
+  top: 17px;
+  left: 19px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 8px 11px;
+  border: 1px solid #ffffff55;
+  background: #17172f88;
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+}
+.profile {
+  padding: 0 27px 27px;
+}
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 14px;
+  margin-top: -48px;
+  position: relative;
+}
+.avatar-wrap {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  background: var(--panel);
+  border-radius: 30px;
+  position: relative;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  object-fit: cover;
+  background: linear-gradient(140deg, #5a82b8, #b8a2f3);
+}
+.status-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  border: 4px solid var(--panel);
+  background: #808080;
+}
+.status-dot.online { background: #43d99b; }
+.status-dot.idle { background: #f0b84d; }
+.status-dot.dnd { background: #ed626b; }
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 8px;
+  padding-bottom: 5px;
+}
+.btn {
+  border: 1px solid #ffffff20;
+  border-radius: 10px;
+  padding: 10px 13px;
+  background: var(--panel2);
+  color: var(--text);
+  font-size: 12px;
+  transition: .2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue);
+}
+.btn.primary {
+  background: linear-gradient(120deg, #6b86db, #8e78d8);
+  border: 0;
+}
+h1 {
+  margin: 17px 0 3px;
+  font-size: 29px;
+  letter-spacing: -.5px;
+}
+.username { color: var(--muted); font-size: 14px; }
+.status-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 15px;
+  font-size: 13px;
+}
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8a8aa3;
+}
+.pulse.online { background: #43d99b; box-shadow: 0 0 12px #43d99b88; }
+.divider { height: 1px; background: #ffffff12; margin: 23px 0; }
+.section-title {
+  color: var(--blue);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.about {
+  color: #d6d3ee;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.quote {
+  border-left: 2px solid var(--purple);
+  padding: 10px 14px;
+  color: #c6c2e8;
+  font-style: italic;
+  margin-top: 12px;
+  background: #ffffff05;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  border-radius: 8px;
+  padding: 8px 11px;
+  background: #8c8bd016;
+  border: 1px solid #b5a0ff20;
+  font-size: 12px;
+  color: #d8d0ff;
+}
+.activity {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #ffffff06;
+  border: 1px solid #ffffff10;
+  padding: 13px;
+  border-radius: 14px;
+}
+.activity img {
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.activity-title { font-size: 14px; font-weight: 700; }
+.activity-detail { color: var(--muted); font-size: 12px; margin-top: 5px; line-height: 1.5; }
+.empty { color: var(--muted); font-size: 13px; }
+footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #8887a8;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  background: #292944;
+  border: 1px solid #ffffff20;
+  padding: 12px 17px;
+  border-radius: 12px;
+  transition: .25s;
+  z-index: 5;
+  font-size: 13px;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 520px) {
+  body { padding: 18px 10px 35px; }
+  .banner { height: 145px; }
+  .profile { padding: 0 17px 22px; }
+  .profile-row { align-items: end; }
+  .avatar-wrap { width: 82px; height: 82px; border-radius: 25px; }
+  .avatar { border-radius: 20px; }
+  .action-buttons { max-width: 190px; }
+  .btn { padding: 9px 10px; font-size: 11px; }
+  h1 { font-size: 25px; }
+}
+</style></head><body>
+<div class="stars"></div><main class="container">
+  <div class="topbar">
+    <a class="brand" href="index.html">✦ ARI'S UNIVERSE</a>
+    <span>DISCORD PROFILE · 01</span>
+  </div>  <article class="card">
+    <div class="banner">
+      <span class="banner-label">✧ THE HYDRO ARCHON'S STAGE</span>
+    </div><div class="profile">
+  <div class="profile-row">
+    <div class="avatar-wrap">
+      <img id="avatar" class="avatar"
+        src="https://api.lanyard.rest/965608704974151710.png"
+        alt="Discord avatar">
+      <span id="statusDot" class="status-dot"></span>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn" id="copyBtn">▣ Copy username</button>
+      <a class="btn primary"
+         href="https://discord.com/users/965608704974151710"
+         target="_blank" rel="noopener">↗ Open Discord</a>
+    </div>
+  </div>
+
+  <h1 id="displayName">Ari <span>✦</span></h1>
+  <div class="username" id="username">@loading...</div>
+
+  <div class="status-line">
+    <span id="statusPulse" class="pulse"></span>
+    <span id="statusText">Connecting to Lanyard...</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-title">✦ About me</div>
+  <div class="about">
+    Somewhere between dreams and reality, I exist.
+    <div class="quote">
+      “The world is a stage, and every heart hides a story.”
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-title">✦ Interests</div>
+  <div class="tags">
+    <span class="tag">🎨 Drawing</span>
+    <span class="tag">✍️ Writing</span>
+    <span class="tag">💧 Furina</span>
+    <span class="tag">🎮 Genshin Impact</span>
+    <span class="tag">🚂 Honkai: Star Rail</span>
+    <span class="tag">🌙 Daydreaming</span>
+    <span class="tag">🎧 Music</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-title">✦ Currently doing</div>
+  <div id="activityBox" class="activity">
+    <div>
+      <div class="activity-title">Finding Ari...</div>
+      <div class="activity-detail">Waiting for Lanyard presence data.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-title">✦ Spotify</div>
+  <div id="spotifyBox" class="activity">
+    <div>
+      <div class="activity-title">No track detected</div>
+      <div class="activity-detail">When Ari listens to Spotify, music info may appear here.</div>
+    </div>
+  </div>
+</div>
+
+  </article>  <footer>MADE OF MOONLIGHT · SEA AND STARDUST ✦</footer>
+</main><div id="toast" class="toast">Copied!</div><script>
+const DISCORD_ID = "965608704974151710";
+const API_URL = `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
+const WS_URL = "wss://api.lanyard.rest/socket";
+
+const statusNames = {
+  online: "Online",
+  idle: "Idle · Away",
+  dnd: "Do Not Disturb",
+  offline: "Offline"
+};
+
+let currentUsername = "";
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2200);
+}
+
+function setStatus(status) {
+  const dot = document.getElementById("statusDot");
+  const pulse = document.getElementById("statusPulse");
+  dot.className = "status-dot " + (status || "");
+  pulse.className = "pulse " + (status === "online" ? "online" : "");
+  document.getElementById("statusText").textContent =
+    statusNames[status] || "Status unavailable";
+}
+
+function renderPresence(data) {
+  if (!data) return;
+
+  const user = data.discord_user;
+  if (user) {
+    currentUsername = user.username || "";
+    document.getElementById("username").textContent =
+      "@" + (user.username || "unknown");
+
+    document.getElementById("displayName").textContent =
+      user.display_name || user.global_name || user.username || "Ari";
+
+    if (user.avatar) {
+      const ext = user.avatar.startsWith("a_") ? "gif" : "png";
+      document.getElementById("avatar").src =
+        `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+    }
+  }
+
+  setStatus(data.discord_status);
+
+  const activityBox = document.getElementById("activityBox");
+  const activities = (data.activities || []).filter(a =>
+    a.name !== "Custom Status" && a.name !== "Spotify"
+  );
+
+  if (activities.length) {
+    const a = activities[0];
+    const title = a.name || "Activity";
+    const detail = [a.details, a.state].filter(Boolean).join(" · ");
+    activityBox.innerHTML = `
+      <div>
+        <div class="activity-title">${escapeHTML(title)}</div>
+        <div class="activity-detail">${escapeHTML(detail || "Active on Discord")}</div>
+      </div>`;
+  } else {
+    activityBox.innerHTML = `
+      <div>
+        <div class="activity-title">Just chilling 🌙</div>
+        <div class="activity-detail">No public activity detected right now.</div>
+      </div>`;
+  }
+
+  const spotifyBox = document.getElementById("spotifyBox");
+  if (data.listening_to_spotify && data.spotify) {
+    const s = data.spotify;
+    spotifyBox.innerHTML = `
+      <img src="${safeImageURL(s.album_art_url)}" alt="Album cover">
+      <div>
+        <div class="activity-title">${escapeHTML(s.song || "Unknown track")}</div>
+        <div class="activity-detail">
+          ${escapeHTML(s.artist || "Unknown artist")}<br>
+          ${escapeHTML(s.album || "")}
+        </div>
+      </div>`;
+  } else {
+    spotifyBox.innerHTML = `
+      <div>
+        <div class="activity-title">No track detected 🎧</div>
+        <div class="activity-detail">Spotify activity will appear here when available.</div>
+      </div>`;
+  }
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
+
+function safeImageURL(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+async function loadInitialPresence() {
+  try {
+    const response = await fetch(API_URL);
+    const result = await response.json();
+    if (result.success) {
+      renderPresence(result.data);
+    } else {
+      document.getElementById("statusText").textContent =
+        "Lanyard has not returned your presence yet.";
+    }
+  } catch {
+    document.getElementById("statusText").textContent =
+      "Could not connect to Lanyard.";
+  }
+}
+
+function connectLanyard() {
+  const socket = new WebSocket(WS_URL);
+  let heartbeatTimer;
+
+  socket.addEventListener("message", event => {
+    let message;
+    try { message = JSON.parse(event.data); }
+    catch { return; }
+
+    if (message.op === 1) {
+      clearInterval(heartbeatTimer);
+      heartbeatTimer = setInterval(() => {
+        if (socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({ op: 3 }));
+        }
+      }, message.d.heartbeat_interval);
+
+      socket.send(JSON.stringify({
+        op: 2,
+        d: { subscribe_to_id: DISCORD_ID }
+      }));
+    }
+
+    if (message.op === 0 && message.t === "INIT_STATE") {
+      renderPresence(message.d);
+    }
+
+    if (message.op === 0 && message.t === "PRESENCE_UPDATE") {
+      renderPresence(message.d);
+    }
+  });
+
+  socket.addEventListener("close", () => {
+    clearInterval(heartbeatTimer);
+    setTimeout(connectLanyard, 5000);
+  });
+
+  socket.addEventListener("error", () => {
+    socket.close();
+  });
+}
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  const text = currentUsername || DISCORD_ID;
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast("Username copied ✦");
+  } catch {
+    showToast("Username: " + text);
+  }
+});
+
+loadInitialPresence();
+connectLanyard();
+</script></body>
+          </html>
