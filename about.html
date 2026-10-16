@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Ari | Moonlit</title>
+
+    <style>
+        /* ===== CÀI ĐẶT CHUNG ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #f4f6ff;
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    #1c2b50 0%,
+                    #0c142b 50%,
+                    #050916 100%
+                );
+            overflow-x: hidden;
+        }
+
+        /* ===== BẦU TRỜI SAO ===== */
+        #stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 8px #a9c7ff;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.7);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        /* ===== THANH ĐIỀU HƯỚNG ===== */
+        header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 8%;
+            border-bottom: 1px solid #ffffff15;
+        }
+
+        .logo {
+            color: #c5d9ff;
+            font-size: 23px;
+            letter-spacing: 4px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a,
+        #language {
+            color: #dbe5ff;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 14px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        #language:hover {
+            color: #91b7ff;
+        }
+
+        /* ===== TIÊU ĐỀ ===== */
+        .page-title {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 90px 20px 55px;
+            animation: appear 1s ease both;
+        }
+
+        .eyebrow {
+            color: #a9c7ff;
+            font-size: 12px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 8vw, 75px);
+            font-weight: normal;
+            letter-spacing: 5px;
+            background: linear-gradient(
+                120deg,
+                #ffffff,
+                #a9c7ff,
+                #e3eaff
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            margin-top: 20px;
+            color: #9baaca;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* ===== NỘI DUNG ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: min(1000px, 88%);
+            margin: 0 auto;
+            padding-bottom: 90px;
+        }
+
+        .glass-card {
+            padding: 35px;
+            margin-bottom: 25px;
+            border: 1px solid #ffffff18;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.045);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px #00000012;
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease;
+            animation: appear 1s ease both;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: #a9c7ff55;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #c5d9ff;
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+        .description {
+            color: #c2cce3;
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .highlight {
+            color: #dce8ff;
+        }
+
+        /* ===== THÔNG TIN CÁ NHÂN ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .info-item {
+            padding: 20px;
+            border-radius: 14px;
+            background: #ffffff08;
+        }
+
+        .info-label {
+            margin-bottom: 10px;
+            color: #91a9d9;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            color: #edf2ff;
+            font-size: 16px;
+        }
+
+        /* ===== SỞ THÍCH ===== */
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .hobby {
+            padding: 22px 12px;
+            text-align: center;
+            border: 1px solid #ffffff12;
+            border-radius: 16px;
+            background: #ffffff06;
+            transition: 0.3s;
+        }
+
+        .hobby:hover {
+            background: #a9c7ff12;
+            transform: translateY(-5px);
+        }
+
+        .hobby-icon {
+            display: block;
+            margin-bottom: 14px;
+            font-size: 30px;
+        }
+
+        .hobby-name {
+            color: #dce8ff;
+            font-size: 14px;
+        }
+
+        /* ===== CÂU NÓI ===== */
+        .quote-card {
+            text-align: center;
+            padding: 45px 30px;
+        }
+
+        .quote-mark {
+            color: #91b7ff;
+            font-size: 50px;
+            line-height: 1;
+        }
+
+        .quote-text {
+            margin-top: 15px;
+            color: #e0e8ff;
+            font-size: clamp(18px, 3vw, 24px);
+            font-style: italic;
+            line-height: 1.9;
+        }
+
+        /* ===== NÚT ĐIỀU HƯỚNG ===== */
+        .back-home {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            padding: 14px 25px;
+            border: 1px solid #a9c7ff66;
+            border-radius: 30px;
+            color: #dce8ff;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: #a9c7ff15;
+            box-shadow: 0 0 25px #a9c7ff20;
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: 25px;
+            border-top: 1px solid #ffffff10;
+            color: #7887a7;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== HIỆU ỨNG ===== */
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ĐIỆN THOẠI ===== */
+        @media (max-width: 650px) {
+            header {
+                padding: 20px 5%;
+            }
+
+            .logo {
+                font-size: 17px;
+                letter-spacing: 2px;
+            }
+
+            nav {
+                gap: 13px;
+            }
+
+            nav a,
+            #language {
+                font-size: 12px;
+            }
+
+            .page-title {
+                padding-top: 65px;
+            }
+
+            .container {
+                width: 90%;
+            }
+
+            .glass-card {
+                padding: 25px 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hobby-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="stars" aria-hidden="true"></div>
+
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <header>
+        <div class="logo">MOONLIT</div>
+
+        <nav>
+            <a href="index.html"
+               data-vi="Trang chủ"
+               data-en="Home">Trang chủ</a>
+
+            <a href="about.html"
+               data-vi="Về tôi"
+               data-en="About">Về tôi</a>
+
+            <button id="language" type="button">EN</button>
+        </nav>
+    </header>
+
+    <!-- TIÊU ĐỀ -->
+    <section class="page-title">
+        <p class="eyebrow"
+           data-vi="MỘT CHÚT VỀ TÔI"
+           data-en="A LITTLE ABOUT ME">
+            MỘT CHÚT VỀ TÔI
+        </p>
+
+        <h1 data-vi="Về Ari" data-en="About Ari">Về Ari</h1>
+
+        <p class="subtitle"
+           data-vi="Mỗi người đều là một vũ trụ chưa được khám phá."
+           data-en="Everyone is a universe waiting to be discovered.">
+            Mỗi người đều là một vũ trụ chưa được khám phá.
+        </p>
+    </section>
+
+    <main class="container">
+
+        <!-- GIỚI THIỆU -->
+        <section class="glass-card">
+            <h2 data-vi="✦ Xin chào, mình là Ari"
+                data-en="✦ Hello, I'm Ari">
+                ✦ Xin chào, mình là Ari
+            </h2>
+
+            <p class="description"
+               data-vi="Chào mừng đến với góc nhỏ của mình. Mình yêu những điều đẹp đẽ, những câu chuyện có chiều sâu và những giai điệu khiến thời gian chậm lại. Mình thích vẽ, viết lách, khám phá thế giới qua trò chơi và lưu giữ những suy nghĩ bằng ngôn từ. Đây là nơi mình kể một chút về bản thân, theo cách riêng của mình."
+               data-en="Welcome to my little corner of the universe. I love beautiful things, meaningful stories, and melodies that make time slow down. I enjoy drawing, writing, exploring virtual worlds through games, and preserving my thoughts in words. This is where I share a little about myself, in my own way.">
+                Chào mừng đến với góc nhỏ của mình. Mình yêu những điều đẹp đẽ, những câu chuyện có chiều sâu và những giai điệu khiến thời gian chậm lại. Mình thích vẽ, viết lách, khám phá thế giới qua trò chơi và lưu giữ những suy nghĩ bằng ngôn từ. Đây là nơi mình kể một chút về bản thân, theo cách riêng của mình.
+            </p>
+        </section>
+
+        <!-- THÔNG TIN -->
+        <section class="glass-card">
+            <h2 data-vi="✦ Những mảnh ghép về mình"
+                data-en="✦ Pieces of Me">
+                ✦ Những mảnh ghép về mình
+            </h2>
+
+            <div class="info-grid">
+
+                <div class="info-item">
+                    <p class="info-label"
+                       data-vi="Tên gọi"
+                       data-en="Name">Tên gọi</p>
+
+                    <p class="info-value">Ari 🌙</p>
+                </div>
+
+                <div class="info-item">
+                    <p class="info-label"
+                       data-vi="Cung hoàng đạo"
+                       data-en="Zodiac">Cung hoàng đạo</p>
+
+                    <p class="info-value"
+                       data-vi="Song Ngư ♓"
+                       data-en="Pisces ♓">Song Ngư ♓</p>
+                </div>
+
+                <div class="info-item">
+                    <p class="info-label"
+                       data-vi="Tính cách"
+                       data-en="Personality">Tính cách</p>
+
+                    <p class="info-value">INFJ ✧</p>
+                </div>
+
+                <div class="info-item">
+                    <p class="info-label"
+                       data-vi="Không gian yêu thích"
+                       data-en="Favorite Vibe">Không gian yêu thích</p>
+
+                    <p class="info-value"
+                       data-vi="Bầu trời đêm ✨"
+                       data-en="The night sky ✨">Bầu trời đêm ✨</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SỞ THÍCH -->
+        <section class="glass-card">
+            <h2 data-vi="✦ Những điều mình yêu thích"
+                data-en="✦ Things I Love">
+                ✦ Những điều mình yêu thích
+            </h2>
+
+            <div class="hobby-grid">
+
+                <div class="hobby">
+                    <span class="hobby-icon">🎨</span>
+                    <p class="hobby-name"
+                       data-vi="Vẽ vời"
+                       data-en="Drawing">Vẽ vời</p>
+                </div>
+
+                <div class="hobby">
+                    <span class="hobby-icon">📖</span>
+                    <p class="hobby-name"
+                       data-vi="Viết lách"
+                       data-en="Writing">Viết lách</p>
+                </div>
+
+                <div class="hobby">
+                    <span class="hobby-icon">🎮</span>
+                    <p class="hobby-name"
+                       data-vi="Chơi game"
+                       data-en="Gaming">Chơi game</p>
+                </div>
+
+                <div class="hobby">
+                    <span class="hobby-icon">🎧</span>
+                    <p class="hobby-name"
+                       data-vi="Nghe nhạc"
+                       data-en="Music">Nghe nhạc</p>
+                </div>
+
+                <div class="hobby">
+                    <span class="hobby-icon">🌙</span>
+                    <p class="hobby-name"
+                       data-vi="Mơ mộng"
+                       data-en="Daydreaming">Mơ mộng</p>
+                </div>
+
+                <div class="hobby">
+                    <span class="hobby-icon">🎸</span>
+                    <p class="hobby-name"
+                       data-vi="Âm nhạc"
+                       data-en="Instruments">Âm nhạc</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CÂU NÓI -->
+        <section class="glass-card quote-card">
+            <div class="quote-mark">“</div>
+
+            <p class="quote-text"
+               data-vi="Somewhere between dreams and reality, I exist."
+               data-en="Somewhere between dreams and reality, I exist.">
+                Somewhere between dreams and reality, I exist.
+            </p>
+        </section>
+
+        <a class="back-home"
+           href="index.html"
+           data-vi="← TRỞ VỀ TRANG CHỦ"
+           data-en="← BACK TO HOME">
+            ← TRỞ VỀ TRANG CHỦ
+        </a>
+
+    </main>
+
+    <footer>
+        <p>MADE WITH MOONLIGHT · © 2026 ARI</p>
+    </footer>
+
+    <script>
+        // Tạo bầu trời sao
+        const stars = document.getElementById("stars");
+
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement("span");
+
+            star.className = "star";
+            star.style.left = Math.random() * 100 + "%";
+            star.style.top = Math.random() * 100 + "%";
+            star.style.animationDelay = Math.random() * 3 + "s";
+            star.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            stars.appendChild(star);
+        }
+
+        // Chuyển đổi ngôn ngữ
+        const languageButton = document.getElementById("language");
+
+        let currentLanguage = "vi";
+
+        languageButton.addEventListener("click", () => {
+            currentLanguage =
+                currentLanguage === "vi" ? "en" : "vi";
+
+            document.documentElement.lang = currentLanguage;
+
+            document.querySelectorAll("[data-vi][data-en]")
+                .forEach(element => {
+                    element.textContent =
+                        element.dataset[currentLanguage];
+                });
+
+            languageButton.textContent =
+                currentLanguage === "vi" ? "EN" : "VI";
+        });
+    </script>
+
+</body>
+  </html>
