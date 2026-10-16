@@ -374,6 +374,14 @@
   <a href="music.html" class="active">♫ Music</a>
 </nav>
 
+<div class="language-switch">
+  <button id="langButton"
+          type="button"
+          onclick="toggleLanguage()">
+    EN
+  </button>
+</div>
+
     <div class="stars" id="stars"></div>
 
     
@@ -434,13 +442,6 @@
             Mỗi sở thích là một ô cửa nhỏ, mở ra một thế giới khác trong tâm hồn.
         </p>
 
- <div class="language-switch">
-  <button id="languageToggle" type="button" aria-label="Switch language">
-    <span class="lang-option active" data-lang="en">EN</span>
-    <span class="lang-divider">/</span>
-    <span class="lang-option" data-lang="vi">VIE</span>
-  </button>
-  </div>
 
     </section>
 
@@ -593,30 +594,27 @@
 
     <script src="effects.js"></script>
 
-    <!-- LANGUAGE SWITCHER -->
 
     <script>
-        const languageButton = document.getElementById("language");
+        /* LANGUAGE SWITCHER */
 
-        let currentLanguage = "vi";
+let currentLanguage = "vi";
 
-        languageButton.addEventListener("click", () => {
+function toggleLanguage() {
+  currentLanguage = currentLanguage === "vi" ? "en" : "vi";
 
-            currentLanguage =
-                currentLanguage === "vi" ? "en" : "vi";
+  document.documentElement.lang = currentLanguage;
 
-            document.documentElement.lang = currentLanguage;
+  document.querySelectorAll("[data-vi][data-en]").forEach(element => {
+    element.textContent = element.dataset[currentLanguage];
+  });
 
-            document.querySelectorAll("[data-vi][data-en]")
-                .forEach(element => {
-                    element.textContent =
-                        element.dataset[currentLanguage];
-                });
+  const button = document.getElementById("langButton");
 
-            languageButton.textContent =
-                currentLanguage === "vi" ? "EN" : "VI";
-
-        });
+  if (button) {
+    button.textContent = currentLanguage === "vi" ? "EN" : "VI";
+  }
+}
     </script>
     <script src="effects.js"></script>
 
